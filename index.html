@@ -550,11 +550,11 @@
   ═══════════════════════════════════════════ */
   .wheel-layout {
     display: grid;
-    grid-template-columns: 380px 1fr;
+    grid-template-columns: minmax(0, 380px) 1fr;
     gap: 32px;
     align-items: start;
   }
-  svg.wheel { width: 380px; height: 380px; }
+  svg.wheel { width: 100%; max-width: 380px; height: auto; display: block; margin: 0 auto; }
 
   .gap-bar-header {
     display: flex;
@@ -812,130 +812,74 @@
   }
 
   /* ═══════════════════════════════════════════
-     MOBILE RESPONSIVE — comprehensive
+     MOBILE RESPONSIVE
   ═══════════════════════════════════════════ */
   @media (max-width: 800px) {
-    /* Shell */
-    .shell { min-width: unset; }
+    .shell { min-width: unset; overflow-x: hidden; }
+    body { overflow-x: hidden; }
 
-    /* Topbar */
-    .topbar { padding: 10px 14px; gap: 8px; }
+    .topbar { padding: 10px 14px; }
     .topbar-brand { font-size: 13px; }
-    .topbar-tag { font-size: 10px; display: none; }
-    .topbar-user span { display: none; }
-    .avatar { width: 28px; height: 28px; font-size: 11px; }
+    .topbar-tag, .topbar-user span { display: none; }
 
-    /* Tab nav */
-    .tab-nav { gap: 2px; padding: 6px 8px; overflow-x: auto; flex-wrap: nowrap; -webkit-overflow-scrolling: touch; scrollbar-width: none; }
+    .tab-nav { gap: 2px; padding: 6px 8px; overflow-x: auto; flex-wrap: nowrap; scrollbar-width: none; }
     .tab-nav::-webkit-scrollbar { display: none; }
-    .tab-btn { font-size: 11px; padding: 7px 10px; white-space: nowrap; flex-shrink: 0; border-radius: 6px; }
+    .tab-btn { font-size: 11px; padding: 7px 10px; white-space: nowrap; flex-shrink: 0; }
 
-    /* Hero */
-    .tab-hero { padding: 20px 16px; flex-direction: column !important; gap: 16px; }
-    .tab-hero > div:first-child { flex: unset !important; }
-    .tab-hero h1 { font-size: 22px; line-height: 1.25; }
+    .tab-hero { padding: 20px 16px; flex-direction: column !important; }
+    .tab-hero h1 { font-size: 20px; }
     .tab-hero p { font-size: 13px; }
-    .tab-hero-meta { margin-top: 0; }
-    .countdown-block { padding: 12px 20px; }
-    .countdown-num { font-size: 40px; }
+    .tab-hero > div:first-child { flex: unset !important; }
 
-    /* Page body */
     .page-body { padding: 14px; }
 
-    /* ALL multi-column layouts → single column */
-    .grid-2,
-    .grid-3,
-    .wheel-layout,
-    .immersion-layout,
-    .post-layout { 
-      display: flex !important; 
-      flex-direction: column !important; 
-      gap: 16px !important;
+    .grid-2, .grid-3, .prep-steps,
+    .wheel-layout, .immersion-layout, .post-layout,
+    .right-panels {
+      display: flex !important;
+      flex-direction: column !important;
+      width: 100% !important;
+      gap: 14px !important;
     }
 
-    /* Prep steps */
-    .prep-steps { 
-      display: flex !important; 
-      flex-direction: column !important; 
-      gap: 10px; 
-    }
-    .prep-step { padding: 12px 14px; gap: 10px; }
-    .prep-step-title { font-size: 13px; }
-    .prep-step-desc { font-size: 12px; }
+    .grid-2 > *, .grid-3 > *,
+    .wheel-layout > *, .immersion-layout > *,
+    .post-layout > * { width: 100% !important; min-width: 0 !important; }
 
-    /* Force cards grid */
-    .force-cards { 
-      display: grid !important; 
-      grid-template-columns: 1fr 1fr !important; 
-      gap: 8px !important; 
-    }
+    svg.wheel { max-width: 260px !important; }
+
+    .force-cards { display: grid !important; grid-template-columns: 1fr 1fr !important; gap: 8px !important; }
     .force-card { padding: 10px 8px; }
-    .force-card-num { font-size: 11px; }
-    .force-card-name { font-size: 10px; line-height: 1.3; }
+    .force-card-name { font-size: 10px; }
 
-    /* Cards */
     .card-white, .card-dark { padding: 14px; }
     .section-title { font-size: 14px; }
-
-    /* Panels */
     .panel-header { padding: 10px 12px; }
-    .panel-header-title { font-size: 12px; }
     .panel-body { padding: 12px; }
-    .right-panels { display: flex; flex-direction: column; gap: 12px; }
 
-    /* Chat */
-    .chat-bubble { font-size: 12px; padding: 10px 12px; max-width: 95% !important; }
+    .chat-bubble { font-size: 12px; max-width: 95% !important; }
 
-    /* Wheel SVG */
-    .wheel { width: 100% !important; max-width: 260px !important; margin: 0 auto; display: block; }
+    table { display: block; overflow-x: auto; font-size: 11px; }
+    table th, table td { padding: 8px 10px !important; }
 
-    /* Gap bars */
-    .gap-bar-name { font-size: 11px; }
-    .gap-bar-score { font-size: 12px; }
-    .force-action-row { }
-    .force-action-header { flex-wrap: wrap; gap: 6px; }
-
-    /* Implementation table */
-    .card-white table, .impl-table { display: block; overflow-x: auto; -webkit-overflow-scrolling: touch; font-size: 11px; }
-    table th, table td { padding: 8px 10px !important; min-width: 90px; white-space: normal; }
-
-    /* Week selector */
     .week-selector { gap: 4px; }
     .week-chip { font-size: 11px; padding: 5px 9px; }
 
-    /* Focus force cards */
-    .focus-force-card { padding: 12px; }
-    .focus-force-name { font-size: 13px; }
-
-    /* Buttons */
     .btn { font-size: 12px; padding: 9px 14px; }
-    .flex.gap8 { flex-wrap: wrap; }
-
-    /* Labels */
+    .badge { font-size: 9px; }
     .label { font-size: 10px; }
-    .badge { font-size: 9px; padding: 3px 7px; }
-    .text-sm { font-size: 12px; }
-    .text-xs { font-size: 10px; }
 
-    /* Posture list */
-    .posture-item { flex-wrap: wrap; }
-
-    /* Misc spacing */
-    .mb24 { margin-bottom: 16px; }
-    .mb20 { margin-bottom: 14px; }
-    .mb16 { margin-bottom: 12px; }
-    .mt20 { margin-top: 14px; }
-    .gap16 { gap: 10px; }
-    .gap24 { gap: 14px; }
+    .gap-bar-name { font-size: 11px; }
+    .force-action-header { flex-wrap: wrap; gap: 6px; }
   }
 
   @media (max-width: 480px) {
-    .tab-hero h1 { font-size: 19px; }
+    .tab-hero h1 { font-size: 18px; }
     .force-cards { grid-template-columns: 1fr !important; }
     .tab-btn { font-size: 10px; padding: 6px 8px; }
     .card-white, .card-dark { padding: 12px; }
+    svg.wheel { max-width: 220px !important; }
   }
-
 </style>
 </head>
 <body>
