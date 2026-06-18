@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Tony AI × Business Mastery — Visual Mockup v2</title>
+<title>Tony AI × Business Mastery — Visual Mockup v3</title>
 <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,600;0,700;1,400&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
 <style>
   *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
@@ -12,6 +12,10 @@
     --mint: #3beba0;
     --mint-dark: #22c97e;
     --mint-light: #e8fdf4;
+    --dark-green: #1a4a3a;
+    --dark-green-2: #163d30;
+    --dark-green-light: #2a6052;
+    --near-black: #0f1f1a;
     --black: #111111;
     --white: #ffffff;
     --gray-50: #f9fafb;
@@ -54,23 +58,23 @@
     display: flex;
     align-items: center;
     justify-content: space-between;
-    padding: 16px 32px;
-    border-bottom: 1px solid var(--border);
+    padding: 0 32px;
+    height: 60px;
     flex-shrink: 0;
-    background: #fff;
+    background: var(--dark-green);
   }
   .topbar-brand {
     font-family: 'Playfair Display', serif;
     font-size: 18px;
     font-weight: 700;
     letter-spacing: -0.3px;
-    color: var(--black);
+    color: var(--white);
   }
-  .topbar-brand span { color: var(--mint-dark); }
+  .topbar-brand span { color: var(--mint); }
   .topbar-tag {
     font-size: 10px;
     font-weight: 500;
-    color: var(--gray-400);
+    color: rgba(255,255,255,0.45);
     letter-spacing: 1.5px;
     text-transform: uppercase;
     margin-top: 3px;
@@ -80,61 +84,52 @@
     align-items: center;
     gap: 10px;
     font-size: 13px;
-    color: var(--gray-400);
+    color: rgba(255,255,255,0.6);
   }
   .avatar {
     width: 32px; height: 32px;
     border-radius: 50%;
-    background: linear-gradient(135deg, var(--mint), var(--mint-dark));
+    background: var(--mint);
     display: flex; align-items: center; justify-content: center;
-    font-size: 12px; font-weight: 600; color: var(--black);
+    font-size: 12px; font-weight: 700; color: var(--dark-green);
   }
 
   /* ─── TAB NAV ─── */
   .tabnav {
     display: flex;
     padding: 0 32px;
-    border-bottom: 1px solid var(--border);
+    border-bottom: 2px solid var(--border);
     flex-shrink: 0;
     overflow-x: auto;
     scrollbar-width: none;
-    background: #fff;
+    background: var(--white);
   }
   .tabnav::-webkit-scrollbar { display: none; }
   .tab-btn {
-    padding: 14px 22px;
-    font-size: 13px;
-    font-weight: 500;
+    padding: 16px 22px;
+    font-size: 12px;
+    font-weight: 600;
     color: var(--gray-400);
     cursor: pointer;
     border: none;
     background: none;
     border-bottom: 2px solid transparent;
+    margin-bottom: -2px;
     transition: all 0.18s;
     white-space: nowrap;
-    display: flex;
-    align-items: center;
-    gap: 8px;
-    margin-bottom: -1px;
+    letter-spacing: 0.3px;
+    text-transform: uppercase;
   }
-  .tab-btn:hover { color: var(--black); }
+  .tab-btn:hover { color: var(--dark-green); }
   .tab-btn.active {
-    color: var(--mint-dark);
+    color: var(--dark-green);
     border-bottom-color: var(--mint);
   }
-  .tab-dot {
-    width: 6px; height: 6px;
-    border-radius: 50%;
-    background: var(--gray-200);
-    transition: background 0.18s;
-  }
-  .tab-btn.active .tab-dot { background: var(--mint); }
 
   /* ─── CONTENT AREA ─── */
   .content {
     flex: 1;
     overflow-y: auto;
-    padding: 32px;
     scrollbar-width: thin;
     scrollbar-color: var(--gray-200) transparent;
     background: #fff;
@@ -146,11 +141,88 @@
   .screen { display: none; }
   .screen.active { display: block; }
 
-  /* ─── SHARED COMPONENTS ─── */
-  .section-header { margin-bottom: 28px; }
-  .section-label {
-    font-size: 11px;
+  /* ─── TAB HERO (dark green banner at top of each tab) ─── */
+  .tab-hero {
+    background: var(--dark-green);
+    padding: 40px 48px;
+    color: var(--white);
+    position: relative;
+    overflow: hidden;
+  }
+  .tab-hero::after {
+    content: '';
+    position: absolute;
+    right: -60px; top: -60px;
+    width: 320px; height: 320px;
+    border-radius: 50%;
+    background: rgba(59,235,160,0.07);
+    pointer-events: none;
+  }
+  .tab-hero-eyebrow {
+    font-size: 10px;
     font-weight: 600;
+    letter-spacing: 2.5px;
+    text-transform: uppercase;
+    color: var(--mint);
+    margin-bottom: 12px;
+  }
+  .tab-hero h1 {
+    font-family: 'Playfair Display', serif;
+    font-size: 34px;
+    font-weight: 700;
+    line-height: 1.18;
+    color: var(--white);
+    margin-bottom: 12px;
+    max-width: 600px;
+  }
+  .tab-hero h1 em { color: var(--mint); font-style: normal; }
+  .tab-hero p {
+    font-size: 15px;
+    line-height: 1.65;
+    color: rgba(255,255,255,0.65);
+    max-width: 520px;
+    margin-bottom: 0;
+  }
+  .tab-hero-meta {
+    position: absolute;
+    right: 48px;
+    top: 50%;
+    transform: translateY(-50%);
+    text-align: center;
+    z-index: 1;
+  }
+  .countdown-block {
+    background: rgba(255,255,255,0.08);
+    border: 1px solid rgba(255,255,255,0.15);
+    border-radius: 12px;
+    padding: 24px 32px;
+    min-width: 160px;
+  }
+  .countdown-num {
+    font-family: 'Playfair Display', serif;
+    font-size: 52px;
+    font-weight: 700;
+    color: var(--mint);
+    line-height: 1;
+  }
+  .countdown-label {
+    font-size: 10px;
+    letter-spacing: 1.5px;
+    text-transform: uppercase;
+    color: rgba(255,255,255,0.5);
+    margin-top: 6px;
+  }
+
+  /* ─── PAGE BODY (padded content below hero) ─── */
+  .page-body { padding: 36px 48px 48px; }
+
+  /* ─── SHARED COMPONENTS ─── */
+  .section-head {
+    margin-bottom: 24px;
+  }
+  .section-label {
+    font-size: 10px;
+    font-weight: 700;
     letter-spacing: 2px;
     text-transform: uppercase;
     color: var(--mint-dark);
@@ -158,16 +230,10 @@
   }
   .section-title {
     font-family: 'Playfair Display', serif;
-    font-size: 32px;
+    font-size: 26px;
     font-weight: 700;
-    line-height: 1.15;
-    color: var(--black);
-  }
-  .section-sub {
-    font-size: 14px;
-    color: var(--gray-400);
-    margin-top: 8px;
-    line-height: 1.6;
+    line-height: 1.2;
+    color: var(--dark-green);
   }
 
   .card {
@@ -183,20 +249,20 @@
     padding: 24px;
     box-shadow: 0 1px 4px rgba(0,0,0,0.04);
   }
+  .card-dark {
+    background: var(--dark-green);
+    border-radius: 12px;
+    padding: 24px;
+    color: white;
+  }
   .card-mint {
     background: var(--mint-light);
     border: 1px solid rgba(59,235,160,0.3);
     border-radius: 12px;
     padding: 24px;
   }
-  .card-accent {
-    background: #f0fdf8;
-    border: 1px solid rgba(34,201,126,0.2);
-    border-radius: 12px;
-    padding: 24px;
-  }
 
-  .grid-2 { display: grid; grid-template-columns: 1fr 1fr; gap: 20px; }
+  .grid-2 { display: grid; grid-template-columns: 1fr 1fr; gap: 24px; }
   .grid-3 { display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 20px; }
 
   .badge {
@@ -207,10 +273,11 @@
     border-radius: 20px;
     font-size: 11px;
     font-weight: 600;
-    letter-spacing: 0.5px;
+    letter-spacing: 0.3px;
   }
   .badge-mint { background: var(--mint-light); color: var(--mint-dark); border: 1px solid rgba(59,235,160,0.3); }
   .badge-gray { background: var(--gray-100); color: var(--gray-600); border: 1px solid var(--border); }
+  .badge-dark { background: var(--dark-green); color: white; }
 
   .btn {
     display: inline-flex; align-items: center; gap: 8px;
@@ -219,20 +286,27 @@
     font-size: 14px; font-weight: 600;
     cursor: pointer; border: none;
     transition: all 0.18s;
+    font-family: 'Inter', sans-serif;
   }
-  .btn-primary { background: var(--mint); color: var(--black); }
+  .btn-primary { background: var(--mint); color: var(--dark-green); }
   .btn-primary:hover { background: var(--mint-dark); color: #fff; }
-  .btn-ghost { background: var(--gray-100); color: var(--black); border: 1px solid var(--border); }
-  .btn-ghost:hover { background: var(--gray-200); }
+  .btn-dark { background: var(--dark-green); color: white; }
+  .btn-dark:hover { background: var(--dark-green-light); }
+  .btn-ghost { background: transparent; color: rgba(255,255,255,0.8); border: 1px solid rgba(255,255,255,0.25); }
+  .btn-ghost:hover { background: rgba(255,255,255,0.1); color: white; }
+  .btn-outline { background: var(--gray-100); color: var(--black); border: 1px solid var(--border); }
+  .btn-outline:hover { background: var(--gray-200); }
 
   .label {
-    font-size: 11px;
-    font-weight: 600;
-    letter-spacing: 1px;
+    font-size: 10px;
+    font-weight: 700;
+    letter-spacing: 1.5px;
     text-transform: uppercase;
     color: var(--gray-400);
     margin-bottom: 6px;
   }
+  .label-dark { color: var(--dark-green); }
+  .label-mint { color: var(--mint-dark); }
 
   .chat-bubble {
     border-radius: 12px;
@@ -240,7 +314,7 @@
     font-size: 14px;
     line-height: 1.6;
     margin-bottom: 10px;
-    max-width: 85%;
+    max-width: 86%;
     color: var(--black);
   }
   .chat-ai {
@@ -254,15 +328,15 @@
     margin-left: auto;
     border-radius: 12px 4px 12px 12px;
   }
-  .chat-label {
+  .chat-who {
     font-size: 10px;
-    font-weight: 600;
+    font-weight: 700;
     letter-spacing: 1px;
     text-transform: uppercase;
-    margin-bottom: 4px;
+    margin-bottom: 5px;
     color: var(--gray-400);
   }
-  .chat-label.ai { color: var(--mint-dark); }
+  .chat-who.ai { color: var(--mint-dark); }
 
   .notes-field {
     width: 100%;
@@ -284,6 +358,7 @@
   /* utility */
   .mt4 { margin-top: 4px; }
   .mt8 { margin-top: 8px; }
+  .mt12 { margin-top: 12px; }
   .mt16 { margin-top: 16px; }
   .mt20 { margin-top: 20px; }
   .mt24 { margin-top: 24px; }
@@ -294,135 +369,78 @@
   .mb24 { margin-bottom: 24px; }
   .text-xs { font-size: 11px; }
   .text-sm { font-size: 13px; }
-  .text-base { font-size: 15px; }
   .text-gray { color: var(--gray-400); }
   .text-mint { color: var(--mint-dark); }
-  .text-black { color: var(--black); }
+  .text-dark { color: var(--dark-green); }
+  .text-white { color: white; }
   .fw6 { font-weight: 600; }
   .fw5 { font-weight: 500; }
   .flex { display: flex; }
   .items-center { align-items: center; }
   .items-start { align-items: flex-start; }
   .gap8 { gap: 8px; }
+  .gap12 { gap: 12px; }
   .gap16 { gap: 16px; }
   .gap20 { gap: 20px; }
   .space-between { justify-content: space-between; }
   .divider { height: 1px; background: var(--border); margin: 16px 0; }
+  .divider-white { height: 1px; background: rgba(255,255,255,0.15); margin: 16px 0; }
 
   /* ═══════════════════════════════════════════
-     SCREEN 1 — PRE-EVENT PREP BRIEF
+     SCREEN 1 — PRE-EVENT
   ═══════════════════════════════════════════ */
-  .prep-hero {
-    background: linear-gradient(135deg, rgba(59,235,160,0.07) 0%, rgba(255,255,255,0) 65%);
-    border: 1px solid rgba(59,235,160,0.2);
-    border-radius: 16px;
-    padding: 40px 48px;
-    margin-bottom: 28px;
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-    gap: 40px;
-  }
-  .prep-hero-left { flex: 1; }
-  .prep-hero h1 {
-    font-family: 'Playfair Display', serif;
-    font-size: 38px;
-    font-weight: 700;
-    line-height: 1.15;
-    color: var(--black);
-    margin-bottom: 14px;
-  }
-  .prep-hero h1 em { color: var(--mint-dark); font-style: normal; }
-  .prep-hero p {
-    font-size: 16px;
-    line-height: 1.65;
-    color: var(--gray-600);
-    max-width: 480px;
-    margin-bottom: 24px;
-  }
-  .prep-hero-right { flex-shrink: 0; text-align: center; }
-  .prep-countdown {
-    background: #fff;
+  .prep-steps {
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr;
+    gap: 1px;
+    background: var(--border);
     border: 1px solid var(--border);
     border-radius: 12px;
-    padding: 24px 32px;
-    min-width: 180px;
-    box-shadow: 0 2px 8px rgba(0,0,0,0.05);
+    overflow: hidden;
+    margin-bottom: 24px;
   }
-  .prep-countdown-num {
+  .prep-step {
+    background: white;
+    padding: 20px 22px;
+  }
+  .prep-step-num {
     font-family: 'Playfair Display', serif;
-    font-size: 52px;
+    font-size: 28px;
     font-weight: 700;
-    color: var(--mint-dark);
+    color: var(--dark-green);
     line-height: 1;
+    margin-bottom: 8px;
   }
-  .prep-countdown-label {
-    font-size: 11px;
-    letter-spacing: 1.5px;
-    text-transform: uppercase;
-    color: var(--gray-400);
-    margin-top: 6px;
+  .prep-step.active .prep-step-num { color: var(--mint-dark); }
+  .prep-step-title {
+    font-size: 13px;
+    font-weight: 600;
+    color: var(--dark-green);
+    margin-bottom: 6px;
   }
-  .prep-convo-note {
-    margin-top: 12px;
+  .prep-step-desc {
     font-size: 12px;
     color: var(--gray-400);
-    text-align: center;
-    font-style: italic;
+    line-height: 1.6;
   }
-
-  .timeline {
-    display: flex;
-    gap: 0;
-    position: relative;
+  .prep-step.active {
+    background: #f0fdf8;
+    border-left: 3px solid var(--mint);
   }
-  .timeline::before {
-    content: '';
-    position: absolute;
-    top: 20px;
-    left: 20px;
-    right: 20px;
-    height: 1px;
-    background: var(--border);
-  }
-  .timeline-step {
-    flex: 1;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    text-align: center;
-    position: relative;
-    z-index: 1;
-  }
-  .timeline-dot {
-    width: 40px; height: 40px;
+  .prep-step.done { background: var(--gray-50); }
+  .prep-step.done .prep-step-title { color: var(--gray-400); }
+  .step-check {
+    display: inline-block;
+    width: 18px; height: 18px;
     border-radius: 50%;
-    display: flex; align-items: center; justify-content: center;
-    font-size: 13px; font-weight: 700;
-    margin-bottom: 10px;
-    background: var(--gray-100);
-    border: 1px solid var(--border);
-    color: var(--gray-400);
-  }
-  .timeline-step.done .timeline-dot {
     background: var(--mint);
-    color: var(--black);
-    border-color: var(--mint);
+    color: var(--dark-green);
+    font-size: 10px;
+    font-weight: 700;
+    line-height: 18px;
+    text-align: center;
+    margin-bottom: 8px;
   }
-  .timeline-step.active .timeline-dot {
-    background: var(--mint-light);
-    color: var(--mint-dark);
-    border-color: var(--mint);
-    box-shadow: 0 0 0 4px rgba(59,235,160,0.15);
-  }
-  .timeline-name {
-    font-size: 12px;
-    font-weight: 500;
-    color: var(--gray-400);
-    line-height: 1.3;
-  }
-  .timeline-step.done .timeline-name { color: var(--black); }
-  .timeline-step.active .timeline-name { color: var(--mint-dark); font-weight: 600; }
 
   /* ═══════════════════════════════════════════
      SCREEN 2 — 5-DAY IMMERSION
@@ -431,10 +449,6 @@
     display: grid;
     grid-template-columns: 3fr 2fr;
     gap: 24px;
-    min-height: calc(100vh - 200px);
-  }
-  @media (max-width: 768px) {
-    .immersion-layout { grid-template-columns: 1fr; }
   }
 
   .panel {
@@ -451,12 +465,13 @@
     justify-content: space-between;
     border-bottom: 1px solid var(--border);
     flex-shrink: 0;
-    background: var(--gray-50);
+    background: var(--dark-green);
   }
   .panel-header-title {
-    font-size: 13px;
-    font-weight: 600;
-    color: var(--black);
+    font-size: 12px;
+    font-weight: 700;
+    color: white;
+    letter-spacing: 0.5px;
     display: flex;
     align-items: center;
     gap: 8px;
@@ -477,22 +492,25 @@
     align-items: center;
     gap: 10px;
     padding: 10px 14px;
-    background: #fef3ec;
-    border: 1px solid rgba(92,64,51,0.2);
+    background: var(--gray-50);
+    border: 1px solid var(--border);
+    border-left: 3px solid var(--f4);
     border-radius: 8px;
     margin-bottom: 20px;
     font-size: 13px;
     color: var(--gray-600);
   }
-  .force-tag strong { color: var(--black); font-weight: 600; }
+  .force-tag strong { color: var(--dark-green); font-weight: 600; }
   .force-dot { width: 8px; height: 8px; border-radius: 50%; flex-shrink: 0; }
 
   .manual-exercise { margin-bottom: 22px; }
   .manual-exercise h3 {
-    font-size: 14px;
-    font-weight: 600;
+    font-size: 13px;
+    font-weight: 700;
     margin-bottom: 10px;
-    color: var(--black);
+    color: var(--dark-green);
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
   }
   .exercise-question {
     font-size: 14px;
@@ -503,22 +521,23 @@
     border-left: 2px solid var(--mint);
   }
   .quote-block {
-    font-size: 14px;
+    font-family: 'Playfair Display', serif;
+    font-size: 15px;
     font-style: italic;
-    color: var(--gray-600);
+    color: var(--dark-green);
     line-height: 1.65;
-    padding: 16px 20px;
+    padding: 18px 22px;
     background: var(--gray-50);
     border-radius: 8px;
-    border-left: 3px solid var(--mint);
+    border-left: 3px solid var(--dark-green);
   }
 
   .progress-bar-mini {
-    height: 6px;
+    height: 5px;
     background: var(--gray-100);
     border-radius: 3px;
     overflow: hidden;
-    margin-top: 6px;
+    margin-top: 5px;
   }
   .progress-bar-fill {
     height: 100%;
@@ -526,28 +545,17 @@
     background: var(--mint);
   }
 
-  .journal-meta {
-    font-size: 11px;
-    color: var(--gray-400);
-    font-weight: 500;
-    letter-spacing: 0.5px;
-    text-transform: uppercase;
-    margin-bottom: 8px;
-  }
-
   /* ═══════════════════════════════════════════
      SCREEN 3 — WHEEL / GAP MAP
   ═══════════════════════════════════════════ */
   .wheel-layout {
     display: grid;
-    grid-template-columns: 400px 1fr;
+    grid-template-columns: 380px 1fr;
     gap: 32px;
     align-items: start;
   }
-  .wheel-container { width: 400px; flex-shrink: 0; }
-  svg.wheel { width: 400px; height: 400px; }
+  svg.wheel { width: 380px; height: 380px; }
 
-  .gap-bar { margin-bottom: 0; }
   .gap-bar-header {
     display: flex;
     align-items: center;
@@ -565,7 +573,7 @@
   .gap-bar-score { font-size: 12px; color: var(--gray-400); }
   .gap-bar-score span { color: var(--mint-dark); font-weight: 700; }
   .bar-track {
-    height: 8px;
+    height: 7px;
     background: var(--gray-100);
     border-radius: 4px;
     overflow: hidden;
@@ -573,19 +581,19 @@
     margin-bottom: 8px;
   }
   .bar-now { height: 100%; border-radius: 4px; position: absolute; top: 0; left: 0; }
-  .bar-want { height: 100%; border-radius: 4px; position: absolute; top: 0; left: 0; opacity: 0.2; }
+  .bar-want { height: 100%; border-radius: 4px; position: absolute; top: 0; left: 0; opacity: 0.15; }
 
   .force-action-row {
     border: 1px solid var(--border);
     border-radius: 10px;
-    margin-bottom: 12px;
+    margin-bottom: 10px;
     overflow: hidden;
   }
   .force-action-header {
     display: flex;
     align-items: center;
     justify-content: space-between;
-    padding: 14px 16px;
+    padding: 13px 16px;
     background: var(--gray-50);
     cursor: pointer;
   }
@@ -596,111 +604,36 @@
   }
   .force-action-body.collapsed { display: none; }
 
-  .gap-summary-table {
-    width: 100%;
-    border-collapse: collapse;
-    font-size: 13px;
-    margin-top: 8px;
-  }
-  .gap-summary-table th {
-    text-align: left;
-    padding: 8px 12px;
-    font-size: 10px;
-    font-weight: 600;
-    letter-spacing: 1px;
-    text-transform: uppercase;
-    color: var(--gray-400);
-    background: var(--gray-50);
-    border-bottom: 1px solid var(--border);
-  }
-  .gap-summary-table td {
-    padding: 10px 12px;
-    border-bottom: 1px solid var(--gray-100);
-    color: var(--black);
-    vertical-align: top;
-  }
-  .gap-summary-table tr:last-child td { border-bottom: none; }
-  .gap-summary-table tr:hover td { background: var(--gray-50); }
-  .captured-action {
-    font-size: 12px;
-    color: var(--gray-600);
-    font-style: italic;
-  }
-  .no-action {
-    font-size: 12px;
-    color: var(--gray-400);
-  }
-
   /* ═══════════════════════════════════════════
-     SCREEN 4 — SEVEN FORCES PLAN
+     SCREEN 4 — 7 FORCES IMPLEMENTATION PLAN
   ═══════════════════════════════════════════ */
-  .day5-opening {
-    background: linear-gradient(135deg, rgba(59,235,160,0.06), rgba(255,255,255,0));
-    border: 1px solid rgba(59,235,160,0.2);
-    border-radius: 12px;
-    padding: 32px 40px;
-    margin-bottom: 28px;
-  }
-  .day5-opening blockquote {
-    font-family: 'Playfair Display', serif;
-    font-size: 21px;
-    line-height: 1.55;
-    color: var(--black);
-    font-style: italic;
-  }
-  .day5-opening cite {
-    display: block;
-    font-size: 11px;
-    font-style: normal;
-    color: var(--gray-400);
-    letter-spacing: 1px;
-    text-transform: uppercase;
-    margin-top: 14px;
-    font-family: 'Inter', sans-serif;
-  }
-
   .force-cards {
     display: grid;
     grid-template-columns: repeat(7, 1fr);
-    gap: 10px;
-    margin-bottom: 24px;
+    gap: 8px;
+    margin-bottom: 20px;
   }
   .force-card {
     border-radius: 10px;
-    padding: 14px 10px;
+    padding: 14px 8px;
     text-align: center;
     cursor: pointer;
     transition: all 0.18s;
     border: 1.5px solid var(--border);
     background: #fff;
   }
-  .force-card:hover { transform: translateY(-2px); box-shadow: 0 4px 12px rgba(0,0,0,0.06); }
-  .force-card.selected { border-width: 2px; box-shadow: 0 2px 8px rgba(0,0,0,0.07); }
+  .force-card:hover { transform: translateY(-2px); box-shadow: 0 4px 12px rgba(0,0,0,0.08); }
+  .force-card.selected { border-width: 2px; }
   .force-card-num {
-    font-size: 22px;
+    font-size: 20px;
     font-weight: 700;
     font-family: 'Playfair Display', serif;
     margin-bottom: 6px;
   }
-  .force-card-name { font-size: 10px; font-weight: 500; line-height: 1.3; color: var(--gray-600); }
+  .force-card-name { font-size: 9px; font-weight: 600; line-height: 1.3; color: var(--gray-600); text-transform: uppercase; letter-spacing: 0.3px; }
   .force-card-score { margin-top: 8px; font-size: 11px; color: var(--gray-400); }
   .force-card-score span { font-weight: 700; color: var(--mint-dark); }
 
-  .narrow-callout {
-    display: flex;
-    align-items: center;
-    gap: 16px;
-    background: var(--mint-light);
-    border: 1px solid rgba(59,235,160,0.3);
-    border-radius: 10px;
-    padding: 18px 22px;
-    margin-bottom: 24px;
-  }
-  .narrow-callout-icon { font-size: 28px; flex-shrink: 0; }
-  .narrow-callout-text { font-size: 14px; font-weight: 600; color: var(--black); line-height: 1.4; }
-  .narrow-callout-sub { font-size: 12px; color: var(--gray-600); margin-top: 3px; }
-
-  /* Implementation table */
   .impl-table {
     width: 100%;
     border-collapse: collapse;
@@ -713,10 +646,10 @@
     font-weight: 700;
     letter-spacing: 1.2px;
     text-transform: uppercase;
-    color: var(--gray-400);
-    background: var(--gray-50);
-    border-bottom: 2px solid var(--border);
+    color: white;
+    background: var(--dark-green);
   }
+  .impl-table th:first-child { border-radius: 0; }
   .impl-table td {
     padding: 14px;
     border-bottom: 1px solid var(--border);
@@ -758,16 +691,12 @@
     border-color: var(--mint);
     box-shadow: 0 0 0 3px rgba(59,235,160,0.1);
   }
-  .priority-dots {
-    display: flex;
-    gap: 4px;
-  }
+  .priority-dots { display: flex; gap: 4px; }
   .priority-dot {
     width: 10px; height: 10px;
     border-radius: 50%;
     background: var(--mint);
     cursor: pointer;
-    transition: opacity 0.15s;
   }
   .priority-dot.inactive { background: var(--gray-200); }
   .impl-notes {
@@ -786,7 +715,7 @@
   .impl-notes:focus { border-color: var(--mint); }
 
   /* ═══════════════════════════════════════════
-     SCREEN 5 — YOUR IMPLEMENTATION (POST-EVENT)
+     SCREEN 5 — POST-EVENT IMPLEMENTATION
   ═══════════════════════════════════════════ */
   .post-layout {
     display: grid;
@@ -804,7 +733,8 @@
   }
   .focus-force-card.active {
     border-color: var(--mint);
-    background: var(--mint-light);
+    border-left: 4px solid var(--mint);
+    background: #f8fffc;
   }
   .focus-force-header {
     display: flex;
@@ -815,18 +745,14 @@
   .focus-force-name {
     font-weight: 600;
     font-size: 14px;
-    color: var(--black);
+    color: var(--dark-green);
     display: flex;
     align-items: center;
     gap: 8px;
   }
-  .focus-force-meta { font-size: 12px; color: var(--gray-400); }
-  .focus-force-action {
-    font-size: 13px;
-    color: var(--gray-600);
-    line-height: 1.5;
-  }
-  .focus-force-action strong { color: var(--black); }
+  .focus-force-meta { font-size: 12px; color: var(--gray-400); margin-bottom: 6px; }
+  .focus-force-action { font-size: 13px; color: var(--gray-600); line-height: 1.5; }
+  .focus-force-action strong { color: var(--dark-green); }
 
   .week-selector {
     display: flex;
@@ -846,7 +772,7 @@
     transition: all 0.15s;
   }
   .week-chip.done { background: var(--gray-100); color: var(--gray-400); }
-  .week-chip.active { background: var(--mint); color: var(--black); border-color: var(--mint); font-weight: 700; }
+  .week-chip.active { background: var(--mint); color: var(--dark-green); border-color: var(--mint); font-weight: 700; }
 
   .posture-list { margin-top: 8px; }
   .posture-item {
@@ -859,9 +785,9 @@
   .posture-item:last-child { border-bottom: none; }
   .posture-tag {
     flex-shrink: 0;
-    font-size: 10px;
-    font-weight: 700;
-    letter-spacing: 1px;
+    font-size: 9px;
+    font-weight: 800;
+    letter-spacing: 1.2px;
     text-transform: uppercase;
     padding: 3px 8px;
     border-radius: 4px;
@@ -872,19 +798,9 @@
   .posture-text { font-size: 13px; color: var(--gray-600); line-height: 1.5; }
   .posture-text em { color: var(--black); font-style: italic; }
 
-  .coaching-rule {
-    padding: 12px 0;
-    border-bottom: 1px solid var(--gray-100);
-    font-size: 13px;
-    line-height: 1.6;
-    color: var(--gray-600);
-  }
-  .coaching-rule:last-child { border-bottom: none; }
-  .coaching-rule strong { color: var(--black); }
-
-  /* pulse for any status indicators */
+  /* pulse */
   .pulse {
-    width: 8px; height: 8px;
+    width: 7px; height: 7px;
     border-radius: 50%;
     background: var(--mint);
     animation: pulse 2s infinite;
@@ -903,7 +819,7 @@
   <header class="topbar">
     <div>
       <div class="topbar-brand">Tony AI <span>×</span> Business Mastery</div>
-      <div class="topbar-tag">Visual Mockup · v2 · June 2026</div>
+      <div class="topbar-tag">Visual Mockup · v3 · June 2026</div>
     </div>
     <div class="topbar-user">
       <span>Marcus Chen · Enrolled</span>
@@ -913,173 +829,128 @@
 
   <!-- TAB NAV -->
   <nav class="tabnav">
-    <button class="tab-btn active" onclick="switchTab(0, this)">
-      <div class="tab-dot"></div> Pre-Event
-    </button>
-    <button class="tab-btn" onclick="switchTab(1, this)">
-      <div class="tab-dot"></div> 5-Day Immersion
-    </button>
-    <button class="tab-btn" onclick="switchTab(2, this)">
-      <div class="tab-dot"></div> Wheel / Gap Map
-    </button>
-    <button class="tab-btn" onclick="switchTab(3, this)">
-      <div class="tab-dot"></div> Seven Forces Plan
-    </button>
-    <button class="tab-btn" onclick="switchTab(4, this)">
-      <div class="tab-dot"></div> Your Implementation
-    </button>
+    <button class="tab-btn active" onclick="switchTab(0, this)">Pre-Event</button>
+    <button class="tab-btn" onclick="switchTab(1, this)">5-Day Immersion</button>
+    <button class="tab-btn" onclick="switchTab(2, this)">Wheel / Gap Map</button>
+    <button class="tab-btn" onclick="switchTab(3, this)">7 Forces Implementation Plan</button>
+    <button class="tab-btn" onclick="switchTab(4, this)">Post-Event Implementation</button>
   </nav>
 
   <!-- CONTENT -->
   <main class="content">
 
     <!-- ══════════════════════════════════════════════════════
-         SCREEN 1 — PRE-EVENT PREP BRIEF
+         SCREEN 1 — PRE-EVENT
     ══════════════════════════════════════════════════════ -->
     <div class="screen active" id="screen-0">
 
-      <!-- Hero -->
-      <div class="prep-hero">
-        <div class="prep-hero-left">
-          <div class="section-label">Before the Event · 14 Days Out</div>
-          <h1>Show up ready to <em>use</em> Business Mastery, not just attend it.</h1>
-          <p>Tony AI helps you get clear on where your business stands, what would move the needle most, and what you want to walk away with. You arrive with a Prep Brief — your starting point for the five days.</p>
-          <div class="flex gap8">
+      <!-- Dark Hero -->
+      <div class="tab-hero" style="display:flex; align-items:center; justify-content:space-between;">
+        <div style="flex:1;">
+          <div class="tab-hero-eyebrow">Pre-Event · 14 Days Out</div>
+          <h1>Show up ready to <em>use</em> Business Mastery,<br>not just attend it.</h1>
+          <p>A 5–7 minute conversation with Tony AI gets you clear on what would move the needle most — before Day 1.</p>
+          <div class="flex gap8 mt20">
             <button class="btn btn-primary">▶ Start My Prep</button>
             <button class="btn btn-ghost">View Sample Brief</button>
           </div>
         </div>
-        <div class="prep-hero-right">
-          <div class="prep-countdown">
-            <div class="prep-countdown-num">14</div>
-            <div class="prep-countdown-label">Days until Business Mastery</div>
-          </div>
-          <div class="prep-convo-note">A quick conversation with Tony AI<br>(5–7 minutes)</div>
-        </div>
-      </div>
-
-      <!-- Prep Flow -->
-      <div class="card mb24">
-        <div class="label mb16">3-Step Prep Flow</div>
-        <div class="timeline">
-          <div class="timeline-step done">
-            <div class="timeline-dot">✓</div>
-            <div class="timeline-name">Business<br>Summary</div>
-          </div>
-          <div class="timeline-step active">
-            <div class="timeline-dot">2</div>
-            <div class="timeline-name">Biggest<br>Levers</div>
-          </div>
-          <div class="timeline-step">
-            <div class="timeline-dot">3</div>
-            <div class="timeline-name">Pre-Event<br>Plan</div>
-          </div>
-        </div>
-        <div class="divider" style="margin-top: 24px;"></div>
-        <div class="grid-3">
-          <div>
-            <div class="text-sm fw6 mb4">1 · Business Summary</div>
-            <div class="text-xs text-gray" style="line-height:1.6;">What's your business — revenue, team size, model? Where are you now and where do you want to go?</div>
-          </div>
-          <div>
-            <div class="text-sm fw6 mb4">2 · Biggest Levers</div>
-            <div class="text-xs text-gray" style="line-height:1.6;">What would move the needle most right now? Not every problem — the one or two things that would change the most if you solved them.</div>
-          </div>
-          <div>
-            <div class="text-sm fw6 mb4">3 · Pre-Event Plan</div>
-            <div class="text-xs text-gray" style="line-height:1.6;">What do you want to get from Business Mastery? What would make this the most valuable five days you've invested in your business?</div>
+        <div class="tab-hero-meta">
+          <div class="countdown-block">
+            <div class="countdown-num">14</div>
+            <div class="countdown-label">Days Until<br>Business Mastery</div>
           </div>
         </div>
       </div>
 
-      <!-- AI Conversation + Prep Brief -->
-      <div class="grid-2 mb24">
-        <div class="card-white">
-          <div class="label mb16">AI Conversation — Step 2: Biggest Levers</div>
-          <div class="chat-label ai">Tony AI</div>
-          <div class="chat-bubble chat-ai">
-            You said revenue's at $3M with a 12-person team. What's the one thing — if it got better — that would have the biggest impact on the business right now?
+      <div class="page-body">
+
+        <!-- 3-Step Prep Flow -->
+        <div class="prep-steps mb24">
+          <div class="prep-step done">
+            <div class="step-check">✓</div>
+            <div class="prep-step-title">Business Snapshot</div>
+            <div class="prep-step-desc">Revenue, team size, where you are now and where you want to go.</div>
           </div>
-          <div class="chat-label">Marcus</div>
-          <div class="chat-bubble chat-user">
-            Honestly? Margins are tight and I'm still doing too much myself. We have demand but not the team to handle it cleanly.
+          <div class="prep-step active">
+            <div class="prep-step-num">2</div>
+            <div class="prep-step-title">Biggest Levers</div>
+            <div class="prep-step-desc">The one or two things that, if solved, would change the most right now.</div>
           </div>
-          <div class="chat-label ai">Tony AI</div>
-          <div class="chat-bubble chat-ai">
-            So when demand comes in, it converts — but it creates pressure on you personally. You're the bottleneck. <strong>What would it look like if that changed?</strong>
-          </div>
-          <div class="chat-label">Marcus</div>
-          <div class="chat-bubble chat-user">
-            I'd have a team that owns the process. I'd be working on the business, not in it.
-          </div>
-          <div class="chat-label ai">Tony AI</div>
-          <div class="chat-bubble chat-ai">
-            That's clear. Team ownership and structure — that's a lever worth watching for at Business Mastery. <strong>What else? Is there a second area that's been nagging at you?</strong>
+          <div class="prep-step">
+            <div class="prep-step-num">3</div>
+            <div class="prep-step-title">Event Outcomes</div>
+            <div class="prep-step-desc">What would make these five days the best investment in your business?</div>
           </div>
         </div>
 
-        <div>
-          <div class="card-white mb16">
-            <div class="label mb12">Prep Brief Preview</div>
-            <div class="text-xs text-gray mb16">Business Mastery Prep Brief — Marcus Chen</div>
-
-            <div class="mb12">
-              <div class="label" style="font-size:9px; color: var(--mint-dark);">1. My Business Now</div>
-              <div class="text-sm text-gray">$3M home services · 12-person team · strong demand, margins at 18%</div>
+        <!-- AI Conversation + Prep Brief -->
+        <div class="grid-2">
+          <div class="card-white">
+            <div class="label label-dark mb16">Step 2 in Progress — Biggest Levers</div>
+            <div class="chat-who ai">Tony AI</div>
+            <div class="chat-bubble chat-ai">
+              You said revenue's at $3M with a 12-person team. What's the one thing — if it got better — that would have the biggest impact on the business right now?
             </div>
-            <div class="mb12">
-              <div class="label" style="font-size:9px; color: var(--mint-dark);">2. Biggest Levers</div>
-              <div class="text-sm" style="color: var(--black);">Team structure &amp; owner dependency · Sales process (no formal system)</div>
+            <div class="chat-who">Marcus</div>
+            <div class="chat-bubble chat-user">
+              Honestly? Margins are tight and I'm still doing too much myself. We have demand but not the team to handle it cleanly.
             </div>
-            <div class="mb12">
-              <div class="label" style="font-size:9px; color: var(--mint-dark);">3. My BM Outcome</div>
-              <div class="text-sm text-gray">$5M revenue with owner working on the business, not in it</div>
+            <div class="chat-who ai">Tony AI</div>
+            <div class="chat-bubble chat-ai">
+              So demand converts — but it creates pressure on you personally. You're the bottleneck. <strong>What would it look like if that changed?</strong>
             </div>
-            <div class="mb12">
-              <div class="label" style="font-size:9px; color: var(--mint-dark);">4. What's Already Working</div>
-              <div class="text-sm text-gray">Strong referral base, repeat customers, good team culture</div>
+            <div class="chat-who">Marcus</div>
+            <div class="chat-bubble chat-user">
+              I'd have a team that owns the process. I'd be working on the business, not in it.
             </div>
-            <div>
-              <div class="label" style="font-size:9px; color: var(--mint-dark);">5. What to Listen For</div>
-              <div class="text-sm text-gray">Operations &amp; team accountability · Pricing for margin · Delegation systems</div>
+            <div class="chat-who ai">Tony AI</div>
+            <div class="chat-bubble chat-ai">
+              Clear. Team ownership and structure — that's a lever worth watching for at Business Mastery. <strong>What else is nagging at you?</strong>
             </div>
           </div>
-          <div class="card-mint">
-            <div class="label mb8" style="color: var(--mint-dark);">Your Pre-Event Focus</div>
-            <div class="text-sm text-gray" style="line-height: 1.65;">
-              Watch for content on <strong class="text-black">team ownership and delegation</strong><br>
-              How Tony frames <strong class="text-black">growth without complexity</strong><br>
-              Stories from service businesses at your revenue stage
+
+          <div>
+            <!-- Prep Brief -->
+            <div class="card-white mb16">
+              <div class="label label-dark mb16">Prep Brief — Marcus Chen</div>
+              <div style="display:flex; flex-direction:column; gap:14px;">
+                <div>
+                  <div class="label label-mint">Business Now</div>
+                  <div class="text-sm" style="color:var(--gray-600);">$3M home services · 12-person team · strong demand, margins at 18%</div>
+                </div>
+                <div>
+                  <div class="label label-mint">Biggest Levers</div>
+                  <div class="text-sm fw6" style="color:var(--dark-green);">Team structure &amp; owner dependency · Sales process (no formal system)</div>
+                </div>
+                <div>
+                  <div class="label label-mint">My Outcome</div>
+                  <div class="text-sm" style="color:var(--gray-600);">$5M revenue with owner working on the business, not in it</div>
+                </div>
+                <div>
+                  <div class="label label-mint">What to Listen For</div>
+                  <div class="text-sm" style="color:var(--gray-600);">Operations &amp; team accountability · Pricing for margin · Delegation systems</div>
+                </div>
+              </div>
             </div>
-            <div class="mt16 text-xs" style="color: var(--mint-dark);">
-              "This is your starting point. You'll refine it as you go through Business Mastery."
+
+            <!-- Focus callout -->
+            <div class="card-dark">
+              <div class="label" style="color:var(--mint); margin-bottom:10px;">Your Pre-Event Focus</div>
+              <div style="font-size:14px; color:rgba(255,255,255,0.85); line-height:1.7;">
+                Watch for content on <strong style="color:white;">team ownership and delegation</strong><br>
+                How Tony frames <strong style="color:white;">growth without complexity</strong><br>
+                Stories from service businesses at your stage
+              </div>
+              <div class="divider-white"></div>
+              <div style="font-size:12px; color:rgba(255,255,255,0.5); font-style:italic;">
+                "This is your starting point. You'll refine it as you go."
+              </div>
             </div>
           </div>
         </div>
+
       </div>
-
-      <!-- Trigger Sequence -->
-      <div class="card">
-        <div class="label mb12">Trigger Sequence</div>
-        <div class="grid-3">
-          <div>
-            <div class="text-xs text-gray mb4">14–21 days before</div>
-            <div class="text-sm fw6">Primary Invitation</div>
-            <div class="text-xs text-gray mt4">"Start your Business Mastery Prep Brief before you arrive"</div>
-          </div>
-          <div>
-            <div class="text-xs text-gray mb4">7 days before</div>
-            <div class="text-sm fw6">Readiness Reminder</div>
-            <div class="text-xs text-gray mt4">"Know what you're looking to solve before Day 1"</div>
-          </div>
-          <div>
-            <div class="text-xs text-gray mb4">Day 1 on-site</div>
-            <div class="text-sm fw6">Last-Chance Entry</div>
-            <div class="text-xs text-gray mt4">"Build your first draft now. You'll use it throughout the event." Fast entry. No pressure.</div>
-          </div>
-        </div>
-      </div>
-
     </div>
 
     <!-- ══════════════════════════════════════════════════════
@@ -1087,146 +958,144 @@
     ══════════════════════════════════════════════════════ -->
     <div class="screen" id="screen-1">
 
-      <div class="section-header mb24">
-        <div class="section-label">Day 3 · Morning · Business Mastery</div>
-        <div class="section-title">5-Day Immersion</div>
-        <div class="section-sub">Your digital manual, journal, and progress tracker — all in one place. Work at your own pace. Implementation plan builds as you go.</div>
+      <!-- Dark Hero -->
+      <div class="tab-hero">
+        <div class="tab-hero-eyebrow">Day 3 · Morning · Business Mastery</div>
+        <h1>5-Day Immersion</h1>
+        <p>Your digital manual, journal, and gap scores — all in one place. Implementation plan builds as you go.</p>
+        <div class="flex items-center gap12 mt16">
+          <span class="badge badge-mint">Day 3 of 5</span>
+          <span style="font-size:12px; color:rgba(255,255,255,0.5);">Force 4 · Exercise 2 of 4</span>
+        </div>
       </div>
 
-      <div class="immersion-layout">
+      <div class="page-body">
+        <div class="immersion-layout">
 
-        <!-- Left: Digital Manual -->
-        <div class="panel">
-          <div class="panel-header">
-            <div class="panel-header-title">
-              <span>📖</span> Digital Manual
-            </div>
-            <div class="flex gap8">
-              <span class="badge badge-gray">Official Content</span>
-              <span class="badge badge-gray">Day 3 of 5</span>
-            </div>
-          </div>
-          <div class="panel-body">
-            <div class="force-tag">
-              <div class="force-dot" style="background: var(--f4);"></div>
-              <div>You are here: <strong>Force 4 — World Class Fulfillment</strong> · Exercise 2 of 4</div>
-            </div>
-
-            <div class="manual-exercise">
-              <h3>Exercise: Your Sales Process Today</h3>
-              <div class="exercise-question">
-                What is the step-by-step process a prospect goes through from first contact to close? Where do leads most often drop off?
-              </div>
-              <textarea class="notes-field" style="min-height:90px;">Most leads come in via referral. They call, I give a quote, sometimes I follow up once. Drop-off happens after the first quote — they go quiet.</textarea>
-            </div>
-
-            <div class="manual-exercise">
-              <h3>Exercise: Your Conversion Metrics</h3>
-              <div class="exercise-question">
-                What is your current lead-to-close rate? What would a 10% improvement in conversion be worth annually?
-              </div>
-              <textarea class="notes-field" style="min-height:60px;" placeholder="Type your answer here…"></textarea>
-            </div>
-
-            <div class="manual-exercise">
-              <h3>Force 4 Teaching: The Power of Mastery</h3>
-              <div class="quote-block">
-                "Sales mastery is not about pressure. It is about certainty. When you are certain your product changes lives, closing becomes a service."
-              </div>
-            </div>
-
-            <div class="manual-exercise">
-              <h3>Exercise: Certainty vs. Pressure</h3>
-              <div class="exercise-question">
-                On a scale of 1–10, how certain are you that what you offer genuinely changes your client's situation? What would a 10 look like?
-              </div>
-              <textarea class="notes-field" style="min-height:60px;" placeholder="Your answer…"></textarea>
-            </div>
-
-            <div class="flex gap8 mt16">
-              <button class="btn btn-primary" style="font-size:12px; padding:8px 18px;">Save &amp; Continue</button>
-              <button class="btn btn-ghost" style="font-size:12px; padding:8px 18px;">← Previous Section</button>
-              <button class="btn btn-ghost" style="font-size:12px; padding:8px 18px;">Next Section →</button>
-            </div>
-          </div>
-        </div>
-
-        <!-- Right: Journal + Progress + Final -->
-        <div class="right-panels">
-
-          <!-- Journal -->
-          <div class="panel" style="flex: 0 0 auto;">
+          <!-- Left: Digital Manual -->
+          <div class="panel">
             <div class="panel-header">
-              <div class="panel-header-title">✏️ Journal</div>
-              <span class="badge badge-gray">Day 3</span>
+              <div class="panel-header-title">📖 Digital Manual</div>
+              <span class="badge badge-mint" style="font-size:10px;">Force 4 Active</span>
             </div>
-            <div class="panel-body" style="padding: 18px;">
-              <div class="journal-meta">Your notes &amp; reflections</div>
-              <textarea class="notes-field" style="min-height:120px;" placeholder="What's coming up for you? What landed? What are you going to do about it?">I realized I don't actually have a sales process. I've been winging it on every call. But when I do close, I know the customer's situation — I lead with diagnosis. That's the edge I need to build from.</textarea>
-              <div class="mt8 text-xs text-gray">Auto-saved · Day 3 · 10:42 AM</div>
-            </div>
-          </div>
+            <div class="panel-body">
+              <div class="force-tag">
+                <div class="force-dot" style="background: var(--f4);"></div>
+                <div><strong>Force 4 — World Class Fulfillment</strong> · Exercise 2 of 4</div>
+              </div>
 
-          <!-- Progress Tracking -->
-          <div class="panel" style="flex: 0 0 auto;">
-            <div class="panel-header">
-              <div class="panel-header-title">📊 Progress — Gap Scores</div>
-              <span class="badge badge-mint">5 of 7 rated</span>
-            </div>
-            <div class="panel-body" style="padding: 18px;">
-              <div style="display: flex; flex-direction: column; gap: 10px;">
-                <div>
-                  <div class="flex space-between mb4">
-                    <span class="text-xs fw5" style="color: var(--black);">F1 · Know Your Business</span>
-                    <span class="text-xs text-gray">6 → <strong class="text-mint">8</strong></span>
-                  </div>
-                  <div class="progress-bar-mini"><div class="progress-bar-fill" style="width:60%; background: var(--f1);"></div></div>
+              <div class="manual-exercise">
+                <h3>Your Sales Process Today</h3>
+                <div class="exercise-question">
+                  What is the step-by-step process a prospect goes through from first contact to close? Where do leads most often drop off?
                 </div>
-                <div>
-                  <div class="flex space-between mb4">
-                    <span class="text-xs fw5" style="color: var(--black);">F2 · Innovate or Evaporate</span>
-                    <span class="text-xs text-gray">5 → <strong class="text-mint">8</strong></span>
-                  </div>
-                  <div class="progress-bar-mini"><div class="progress-bar-fill" style="width:50%; background: var(--f2);"></div></div>
+                <textarea class="notes-field" style="min-height:90px;">Most leads come in via referral. They call, I give a quote, sometimes I follow up once. Drop-off happens after the first quote — they go quiet.</textarea>
+              </div>
+
+              <div class="manual-exercise">
+                <h3>Your Conversion Metrics</h3>
+                <div class="exercise-question">
+                  What is your current lead-to-close rate? What would a 10% improvement be worth annually?
                 </div>
-                <div>
-                  <div class="flex space-between mb4">
-                    <span class="text-xs fw5" style="color: var(--black);">F3 · Dominate Your Market</span>
-                    <span class="text-xs text-gray">7 → <strong class="text-mint">9</strong></span>
-                  </div>
-                  <div class="progress-bar-mini"><div class="progress-bar-fill" style="width:70%; background: var(--f3);"></div></div>
+                <textarea class="notes-field" style="min-height:60px;" placeholder="Type your answer…"></textarea>
+              </div>
+
+              <div class="manual-exercise">
+                <h3>Force 4 Teaching</h3>
+                <div class="quote-block">
+                  "Sales mastery is not about pressure. It is about certainty. When you are certain your product changes lives, closing becomes a service."
                 </div>
-                <div style="background: rgba(59,235,160,0.06); border: 1px solid rgba(59,235,160,0.2); border-radius: 8px; padding: 10px;">
-                  <div class="flex space-between mb4">
-                    <span class="text-xs fw6" style="color: var(--black);">F4 · World Class Fulfillment</span>
-                    <span class="text-xs" style="color: var(--mint-dark); font-weight: 700;">4 → 8 ⚡</span>
-                  </div>
-                  <div class="progress-bar-mini"><div class="progress-bar-fill" style="width:40%; background: var(--mint-dark);"></div></div>
-                  <div class="mt4 text-xs text-gray">Widest gap — active force</div>
+              </div>
+
+              <div class="manual-exercise">
+                <h3>Certainty vs. Pressure</h3>
+                <div class="exercise-question">
+                  On a scale of 1–10, how certain are you that what you offer genuinely changes your client's situation? What would a 10 look like?
                 </div>
-                <div>
-                  <div class="flex space-between mb4">
-                    <span class="text-xs fw5" style="color: var(--black);">F5 · Anticipate &amp; Raving Fans</span>
-                    <span class="text-xs text-gray">6 → <strong class="text-mint">8</strong></span>
-                  </div>
-                  <div class="progress-bar-mini"><div class="progress-bar-fill" style="width:60%; background: var(--f5);"></div></div>
-                </div>
-                <div class="text-xs text-gray" style="padding: 8px 0; border-top: 1px dashed var(--border);">F6, F7 — rate on Day 4</div>
+                <textarea class="notes-field" style="min-height:60px;" placeholder="Your answer…"></textarea>
+              </div>
+
+              <div class="flex gap8 mt16">
+                <button class="btn btn-primary" style="font-size:12px; padding:9px 18px;">Save &amp; Continue</button>
+                <button class="btn btn-outline" style="font-size:12px; padding:9px 18px;">← Back</button>
+                <button class="btn btn-outline" style="font-size:12px; padding:9px 18px;">Next →</button>
               </div>
             </div>
           </div>
 
-          <!-- Final Implementation -->
-          <div class="card-mint" style="border-radius: 12px;">
-            <div class="label mb8" style="color: var(--mint-dark);">📋 Final Manual &amp; Implementation</div>
-            <div class="text-sm text-gray" style="line-height: 1.65;">
-              On <strong class="text-black">Day 5</strong>, your notes, gap scores, and journal come together into your Seven Forces Implementation Plan — a clear action chart you own and take home.
-            </div>
-            <div class="mt16">
-              <button class="btn btn-primary" style="font-size:12px; padding:9px 18px; width:100%; justify-content:center;">Preview Day 5 Plan →</button>
-            </div>
-          </div>
+          <!-- Right: Journal + Gap Scores -->
+          <div class="right-panels">
 
+            <!-- Journal -->
+            <div class="panel">
+              <div class="panel-header">
+                <div class="panel-header-title">✏️ Journal — Day 3</div>
+                <span style="font-size:11px; color:rgba(255,255,255,0.45);">Auto-saved 10:42 AM</span>
+              </div>
+              <div class="panel-body" style="padding:18px;">
+                <textarea class="notes-field" style="min-height:130px;" placeholder="What's coming up? What landed? What are you going to do?">I realized I don't actually have a sales process. I've been winging it on every call. But when I do close, I know the customer's situation — I lead with diagnosis. That's the edge I need to build from.</textarea>
+              </div>
+            </div>
+
+            <!-- Gap Scores -->
+            <div class="panel">
+              <div class="panel-header">
+                <div class="panel-header-title">📊 Gap Scores</div>
+                <span class="badge badge-mint" style="font-size:10px;">5 of 7 rated</span>
+              </div>
+              <div class="panel-body" style="padding:18px;">
+                <div style="display:flex;flex-direction:column;gap:12px;">
+                  <div>
+                    <div class="flex space-between" style="margin-bottom:4px;">
+                      <span class="text-xs fw6 text-dark">Force 1 · Know Your Business</span>
+                      <span class="text-xs text-gray">6 → <strong class="text-mint">8</strong></span>
+                    </div>
+                    <div class="progress-bar-mini"><div class="progress-bar-fill" style="width:60%; background:var(--f1);"></div></div>
+                  </div>
+                  <div>
+                    <div class="flex space-between" style="margin-bottom:4px;">
+                      <span class="text-xs fw6 text-dark">Force 2 · Innovate or Evaporate</span>
+                      <span class="text-xs text-gray">5 → <strong class="text-mint">8</strong></span>
+                    </div>
+                    <div class="progress-bar-mini"><div class="progress-bar-fill" style="width:50%; background:var(--f2);"></div></div>
+                  </div>
+                  <div>
+                    <div class="flex space-between" style="margin-bottom:4px;">
+                      <span class="text-xs fw6 text-dark">Force 3 · Dominate Your Market</span>
+                      <span class="text-xs text-gray">7 → <strong class="text-mint">9</strong></span>
+                    </div>
+                    <div class="progress-bar-mini"><div class="progress-bar-fill" style="width:70%; background:var(--f3);"></div></div>
+                  </div>
+                  <div style="background:rgba(59,235,160,0.07); border:1px solid rgba(59,235,160,0.25); border-radius:8px; padding:10px;">
+                    <div class="flex space-between" style="margin-bottom:4px;">
+                      <span class="text-xs fw6 text-dark">Force 4 · World Class Fulfillment</span>
+                      <span class="text-xs text-mint fw6">4 → 8 ⚡</span>
+                    </div>
+                    <div class="progress-bar-mini"><div class="progress-bar-fill" style="width:40%; background:var(--mint-dark);"></div></div>
+                    <div style="font-size:11px; color:var(--mint-dark); margin-top:4px; font-weight:600;">Widest gap — active now</div>
+                  </div>
+                  <div>
+                    <div class="flex space-between" style="margin-bottom:4px;">
+                      <span class="text-xs fw6 text-dark">Force 5 · Anticipate &amp; Raving Fans</span>
+                      <span class="text-xs text-gray">6 → <strong class="text-mint">8</strong></span>
+                    </div>
+                    <div class="progress-bar-mini"><div class="progress-bar-fill" style="width:60%; background:var(--f5);"></div></div>
+                  </div>
+                  <div class="text-xs text-gray" style="padding-top:8px; border-top:1px dashed var(--border);">Force 6, Force 7 — rate on Day 4</div>
+                </div>
+              </div>
+            </div>
+
+            <!-- Day 5 CTA -->
+            <div class="card-dark">
+              <div class="label" style="color:var(--mint);margin-bottom:8px;">Day 5 — Your Plan</div>
+              <div style="font-size:13px; color:rgba(255,255,255,0.75); line-height:1.65;">
+                Your notes, scores, and journal come together into your <strong style="color:white;">7 Forces Implementation Plan</strong> — a clear action chart you own and take home.
+              </div>
+              <button class="btn btn-primary" style="font-size:12px; padding:9px 18px; width:100%; justify-content:center; margin-top:16px;">Preview Day 5 Plan →</button>
+            </div>
+
+          </div>
         </div>
       </div>
     </div>
@@ -1236,590 +1105,479 @@
     ══════════════════════════════════════════════════════ -->
     <div class="screen" id="screen-2">
 
-      <div class="section-header mb24">
-        <div class="section-label">During the Event · Gap Map</div>
-        <div class="section-title">Your 7 Forces Wheel</div>
-        <div class="section-sub">Rate each force: where you are now vs. where you want to be. Then capture what actions you'll take to close the gap. Build one force at a time.</div>
+      <!-- Dark Hero -->
+      <div class="tab-hero">
+        <div class="tab-hero-eyebrow">During the Event · Gap Map</div>
+        <h1>Your 7 Forces Wheel</h1>
+        <p>Rate each force: where you are now vs. where you want to be. Then capture what actions you'll take to close the gap.</p>
       </div>
 
-      <div class="wheel-layout">
+      <div class="page-body">
+        <div class="wheel-layout">
 
-        <!-- Wheel SVG -->
-        <div class="wheel-container">
-          <svg class="wheel" viewBox="0 0 400 400" xmlns="http://www.w3.org/2000/svg">
-            <!-- Background -->
-            <circle cx="200" cy="200" r="180" fill="#f9fafb" stroke="#e5e7eb" stroke-width="1"/>
+          <!-- Wheel SVG -->
+          <div>
+            <svg class="wheel" viewBox="0 0 400 400" xmlns="http://www.w3.org/2000/svg">
+              <circle cx="200" cy="200" r="180" fill="#f9fafb" stroke="#e5e7eb" stroke-width="1"/>
+              <circle cx="200" cy="200" r="36" fill="none" stroke="#e5e7eb" stroke-width="1"/>
+              <circle cx="200" cy="200" r="72" fill="none" stroke="#e5e7eb" stroke-width="1"/>
+              <circle cx="200" cy="200" r="108" fill="none" stroke="#e5e7eb" stroke-width="1"/>
+              <circle cx="200" cy="200" r="144" fill="none" stroke="#e5e7eb" stroke-width="1"/>
+              <circle cx="200" cy="200" r="180" fill="none" stroke="#d1d5db" stroke-width="1.5"/>
+              <line x1="200" y1="20" x2="200" y2="380" stroke="#d1d5db" stroke-width="1" transform="rotate(0 200 200)"/>
+              <line x1="200" y1="20" x2="200" y2="380" stroke="#d1d5db" stroke-width="1" transform="rotate(51.4 200 200)"/>
+              <line x1="200" y1="20" x2="200" y2="380" stroke="#d1d5db" stroke-width="1" transform="rotate(102.9 200 200)"/>
+              <line x1="200" y1="20" x2="200" y2="380" stroke="#d1d5db" stroke-width="1" transform="rotate(154.3 200 200)"/>
+              <line x1="200" y1="20" x2="200" y2="380" stroke="#d1d5db" stroke-width="1" transform="rotate(205.7 200 200)"/>
+              <line x1="200" y1="20" x2="200" y2="380" stroke="#d1d5db" stroke-width="1" transform="rotate(257.1 200 200)"/>
+              <line x1="200" y1="20" x2="200" y2="380" stroke="#d1d5db" stroke-width="1" transform="rotate(308.6 200 200)"/>
+              <!-- Force 1: now=6→108px, want=8→144px -->
+              <path d="M200,200 L200,56 A144,144 0 0,1 321,120 Z" fill="#1A3A5C" opacity="0.1"/>
+              <path d="M200,200 L200,92 A108,108 0 0,1 293,146 Z" fill="#1A3A5C" opacity="0.8"/>
+              <!-- Force 2: now=5, want=8 -->
+              <path d="M200,200 L321,120 A144,144 0 0,1 321,280 Z" fill="#2E7D32" opacity="0.1"/>
+              <path d="M200,200 L293,146 A90,90 0 0,1 293,254 Z" fill="#2E7D32" opacity="0.8"/>
+              <!-- Force 3: now=7, want=9 -->
+              <path d="M200,200 L321,280 A144,144 0 0,1 200,344 Z" fill="#8B1A1A" opacity="0.1"/>
+              <path d="M200,200 L293,254 A126,126 0 0,1 200,326 Z" fill="#8B1A1A" opacity="0.8"/>
+              <!-- Force 4: now=4, want=8 — widest gap -->
+              <path d="M200,200 L200,344 A144,144 0 0,1 79,280 Z" fill="#5C4033" opacity="0.12"/>
+              <path d="M200,200 L200,272 A72,72 0 0,1 138,236 Z" fill="#5C4033" opacity="0.9"/>
+              <path d="M200,200 L200,344 A144,144 0 0,1 79,280 Z" fill="none" stroke="#3beba0" stroke-width="2" stroke-dasharray="5 3" opacity="0.8"/>
+              <!-- Force 5: now=6, want=8 -->
+              <path d="M200,200 L79,280 A144,144 0 0,1 79,120 Z" fill="#1565C0" opacity="0.1"/>
+              <path d="M200,200 L138,236 A108,108 0 0,1 138,164 Z" fill="#1565C0" opacity="0.8"/>
+              <!-- Force 6: now=5, want=7 -->
+              <path d="M200,200 L79,120 A144,144 0 0,1 200,56 Z" fill="#4A148C" opacity="0.1"/>
+              <path d="M200,200 L138,164 A90,90 0 0,1 200,110 Z" fill="#4A148C" opacity="0.8"/>
+              <!-- Force 7: now=6, want=8 -->
+              <path d="M200,200 L200,56 A144,144 0 0,0 79,120 Z" fill="#E65100" opacity="0.07"/>
+              <path d="M200,200 L200,92 A108,108 0 0,0 138,164 Z" fill="#E65100" opacity="0.8"/>
+              <!-- Center -->
+              <circle cx="200" cy="200" r="30" fill="white" stroke="#e5e7eb" stroke-width="1"/>
+              <text x="200" y="196" text-anchor="middle" fill="#9ca3af" font-size="8" font-family="Inter" letter-spacing="1">GAP</text>
+              <text x="200" y="207" text-anchor="middle" fill="#9ca3af" font-size="8" font-family="Inter" letter-spacing="1">MAP</text>
+              <!-- Labels -->
+              <text x="216" y="70" fill="#1a4a3a" font-size="9" font-family="Inter" font-weight="700">F1</text>
+              <text x="326" y="200" fill="#1a4a3a" font-size="9" font-family="Inter" font-weight="700">F2</text>
+              <text x="298" y="318" fill="#1a4a3a" font-size="9" font-family="Inter" font-weight="700">F3</text>
+              <text x="145" y="362" fill="#1a4a3a" font-size="9" font-family="Inter" font-weight="700">F4</text>
+              <text x="52" y="318" fill="#1a4a3a" font-size="9" font-family="Inter" font-weight="700">F5</text>
+              <text x="52" y="135" fill="#1a4a3a" font-size="9" font-family="Inter" font-weight="700">F6</text>
+              <text x="150" y="62" fill="#1a4a3a" font-size="9" font-family="Inter" font-weight="700">F7</text>
+            </svg>
 
-            <!-- Grid rings -->
-            <circle cx="200" cy="200" r="36" fill="none" stroke="#e5e7eb" stroke-width="1"/>
-            <circle cx="200" cy="200" r="72" fill="none" stroke="#e5e7eb" stroke-width="1"/>
-            <circle cx="200" cy="200" r="108" fill="none" stroke="#e5e7eb" stroke-width="1"/>
-            <circle cx="200" cy="200" r="144" fill="none" stroke="#e5e7eb" stroke-width="1"/>
-            <circle cx="200" cy="200" r="180" fill="none" stroke="#d1d5db" stroke-width="1.5"/>
-
-            <!-- Dividers -->
-            <line x1="200" y1="20" x2="200" y2="380" stroke="#d1d5db" stroke-width="1" transform="rotate(0 200 200)"/>
-            <line x1="200" y1="20" x2="200" y2="380" stroke="#d1d5db" stroke-width="1" transform="rotate(51.4 200 200)"/>
-            <line x1="200" y1="20" x2="200" y2="380" stroke="#d1d5db" stroke-width="1" transform="rotate(102.9 200 200)"/>
-            <line x1="200" y1="20" x2="200" y2="380" stroke="#d1d5db" stroke-width="1" transform="rotate(154.3 200 200)"/>
-            <line x1="200" y1="20" x2="200" y2="380" stroke="#d1d5db" stroke-width="1" transform="rotate(205.7 200 200)"/>
-            <line x1="200" y1="20" x2="200" y2="380" stroke="#d1d5db" stroke-width="1" transform="rotate(257.1 200 200)"/>
-            <line x1="200" y1="20" x2="200" y2="380" stroke="#d1d5db" stroke-width="1" transform="rotate(308.6 200 200)"/>
-
-            <!-- F1: now=6/10→radius 108*0.6=64.8, want=8/10→144*0.8=115 -->
-            <path d="M200,200 L200,56 A144,144 0 0,1 321,120 Z" fill="#1A3A5C" opacity="0.12"/>
-            <path d="M200,200 L200,92 A108,108 0 0,1 293,146 Z" fill="#1A3A5C" opacity="0.8"/>
-
-            <!-- F2: now=5, want=8 -->
-            <path d="M200,200 L321,120 A144,144 0 0,1 321,280 Z" fill="#2E7D32" opacity="0.12"/>
-            <path d="M200,200 L293,146 A90,90 0 0,1 293,254 Z" fill="#2E7D32" opacity="0.8"/>
-
-            <!-- F3: now=7, want=9 -->
-            <path d="M200,200 L321,280 A144,144 0 0,1 200,344 Z" fill="#8B1A1A" opacity="0.12"/>
-            <path d="M200,200 L293,254 A126,126 0 0,1 200,326 Z" fill="#8B1A1A" opacity="0.8"/>
-
-            <!-- F4: now=4, want=8 — WIDEST GAP, highlighted -->
-            <path d="M200,200 L200,344 A144,144 0 0,1 79,280 Z" fill="#5C4033" opacity="0.15"/>
-            <path d="M200,200 L200,272 A72,72 0 0,1 138,236 Z" fill="#5C4033" opacity="0.9"/>
-            <path d="M200,200 L200,344 A144,144 0 0,1 79,280 Z" fill="none" stroke="#3beba0" stroke-width="2" stroke-dasharray="5 3" opacity="0.7"/>
-
-            <!-- F5: now=6, want=8 -->
-            <path d="M200,200 L79,280 A144,144 0 0,1 79,120 Z" fill="#1565C0" opacity="0.12"/>
-            <path d="M200,200 L138,236 A108,108 0 0,1 138,164 Z" fill="#1565C0" opacity="0.8"/>
-
-            <!-- F6: now=5, want=7 -->
-            <path d="M200,200 L79,120 A144,144 0 0,1 200,56 Z" fill="#4A148C" opacity="0.12"/>
-            <path d="M200,200 L138,164 A90,90 0 0,1 200,110 Z" fill="#4A148C" opacity="0.8"/>
-
-            <!-- F7: now=6, want=8 — simplified wedge going back around -->
-            <path d="M200,200 L200,56 A144,144 0 0,0 79,120 Z" fill="#E65100" opacity="0.08"/>
-            <path d="M200,200 L200,92 A108,108 0 0,0 138,164 Z" fill="#E65100" opacity="0.8"/>
-
-            <!-- Center -->
-            <circle cx="200" cy="200" r="30" fill="white" stroke="#e5e7eb" stroke-width="1"/>
-            <text x="200" y="196" text-anchor="middle" fill="#9ca3af" font-size="8" font-family="Inter" letter-spacing="1">GAP</text>
-            <text x="200" y="207" text-anchor="middle" fill="#9ca3af" font-size="8" font-family="Inter" letter-spacing="1">MAP</text>
-
-            <!-- Force labels -->
-            <text x="216" y="70" fill="#4b5563" font-size="9" font-family="Inter" font-weight="600">F1</text>
-            <text x="326" y="200" fill="#4b5563" font-size="9" font-family="Inter" font-weight="600">F2</text>
-            <text x="298" y="318" fill="#4b5563" font-size="9" font-family="Inter" font-weight="600">F3</text>
-            <text x="145" y="362" fill="#4b5563" font-size="9" font-family="Inter" font-weight="600">F4</text>
-            <text x="52" y="318" fill="#4b5563" font-size="9" font-family="Inter" font-weight="600">F5</text>
-            <text x="52" y="135" fill="#4b5563" font-size="9" font-family="Inter" font-weight="600">F6</text>
-            <text x="150" y="62" fill="#4b5563" font-size="9" font-family="Inter" font-weight="600">F7</text>
-          </svg>
-
-          <div class="flex gap16 mt8" style="justify-content: center;">
-            <div class="flex items-center gap8 text-xs text-gray">
-              <div style="width:12px;height:8px;border-radius:2px;background:rgba(0,0,0,0.25);"></div> Now
-            </div>
-            <div class="flex items-center gap8 text-xs text-gray">
-              <div style="width:12px;height:8px;border-radius:2px;background:rgba(0,0,0,0.08);border:1px solid #d1d5db;"></div> Want to Be
-            </div>
-            <div class="flex items-center gap8 text-xs" style="color: var(--mint-dark);">
-              <div style="width:8px;height:8px;border-radius:50%;background:var(--mint);"></div> Widest Gap
+            <div class="flex gap16 mt8" style="justify-content:center;">
+              <div class="flex items-center gap8 text-xs text-gray">
+                <div style="width:12px;height:7px;border-radius:2px;background:rgba(0,0,0,0.3);"></div> Now
+              </div>
+              <div class="flex items-center gap8 text-xs text-gray">
+                <div style="width:12px;height:7px;border-radius:2px;background:rgba(0,0,0,0.07);border:1px solid #d1d5db;"></div> Want
+              </div>
+              <div class="flex items-center gap8 text-xs text-mint">
+                <div style="width:8px;height:8px;border-radius:50%;background:var(--mint);"></div> Widest Gap
+              </div>
             </div>
           </div>
+
+          <!-- Right: Force Action Builder -->
+          <div>
+            <div class="card-white mb16">
+              <div class="flex items-center space-between mb16">
+                <div class="section-title" style="font-size:16px;">Force Action Builder</div>
+                <span class="badge badge-dark">Force 4 Active</span>
+              </div>
+
+              <!-- Force 4 — expanded/active -->
+              <div class="force-action-row" style="border-color:var(--mint);">
+                <div class="force-action-header" style="background:#f0fdf8;">
+                  <div class="gap-bar-name">
+                    <div class="force-dot" style="width:10px;height:10px;background:var(--f4);border-radius:50%;"></div>
+                    <span class="fw6 text-dark">Force 4 · World Class Fulfillment</span>
+                    <span class="badge badge-mint" style="font-size:9px;">Gap: 4 ⚡</span>
+                  </div>
+                  <div class="gap-bar-score">4 → <span>8</span></div>
+                </div>
+                <div class="force-action-body">
+                  <div class="bar-track mb12">
+                    <div class="bar-want" style="background:var(--f4);width:80%;"></div>
+                    <div class="bar-now" style="background:var(--f4);width:40%;"></div>
+                  </div>
+                  <div class="label mb8">Actions to close this gap</div>
+                  <textarea class="notes-field" style="min-height:80px;" placeholder="Be specific. What will you do, by when, and who owns it?">Build a documented 5-step sales process. Train Sarah to own Steps 1–3. Track conversion weekly. Done by March 1.</textarea>
+                  <div class="flex gap8 mt12">
+                    <button class="btn btn-primary" style="font-size:12px;padding:8px 16px;">Save &amp; Next →</button>
+                  </div>
+                </div>
+              </div>
+
+              <!-- Collapsed rows -->
+              <div class="force-action-row">
+                <div class="force-action-header">
+                  <div class="gap-bar-name"><div class="force-dot" style="width:8px;height:8px;background:var(--f3);border-radius:50%;"></div>Force 3 · Dominate Your Market</div>
+                  <div class="gap-bar-score">7 → <span>9</span> &nbsp;✓ <span style="color:var(--mint-dark);font-size:11px;">Captured</span></div>
+                </div>
+              </div>
+              <div class="force-action-row">
+                <div class="force-action-header">
+                  <div class="gap-bar-name"><div class="force-dot" style="width:8px;height:8px;background:var(--f1);border-radius:50%;"></div>Force 1 · Know Your Business</div>
+                  <div class="gap-bar-score">6 → <span>8</span> &nbsp;✓ <span style="color:var(--mint-dark);font-size:11px;">Captured</span></div>
+                </div>
+              </div>
+              <div class="force-action-row">
+                <div class="force-action-header">
+                  <div class="gap-bar-name"><div class="force-dot" style="width:8px;height:8px;background:var(--f2);border-radius:50%;"></div>Force 2 · Innovate or Evaporate</div>
+                  <div class="gap-bar-score text-gray">5 → <span>8</span> &nbsp;<span style="color:var(--gray-400);font-size:11px;">Not started</span></div>
+                </div>
+              </div>
+              <div class="force-action-row">
+                <div class="force-action-header">
+                  <div class="gap-bar-name"><div class="force-dot" style="width:8px;height:8px;background:var(--f5);border-radius:50%;"></div>Force 5 · Anticipate &amp; Raving Fans</div>
+                  <div class="gap-bar-score text-gray">— · Not yet rated</div>
+                </div>
+              </div>
+              <div class="force-action-row">
+                <div class="force-action-header">
+                  <div class="gap-bar-name"><div class="force-dot" style="width:8px;height:8px;background:var(--f6);border-radius:50%;"></div>Force 6 · Optimize for Profit</div>
+                  <div class="gap-bar-score text-gray">— · Not yet rated</div>
+                </div>
+              </div>
+              <div class="force-action-row">
+                <div class="force-action-header">
+                  <div class="gap-bar-name"><div class="force-dot" style="width:8px;height:8px;background:var(--f7);border-radius:50%;"></div>Force 7 · Maximize Time &amp; Energy</div>
+                  <div class="gap-bar-score text-gray">— · Not yet rated</div>
+                </div>
+              </div>
+            </div>
+          </div>
+
         </div>
-
-        <!-- Right: Force Action Builder -->
-        <div>
-          <!-- Active force: F4 (widest gap, sequential) -->
-          <div class="card-white mb16">
-            <div class="flex items-center space-between mb16">
-              <div>
-                <div class="label mb4" style="color: var(--mint-dark);">Active Force — Build One at a Time</div>
-                <div class="text-sm fw6 text-black">Rate each force, then capture your action. Work sequentially.</div>
-              </div>
-              <span class="badge badge-mint">F4 Active</span>
-            </div>
-
-            <!-- F4 — expanded/active -->
-            <div class="force-action-row" style="border-color: var(--mint);">
-              <div class="force-action-header" style="background: var(--mint-light);">
-                <div class="gap-bar-name">
-                  <div class="force-dot" style="width:10px;height:10px;background:var(--f4);border-radius:50%;"></div>
-                  <span class="fw6">F4 · World Class Fulfillment</span>
-                  <span class="badge badge-mint" style="font-size:9px;">Widest Gap ⚡</span>
-                </div>
-                <div class="gap-bar-score">4 → <span>8</span> · Gap: 4</div>
-              </div>
-              <div class="force-action-body">
-                <div class="bar-track mb12">
-                  <div class="bar-want" style="background:var(--f4);width:80%;"></div>
-                  <div class="bar-now" style="background:var(--f4);width:40%;"></div>
-                </div>
-                <div class="label mb8" style="font-size:10px;">What actions will you take to close this gap?</div>
-                <textarea class="notes-field" style="min-height:90px;" placeholder="Be specific. What will you actually do, by when, and who's responsible?">Build a documented 5-step sales process. Train Sarah to own Steps 1–3. Track conversion weekly. Done by March 1.</textarea>
-                <div class="flex gap8 mt12">
-                  <button class="btn btn-primary" style="font-size:12px;padding:8px 16px;">Save &amp; Next Force →</button>
-                </div>
-              </div>
-            </div>
-
-            <!-- Other forces — collapsed -->
-            <div class="force-action-row">
-              <div class="force-action-header">
-                <div class="gap-bar-name"><div class="force-dot" style="width:8px;height:8px;background:var(--f3);border-radius:50%;"></div>F3 · Dominate Your Market</div>
-                <div class="gap-bar-score">7 → <span>9</span> · Gap: 2 &nbsp;✓ <span style="color:var(--mint-dark); font-size:11px;">Actions captured</span></div>
-              </div>
-            </div>
-            <div class="force-action-row">
-              <div class="force-action-header">
-                <div class="gap-bar-name"><div class="force-dot" style="width:8px;height:8px;background:var(--f1);border-radius:50%;"></div>F1 · Know Your Business</div>
-                <div class="gap-bar-score">6 → <span>8</span> · Gap: 2 &nbsp;✓ <span style="color:var(--mint-dark); font-size:11px;">Actions captured</span></div>
-              </div>
-            </div>
-            <div class="force-action-row">
-              <div class="force-action-header">
-                <div class="gap-bar-name"><div class="force-dot" style="width:8px;height:8px;background:var(--f2);border-radius:50%;"></div>F2 · Innovate or Evaporate</div>
-                <div class="gap-bar-score text-gray">5 → <span>8</span> · Gap: 3 &nbsp;<span style="color:var(--gray-400); font-size:11px;">Not yet started</span></div>
-              </div>
-            </div>
-            <div class="force-action-row">
-              <div class="force-action-header">
-                <div class="gap-bar-name"><div class="force-dot" style="width:8px;height:8px;background:var(--f5);border-radius:50%;"></div>F5 · Anticipate &amp; Raving Fans</div>
-                <div class="gap-bar-score text-gray">— · Not yet rated</div>
-              </div>
-            </div>
-            <div class="force-action-row">
-              <div class="force-action-header">
-                <div class="gap-bar-name"><div class="force-dot" style="width:8px;height:8px;background:var(--f6);border-radius:50%;"></div>F6 · Optimize for Profit</div>
-                <div class="gap-bar-score text-gray">— · Not yet rated</div>
-              </div>
-            </div>
-            <div class="force-action-row">
-              <div class="force-action-header">
-                <div class="gap-bar-name"><div class="force-dot" style="width:8px;height:8px;background:var(--f7);border-radius:50%;"></div>F7 · Maximize Time &amp; Energy</div>
-                <div class="gap-bar-score text-gray">— · Not yet rated</div>
-              </div>
-            </div>
-          </div>
-
-          <!-- Summary Card -->
-          <div class="card-white">
-            <div class="label mb12">Gap Map Summary — Captured So Far</div>
-            <table class="gap-summary-table">
-              <thead>
-                <tr>
-                  <th>Force</th>
-                  <th>Now</th>
-                  <th>Want</th>
-                  <th>Gap</th>
-                  <th>Actions Captured</th>
-                </tr>
-              </thead>
-              <tbody>
-                <tr>
-                  <td><div class="flex items-center gap8"><div class="force-dot" style="background:var(--f1);border-radius:50%;width:8px;height:8px;"></div>F1 · Know Your Business</div></td>
-                  <td>6</td><td>8</td><td>2</td>
-                  <td><div class="captured-action">"Hire a bookkeeper, get monthly P&amp;L in place."</div></td>
-                </tr>
-                <tr>
-                  <td><div class="flex items-center gap8"><div class="force-dot" style="background:var(--f2);border-radius:50%;width:8px;height:8px;"></div>F2 · Innovate or Evaporate</div></td>
-                  <td>5</td><td>8</td><td>3</td>
-                  <td><div class="no-action">— Not yet started</div></td>
-                </tr>
-                <tr>
-                  <td><div class="flex items-center gap8"><div class="force-dot" style="background:var(--f3);border-radius:50%;width:8px;height:8px;"></div>F3 · Dominate Your Market</div></td>
-                  <td>7</td><td>9</td><td>2</td>
-                  <td><div class="captured-action">"Build referral program. Activate top 20 past clients."</div></td>
-                </tr>
-                <tr style="background: rgba(59,235,160,0.04);">
-                  <td><div class="flex items-center gap8"><div class="force-dot" style="background:var(--f4);border-radius:50%;width:8px;height:8px;"></div><strong>F4 · World Class Fulfillment</strong></div></td>
-                  <td><strong>4</strong></td><td><strong>8</strong></td>
-                  <td><strong style="color:#b91c1c;">4</strong></td>
-                  <td><div class="captured-action" style="color:var(--mint-dark);">In progress… ✏️</div></td>
-                </tr>
-                <tr>
-                  <td><div class="flex items-center gap8"><div class="force-dot" style="background:var(--f5);border-radius:50%;width:8px;height:8px;"></div>F5 · Anticipate &amp; Raving Fans</div></td>
-                  <td colspan="3" style="color:var(--gray-400);">Not yet rated</td>
-                  <td><div class="no-action">—</div></td>
-                </tr>
-                <tr>
-                  <td><div class="flex items-center gap8"><div class="force-dot" style="background:var(--f6);border-radius:50%;width:8px;height:8px;"></div>F6 · Optimize for Profit</div></td>
-                  <td colspan="3" style="color:var(--gray-400);">Not yet rated</td>
-                  <td><div class="no-action">—</div></td>
-                </tr>
-                <tr>
-                  <td><div class="flex items-center gap8"><div class="force-dot" style="background:var(--f7);border-radius:50%;width:8px;height:8px;"></div>F7 · Maximize Time &amp; Energy</div></td>
-                  <td colspan="3" style="color:var(--gray-400);">Not yet rated</td>
-                  <td><div class="no-action">—</div></td>
-                </tr>
-              </tbody>
-            </table>
-          </div>
-        </div>
-
       </div>
     </div>
 
     <!-- ══════════════════════════════════════════════════════
-         SCREEN 4 — SEVEN FORCES PLAN (was Day 5)
+         SCREEN 4 — 7 FORCES IMPLEMENTATION PLAN
     ══════════════════════════════════════════════════════ -->
     <div class="screen" id="screen-3">
 
-      <!-- Tony's Opening -->
-      <div class="day5-opening mb24">
-        <blockquote>
-          "You've spent five days looking at your business from every angle. You've measured every gap. Now: what's the one move that changes everything?"
-        </blockquote>
-        <cite>— Tony AI · Day 5 · Your Plan, Your Words</cite>
-      </div>
-
-      <!-- Force Selection -->
-      <div class="card-white mb20">
-        <div class="flex items-center space-between mb16">
-          <div>
-            <div class="label mb4">Your 7 Forces — Choose Your Focus</div>
-            <div class="text-sm text-gray">Select the forces you want to work on. You decide what matters most.</div>
-          </div>
-          <div class="text-xs text-gray" style="text-align:right;">Narrow to 3–5<br>to focus &amp; follow through</div>
-        </div>
-        <div class="force-cards">
-          <div class="force-card selected" style="background:#eef3f9;border-color:var(--f1);">
-            <div class="force-card-num" style="color:#2563eb;">1</div>
-            <div class="force-card-name">Know Your Business</div>
-            <div class="force-card-score">6 → <span>8</span></div>
-          </div>
-          <div class="force-card" style="background:#f0faf0;border-color:rgba(46,125,50,0.3);">
-            <div class="force-card-num" style="color:#2e7d32;">2</div>
-            <div class="force-card-name">Innovate or Evaporate</div>
-            <div class="force-card-score">5 → <span>8</span></div>
-          </div>
-          <div class="force-card selected" style="background:#fdf2f2;border-color:var(--f3);">
-            <div class="force-card-num" style="color:#dc2626;">3</div>
-            <div class="force-card-name">Dominate Your Market</div>
-            <div class="force-card-score">7 → <span>9</span></div>
-          </div>
-          <div class="force-card selected" style="background:#fef8f5;border-color:var(--f4);box-shadow:0 0 0 2px rgba(59,235,160,0.25);">
-            <div class="force-card-num" style="color:var(--mint-dark);">4</div>
-            <div class="force-card-name">World Class Fulfillment</div>
-            <div class="force-card-score" style="color:var(--mint-dark);">4 → <span>8</span> ⚡</div>
-          </div>
-          <div class="force-card" style="background:#eff6ff;border-color:rgba(21,101,192,0.3);">
-            <div class="force-card-num" style="color:#1565c0;">5</div>
-            <div class="force-card-name">Anticipate &amp; Raving Fans</div>
-            <div class="force-card-score">6 → <span>8</span></div>
-          </div>
-          <div class="force-card selected" style="background:#f5f0fb;border-color:var(--f6);">
-            <div class="force-card-num" style="color:#7c3aed;">6</div>
-            <div class="force-card-name">Optimize for Profit</div>
-            <div class="force-card-score">5 → <span>7</span></div>
-          </div>
-          <div class="force-card" style="background:#fff7ed;border-color:rgba(230,81,0,0.3);">
-            <div class="force-card-num" style="color:#ea580c;">7</div>
-            <div class="force-card-name">Maximize Time &amp; Energy</div>
-            <div class="force-card-score">6 → <span>8</span></div>
-          </div>
+      <!-- Dark Hero with quote -->
+      <div class="tab-hero">
+        <div class="tab-hero-eyebrow">Day 5 · Your Plan</div>
+        <h1>"What's the one move<br>that changes everything?"</h1>
+        <p>You've measured every gap. You've worked every force. Now lock what you're going to do — and take it home.</p>
+        <div class="flex gap8 mt20">
+          <button class="btn btn-primary">Lock My Plan</button>
+          <button class="btn btn-ghost">Export PDF</button>
         </div>
       </div>
 
-      <!-- Narrow to Focus callout -->
-      <div class="narrow-callout mb24">
-        <div class="narrow-callout-icon">🎯</div>
-        <div>
-          <div class="narrow-callout-text">4 forces selected: F1, F3, F4, F6</div>
-          <div class="narrow-callout-sub">You decide where to focus. Narrow to 3–5 for real follow-through. F4 has your widest gap — many attendees start there.</div>
-        </div>
-        <button class="btn btn-primary" style="margin-left:auto;font-size:13px;padding:10px 20px;white-space:nowrap;">Lock My Plan</button>
-      </div>
+      <div class="page-body">
 
-      <!-- Implementation Chart -->
-      <div class="card-white mb20">
-        <div class="flex items-center space-between mb16">
-          <div>
-            <div class="label mb4" style="color:var(--mint-dark);">Seven Forces Implementation Chart</div>
-            <div class="text-sm text-gray">Your plan. Fill it in. It's yours to take home.</div>
+        <!-- Force Selection -->
+        <div class="card-white mb20">
+          <div class="flex items-center space-between mb16">
+            <div>
+              <div class="section-title" style="font-size:18px;">Choose Your Forces</div>
+              <div class="text-sm text-gray mt4">Narrow to 3–5 for real follow-through.</div>
+            </div>
+            <div class="text-xs text-gray" style="text-align:right;">4 of 7 selected</div>
           </div>
-          <span class="badge badge-mint">4 of 7 Selected</span>
+          <div class="force-cards">
+            <div class="force-card selected" style="background:#eef3f9;border-color:var(--f1);">
+              <div class="force-card-num" style="color:#2563eb;">1</div>
+              <div class="force-card-name">Know Your Business</div>
+              <div class="force-card-score">6 → <span>8</span></div>
+            </div>
+            <div class="force-card" style="background:#f0faf0;border-color:rgba(46,125,50,0.3);">
+              <div class="force-card-num" style="color:#2e7d32;">2</div>
+              <div class="force-card-name">Innovate or Evaporate</div>
+              <div class="force-card-score">5 → <span>8</span></div>
+            </div>
+            <div class="force-card selected" style="background:#fdf2f2;border-color:var(--f3);">
+              <div class="force-card-num" style="color:#dc2626;">3</div>
+              <div class="force-card-name">Dominate Your Market</div>
+              <div class="force-card-score">7 → <span>9</span></div>
+            </div>
+            <div class="force-card selected" style="background:#f0fdf8;border-color:var(--mint);box-shadow:0 0 0 2px rgba(59,235,160,0.2);">
+              <div class="force-card-num" style="color:var(--mint-dark);">4</div>
+              <div class="force-card-name">World Class Fulfillment</div>
+              <div class="force-card-score" style="color:var(--mint-dark);">4 → <span>8</span> ⚡</div>
+            </div>
+            <div class="force-card" style="background:#eff6ff;border-color:rgba(21,101,192,0.3);">
+              <div class="force-card-num" style="color:#1565c0;">5</div>
+              <div class="force-card-name">Anticipate &amp; Raving Fans</div>
+              <div class="force-card-score">6 → <span>8</span></div>
+            </div>
+            <div class="force-card selected" style="background:#f5f0fb;border-color:var(--f6);">
+              <div class="force-card-num" style="color:#7c3aed;">6</div>
+              <div class="force-card-name">Optimize for Profit</div>
+              <div class="force-card-score">5 → <span>7</span></div>
+            </div>
+            <div class="force-card" style="background:#fff7ed;border-color:rgba(230,81,0,0.3);">
+              <div class="force-card-num" style="color:#ea580c;">7</div>
+              <div class="force-card-name">Maximize Time &amp; Energy</div>
+              <div class="force-card-score">6 → <span>8</span></div>
+            </div>
+          </div>
         </div>
 
-        <table class="impl-table">
-          <thead>
-            <tr>
-              <th style="width:22%;">Force</th>
-              <th style="width:8%;">Gap</th>
-              <th style="width:14%;">Priority (1–5)</th>
-              <th style="width:34%;">Key Action</th>
-              <th style="width:22%;">By When</th>
-            </tr>
-          </thead>
-          <tbody>
-            <tr>
-              <td>
-                <div class="force-name-cell">
-                  <div class="force-dot" style="background:var(--f4);border-radius:50%;width:8px;height:8px;"></div>
-                  F4 · World Class Fulfillment
-                </div>
-              </td>
-              <td><span class="gap-pill large">4</span></td>
-              <td>
-                <div class="priority-dots">
-                  <div class="priority-dot"></div>
-                  <div class="priority-dot"></div>
-                  <div class="priority-dot"></div>
-                  <div class="priority-dot"></div>
-                  <div class="priority-dot"></div>
-                </div>
-                <div style="font-size:10px;color:var(--mint-dark);margin-top:3px;font-weight:700;">Priority 1</div>
-              </td>
-              <td><input type="text" value="Build 5-step sales process; train Sarah to run Steps 1–3 independently"></td>
-              <td><input type="text" value="March 1, 2027"></td>
-            </tr>
-            <tr>
-              <td>
-                <div class="force-name-cell">
-                  <div class="force-dot" style="background:var(--f1);border-radius:50%;width:8px;height:8px;"></div>
-                  F1 · Know Your Business
-                </div>
-              </td>
-              <td><span class="gap-pill">2</span></td>
-              <td>
-                <div class="priority-dots">
-                  <div class="priority-dot"></div>
-                  <div class="priority-dot"></div>
-                  <div class="priority-dot inactive"></div>
-                  <div class="priority-dot inactive"></div>
-                  <div class="priority-dot inactive"></div>
-                </div>
-                <div style="font-size:10px;color:var(--gray-400);margin-top:3px;">Priority 2</div>
-              </td>
-              <td><input type="text" value="Hire bookkeeper; set up monthly P&L and dashboard review"></td>
-              <td><input type="text" value="Feb 1, 2027"></td>
-            </tr>
-            <tr>
-              <td>
-                <div class="force-name-cell">
-                  <div class="force-dot" style="background:var(--f3);border-radius:50%;width:8px;height:8px;"></div>
-                  F3 · Dominate Your Market
-                </div>
-              </td>
-              <td><span class="gap-pill">2</span></td>
-              <td>
-                <div class="priority-dots">
-                  <div class="priority-dot"></div>
-                  <div class="priority-dot"></div>
-                  <div class="priority-dot inactive"></div>
-                  <div class="priority-dot inactive"></div>
-                  <div class="priority-dot inactive"></div>
-                </div>
-                <div style="font-size:10px;color:var(--gray-400);margin-top:3px;">Priority 2</div>
-              </td>
-              <td><input type="text" value="Launch referral program; re-engage top 20 past clients by phone"></td>
-              <td><input type="text" value="Jan 15, 2027"></td>
-            </tr>
-            <tr>
-              <td>
-                <div class="force-name-cell">
-                  <div class="force-dot" style="background:var(--f6);border-radius:50%;width:8px;height:8px;"></div>
-                  F6 · Optimize for Profit
-                </div>
-              </td>
-              <td><span class="gap-pill">2</span></td>
-              <td>
-                <div class="priority-dots">
-                  <div class="priority-dot"></div>
-                  <div class="priority-dot inactive"></div>
-                  <div class="priority-dot inactive"></div>
-                  <div class="priority-dot inactive"></div>
-                  <div class="priority-dot inactive"></div>
-                </div>
-                <div style="font-size:10px;color:var(--gray-400);margin-top:3px;">Priority 3</div>
-              </td>
-              <td><input type="text" value="Raise prices 12% on new projects; review job costing monthly"></td>
-              <td><input type="text" value="Dec 1, 2026"></td>
-            </tr>
-          </tbody>
-        </table>
-      </div>
+        <!-- Implementation Chart -->
+        <div class="card-white mb20">
+          <div class="label label-dark mb16">7 Forces Implementation Chart</div>
 
-      <!-- Notes field -->
-      <div class="card-white">
-        <div class="label mb8">Notes &amp; Edits</div>
-        <div class="text-xs text-gray mb12">Your plan, your edits. Add context, adjust actions, note anything from the event.</div>
-        <textarea class="impl-notes" style="min-height:100px;" placeholder="Add notes here — things you heard today, adjustments to your plan, questions to follow up on…">F4 is the big one. Everything else gets easier once I have a sales process that doesn't depend on me. Need to talk to Sarah tomorrow morning before Day 4 starts.</textarea>
-        <div class="flex gap8 mt12">
-          <button class="btn btn-primary" style="font-size:13px;padding:10px 20px;">Save Plan</button>
-          <button class="btn btn-ghost" style="font-size:13px;padding:10px 20px;">Export PDF</button>
+          <table class="impl-table">
+            <thead>
+              <tr>
+                <th style="width:24%;border-radius:8px 0 0 0;">Force</th>
+                <th style="width:8%;">Gap</th>
+                <th style="width:14%;">Priority</th>
+                <th style="width:34%;">Key Action</th>
+                <th style="width:20%;border-radius:0 8px 0 0;">By When</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>
+                  <div class="force-name-cell">
+                    <div class="force-dot" style="background:var(--f4);border-radius:50%;width:8px;height:8px;"></div>
+                    Force 4 · Fulfillment
+                  </div>
+                </td>
+                <td><span class="gap-pill large">4</span></td>
+                <td>
+                  <div class="priority-dots">
+                    <div class="priority-dot"></div><div class="priority-dot"></div><div class="priority-dot"></div><div class="priority-dot"></div><div class="priority-dot"></div>
+                  </div>
+                  <div style="font-size:10px;color:var(--mint-dark);margin-top:3px;font-weight:700;">#1</div>
+                </td>
+                <td><input type="text" value="Build 5-step sales process; train Sarah to run Steps 1–3 independently"></td>
+                <td><input type="text" value="March 1, 2027"></td>
+              </tr>
+              <tr>
+                <td>
+                  <div class="force-name-cell">
+                    <div class="force-dot" style="background:var(--f1);border-radius:50%;width:8px;height:8px;"></div>
+                    Force 1 · Know Your Business
+                  </div>
+                </td>
+                <td><span class="gap-pill">2</span></td>
+                <td>
+                  <div class="priority-dots">
+                    <div class="priority-dot"></div><div class="priority-dot"></div><div class="priority-dot inactive"></div><div class="priority-dot inactive"></div><div class="priority-dot inactive"></div>
+                  </div>
+                  <div style="font-size:10px;color:var(--gray-400);margin-top:3px;">#2</div>
+                </td>
+                <td><input type="text" value="Hire bookkeeper; set up monthly P&L and dashboard review"></td>
+                <td><input type="text" value="Feb 1, 2027"></td>
+              </tr>
+              <tr>
+                <td>
+                  <div class="force-name-cell">
+                    <div class="force-dot" style="background:var(--f3);border-radius:50%;width:8px;height:8px;"></div>
+                    Force 3 · Dominate Market
+                  </div>
+                </td>
+                <td><span class="gap-pill">2</span></td>
+                <td>
+                  <div class="priority-dots">
+                    <div class="priority-dot"></div><div class="priority-dot"></div><div class="priority-dot inactive"></div><div class="priority-dot inactive"></div><div class="priority-dot inactive"></div>
+                  </div>
+                  <div style="font-size:10px;color:var(--gray-400);margin-top:3px;">#2</div>
+                </td>
+                <td><input type="text" value="Launch referral program; re-engage top 20 past clients by phone"></td>
+                <td><input type="text" value="Jan 15, 2027"></td>
+              </tr>
+              <tr>
+                <td>
+                  <div class="force-name-cell">
+                    <div class="force-dot" style="background:var(--f6);border-radius:50%;width:8px;height:8px;"></div>
+                    Force 6 · Optimize Profit
+                  </div>
+                </td>
+                <td><span class="gap-pill">2</span></td>
+                <td>
+                  <div class="priority-dots">
+                    <div class="priority-dot"></div><div class="priority-dot inactive"></div><div class="priority-dot inactive"></div><div class="priority-dot inactive"></div><div class="priority-dot inactive"></div>
+                  </div>
+                  <div style="font-size:10px;color:var(--gray-400);margin-top:3px;">#3</div>
+                </td>
+                <td><input type="text" value="Raise prices 12% on new projects; review job costing monthly"></td>
+                <td><input type="text" value="Dec 1, 2026"></td>
+              </tr>
+            </tbody>
+          </table>
+
+          <div class="divider"></div>
+          <div class="label mb8">Notes</div>
+          <textarea class="impl-notes" style="min-height:80px;" placeholder="Add context, adjustments, or questions to follow up on…">Force 4 is the big one. Everything else gets easier once I have a sales process that doesn't depend on me. Talk to Sarah before Day 4 starts.</textarea>
         </div>
-      </div>
 
+      </div>
     </div>
 
     <!-- ══════════════════════════════════════════════════════
-         SCREEN 5 — YOUR IMPLEMENTATION (POST-EVENT)
+         SCREEN 5 — POST-EVENT IMPLEMENTATION
     ══════════════════════════════════════════════════════ -->
     <div class="screen" id="screen-4">
 
-      <div class="section-header mb24">
-        <div class="section-label">Post-Event · Implementation</div>
-        <div class="section-title">Your Implementation</div>
-        <div class="section-sub">You built the plan at Business Mastery. Now you work it. Tony AI coaches you through the forces you chose, in the order that makes sense for your business.</div>
+      <!-- Dark Hero -->
+      <div class="tab-hero">
+        <div class="tab-hero-eyebrow">Post-Event · Implementation</div>
+        <h1>You built the plan.<br>Now work it.</h1>
+        <p>Tony AI coaches you through the forces you chose, in the order that makes sense for your business — week by week.</p>
+        <div class="flex items-center gap12 mt16">
+          <div class="pulse"></div>
+          <span style="font-size:13px; color:rgba(255,255,255,0.65);">Week 4 · Force 4 · Sales Training</span>
+        </div>
       </div>
 
-      <div class="post-layout">
+      <div class="page-body">
+        <div class="post-layout">
 
-        <!-- Left: Selected Forces + Coaching -->
-        <div>
+          <!-- Left: Selected Forces + Weekly Rhythm -->
+          <div>
 
-          <!-- Their selected forces -->
-          <div class="card-white mb20">
-            <div class="flex items-center space-between mb16">
-              <div class="label">Your Selected Forces</div>
-              <span class="badge badge-mint">4 Forces · Your Order</span>
+            <!-- Selected Forces -->
+            <div class="card-white mb20">
+              <div class="flex items-center space-between mb16">
+                <div class="section-title" style="font-size:16px;">Your Forces</div>
+                <span class="badge badge-dark">4 Selected</span>
+              </div>
+
+              <div class="focus-force-card active">
+                <div class="focus-force-header">
+                  <div class="focus-force-name">
+                    <div class="force-dot" style="background:var(--f4);border-radius:50%;width:8px;height:8px;"></div>
+                    Force 4 · World Class Fulfillment
+                  </div>
+                  <span class="badge badge-mint" style="font-size:10px;">In Focus</span>
+                </div>
+                <div class="focus-force-meta">Gap: 4 → 8 · Priority 1 · Due Mar 1, 2027</div>
+                <div class="focus-force-action"><strong>Key Action:</strong> Build 5-step sales process; train Sarah to run Steps 1–3 independently</div>
+              </div>
+
+              <div class="focus-force-card">
+                <div class="focus-force-header">
+                  <div class="focus-force-name">
+                    <div class="force-dot" style="background:var(--f3);border-radius:50%;width:8px;height:8px;"></div>
+                    Force 3 · Dominate Your Market
+                  </div>
+                  <span class="badge badge-gray" style="font-size:10px;">Upcoming</span>
+                </div>
+                <div class="focus-force-meta">Gap: 2 · Priority 2 · Due Jan 15, 2027</div>
+                <div class="focus-force-action"><strong>Key Action:</strong> Launch referral program; re-engage top 20 past clients by phone</div>
+              </div>
+
+              <div class="focus-force-card">
+                <div class="focus-force-header">
+                  <div class="focus-force-name">
+                    <div class="force-dot" style="background:var(--f1);border-radius:50%;width:8px;height:8px;"></div>
+                    Force 1 · Know Your Business
+                  </div>
+                  <span class="badge badge-gray" style="font-size:10px;">Upcoming</span>
+                </div>
+                <div class="focus-force-meta">Gap: 2 · Priority 2 · Due Feb 1, 2027</div>
+                <div class="focus-force-action"><strong>Key Action:</strong> Hire bookkeeper; set up monthly P&amp;L and dashboard review</div>
+              </div>
+
+              <div class="focus-force-card">
+                <div class="focus-force-header">
+                  <div class="focus-force-name">
+                    <div class="force-dot" style="background:var(--f6);border-radius:50%;width:8px;height:8px;"></div>
+                    Force 6 · Optimize for Profit
+                  </div>
+                  <span class="badge badge-gray" style="font-size:10px;">Upcoming</span>
+                </div>
+                <div class="focus-force-meta">Gap: 2 · Priority 3 · Due Dec 1, 2026</div>
+                <div class="focus-force-action"><strong>Key Action:</strong> Raise prices 12% on new projects; review job costing monthly</div>
+              </div>
             </div>
 
-            <div class="focus-force-card active">
-              <div class="focus-force-header">
-                <div class="focus-force-name">
-                  <div class="force-dot" style="background:var(--f4);border-radius:50%;width:8px;height:8px;"></div>
-                  F4 · World Class Fulfillment
-                </div>
-                <span class="badge badge-mint" style="font-size:10px;">In Focus</span>
+            <!-- Weekly Rhythm -->
+            <div class="card-white">
+              <div class="flex items-center space-between mb12">
+                <div class="section-title" style="font-size:16px;">Weekly Check-Ins</div>
+                <span class="badge badge-mint">Week 4 Active</span>
               </div>
-              <div class="focus-force-meta mb8">Gap: 4 → 8 · Priority 1 · Deadline: Mar 1, 2027</div>
-              <div class="focus-force-action"><strong>Key Action:</strong> Build 5-step sales process; train Sarah to run Steps 1–3 independently</div>
+              <div class="week-selector">
+                <div class="week-chip done">Wk 1 · Force 3 Referrals ✓</div>
+                <div class="week-chip done">Wk 2 · Force 4 Process Map ✓</div>
+                <div class="week-chip done">Wk 3 · Force 6 Pricing ✓</div>
+                <div class="week-chip active">Wk 4 · Force 4 Sarah Training</div>
+                <div class="week-chip">Wk 5 · Force 1 Bookkeeping</div>
+                <div class="week-chip">Wk 6 · Force 4 Conversion</div>
+                <div class="week-chip">Wk 7+</div>
+              </div>
+              <div class="text-xs text-gray" style="line-height:1.6;">Follows <em>your</em> plan and momentum — not force order. You move where the business needs it most.</div>
             </div>
 
-            <div class="focus-force-card">
-              <div class="focus-force-header">
-                <div class="focus-force-name">
-                  <div class="force-dot" style="background:var(--f3);border-radius:50%;width:8px;height:8px;"></div>
-                  F3 · Dominate Your Market
-                </div>
-                <span class="badge badge-gray" style="font-size:10px;">Upcoming</span>
+          </div>
+
+          <!-- Right: AI Coaching + Posture -->
+          <div>
+            <div class="card-white mb20">
+              <div class="label label-dark mb16">AI Coaching — Week 4: Force 4 Sales Training</div>
+
+              <div class="chat-who ai mb4">Tony AI</div>
+              <div class="chat-bubble chat-ai">
+                Last week you said Sarah ran her first three calls solo. <strong>How did they go?</strong>
               </div>
-              <div class="focus-force-meta mb8">Gap: 2 · Priority 2 · Deadline: Jan 15, 2027</div>
-              <div class="focus-force-action"><strong>Key Action:</strong> Launch referral program; re-engage top 20 past clients by phone</div>
+              <div class="chat-bubble chat-user">
+                Two were good. One she talked too long and lost the close.
+              </div>
+              <div class="chat-bubble chat-ai">
+                What was the moment she should have stopped and asked for the next step?
+              </div>
+              <div class="chat-bubble chat-user">
+                When the customer stopped asking about price and started asking about availability. She kept selling anyway.
+              </div>
+              <div class="chat-bubble chat-ai">
+                That's a trainable trigger. One sentence: <em>"When they ask about availability, stop selling and confirm the next step."</em> Can you give that to her in writing today?
+              </div>
+              <div class="chat-bubble chat-user">
+                Yeah. I can do that this afternoon.
+              </div>
+              <div class="chat-bubble chat-ai" style="color:var(--dark-green); border-color:rgba(26,74,58,0.2); background:#f0fdf8;">
+                Done. I'll hold that. You said $180K/year hinges on this. That one sentence might be the whole thing.
+              </div>
             </div>
 
-            <div class="focus-force-card">
-              <div class="focus-force-header">
-                <div class="focus-force-name">
-                  <div class="force-dot" style="background:var(--f1);border-radius:50%;width:8px;height:8px;"></div>
-                  F1 · Know Your Business
+            <div class="card-white">
+              <div class="label label-dark mb12">AI Posture</div>
+              <div class="posture-list">
+                <div class="posture-item">
+                  <div class="posture-tag posture-says">Says</div>
+                  <div class="posture-text"><em>"Last week you said Sarah ran her first three calls solo. How did they go?"</em></div>
                 </div>
-                <span class="badge badge-gray" style="font-size:10px;">Upcoming</span>
+                <div class="posture-item">
+                  <div class="posture-tag posture-says">Says</div>
+                  <div class="posture-text"><em>"You said you want to get this off your plate by March. What's in the way?"</em></div>
+                </div>
+                <div class="posture-item">
+                  <div class="posture-tag posture-never">Never</div>
+                  <div class="posture-text"><em>"Great progress this week!"</em></div>
+                </div>
+                <div class="posture-item">
+                  <div class="posture-tag posture-never">Never</div>
+                  <div class="posture-text"><em>"Here are 5 tips to improve your sales process:"</em></div>
+                </div>
+                <div class="posture-item">
+                  <div class="posture-tag posture-never">Never</div>
+                  <div class="posture-text"><em>"According to Tony Robbins..."</em></div>
+                </div>
               </div>
-              <div class="focus-force-meta mb8">Gap: 2 · Priority 2 · Deadline: Feb 1, 2027</div>
-              <div class="focus-force-action"><strong>Key Action:</strong> Hire bookkeeper; set up monthly P&amp;L and dashboard review</div>
-            </div>
 
-            <div class="focus-force-card">
-              <div class="focus-force-header">
-                <div class="focus-force-name">
-                  <div class="force-dot" style="background:var(--f6);border-radius:50%;width:8px;height:8px;"></div>
-                  F6 · Optimize for Profit
-                </div>
-                <span class="badge badge-gray" style="font-size:10px;">Upcoming</span>
+              <div class="divider"></div>
+              <div class="label label-dark mb8">Three Rules</div>
+              <div style="display:flex;flex-direction:column;gap:10px;">
+                <div style="font-size:13px;color:var(--gray-600);line-height:1.6;"><strong style="color:var(--dark-green);">1. Open with their words.</strong> Reflect their own intention back — never reference time or week number.</div>
+                <div style="font-size:13px;color:var(--gray-600);line-height:1.6;"><strong style="color:var(--dark-green);">2. Always offer, never assign.</strong> "Want to?" not "Time to." Saying no earns no guilt.</div>
+                <div style="font-size:13px;color:var(--gray-600);line-height:1.6;"><strong style="color:var(--dark-green);">3. Go quiet when ignored.</strong> Two unanswered invitations become silence.</div>
               </div>
-              <div class="focus-force-meta mb8">Gap: 2 · Priority 3 · Deadline: Dec 1, 2026</div>
-              <div class="focus-force-action"><strong>Key Action:</strong> Raise prices 12% on new projects; review job costing monthly</div>
             </div>
           </div>
 
-          <!-- Weekly rhythm (custom order, not force-order) -->
-          <div class="card-white mb20">
-            <div class="flex items-center space-between mb12">
-              <div class="label">Weekly Check-Ins — Your Order</div>
-              <span class="badge badge-mint">Week 4 Active</span>
-            </div>
-            <div class="week-selector">
-              <div class="week-chip done">Wk 1 · F3 Referrals ✓</div>
-              <div class="week-chip done">Wk 2 · F4 Process Map ✓</div>
-              <div class="week-chip done">Wk 3 · F6 Pricing ✓</div>
-              <div class="week-chip active">Wk 4 · F4 Sarah Training</div>
-              <div class="week-chip">Wk 5 · F1 Bookkeeping</div>
-              <div class="week-chip">Wk 6 · F4 Conversion Tracking</div>
-              <div class="week-chip">Wk 7+</div>
-            </div>
-            <div class="text-xs text-gray" style="line-height:1.6;">
-              Weekly cycle follows <em>your</em> plan and momentum — not force order. You move where the business needs it most.
-            </div>
-          </div>
-
-          <div class="card-mint">
-            <div class="label mb4" style="color: var(--mint-dark);">Tony's Optimization Principle</div>
-            <div class="text-sm" style="color: var(--black); line-height:1.65; font-style:italic;">
-              "Optimization means taking a bunch of little things that don't seem very difficult to change and doing them consistently."
-            </div>
-          </div>
         </div>
-
-        <!-- Right: AI Coaching + Posture -->
-        <div>
-          <div class="card-white mb20">
-            <div class="label mb12">AI Coaching — Week 4: F4 Sales Training</div>
-
-            <div class="chat-label ai mb4">Tony AI</div>
-            <div class="chat-bubble chat-ai">
-              Last week you said Sarah ran her first three calls solo. <strong>How did they go?</strong>
-            </div>
-            <div class="chat-bubble chat-user">
-              Two were good. One she talked too long and lost the close.
-            </div>
-            <div class="chat-bubble chat-ai">
-              What was the moment she should have stopped and asked for the next step?
-            </div>
-            <div class="chat-bubble chat-user">
-              When the customer stopped asking about price and started asking about availability. She kept selling anyway.
-            </div>
-            <div class="chat-bubble chat-ai">
-              That's a trainable trigger. One sentence: <em>"When they ask about availability, stop selling and confirm the next step."</em> Can you give that to her in writing today?
-            </div>
-            <div class="chat-bubble chat-user">
-              Yeah. I can do that this afternoon.
-            </div>
-            <div class="chat-bubble chat-ai" style="color: var(--mint-dark);">
-              Done. I'll hold that. You said $180K/year hinges on this. That one sentence might be the whole thing.
-            </div>
-          </div>
-
-          <div class="card-white">
-            <div class="label mb12">AI Posture — Says vs. Never Says</div>
-            <div class="posture-list">
-              <div class="posture-item">
-                <div class="posture-tag posture-says">Says</div>
-                <div class="posture-text"><em>"Last week you said Sarah ran her first three calls solo. How did they go?"</em></div>
-              </div>
-              <div class="posture-item">
-                <div class="posture-tag posture-says">Says</div>
-                <div class="posture-text"><em>"You said you want to get this off your plate by March. What's in the way?"</em></div>
-              </div>
-              <div class="posture-item">
-                <div class="posture-tag posture-says">Says</div>
-                <div class="posture-text"><em>"Which of your four forces would move the needle most right now?"</em></div>
-              </div>
-              <div class="posture-item">
-                <div class="posture-tag posture-never">Never</div>
-                <div class="posture-text"><em>"Great progress this week!"</em></div>
-              </div>
-              <div class="posture-item">
-                <div class="posture-tag posture-never">Never</div>
-                <div class="posture-text"><em>"Here are 5 tips to improve your sales process:"</em></div>
-              </div>
-              <div class="posture-item">
-                <div class="posture-tag posture-never">Never</div>
-                <div class="posture-text"><em>"According to Tony Robbins..."</em></div>
-              </div>
-            </div>
-
-            <div class="divider"></div>
-            <div class="label mb8" style="color: var(--mint-dark);">Three Posture Rules</div>
-            <div class="coaching-rule">
-              <strong>1. Open with their words, never the clock.</strong> The attendee never hears "it's week 3" — only their own intention reflected back.
-            </div>
-            <div class="coaching-rule">
-              <strong>2. Always offer, never assign.</strong> "Want to?" not "Time to." Saying "not now" earns no guilt.
-            </div>
-            <div class="coaching-rule">
-              <strong>3. Go quiet when ignored.</strong> Two unanswered invitations become silence — not a third louder one.
-            </div>
-          </div>
-        </div>
-
       </div>
     </div>
 
