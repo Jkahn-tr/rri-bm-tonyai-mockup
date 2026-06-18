@@ -1,0 +1,1373 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Seven Forces Implementation Plan — Marcus Chen</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,600;0,700;1,400&family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet" />
+  <style>
+    :root {
+      --mint: #3beba0;
+      --mint-light: #e8fdf4;
+      --mint-mid: #c2f5e0;
+      --dark-green: #1a4a3a;
+      --black: #000000;
+      --white: #ffffff;
+      --off-white: #f5f5f0;
+      --mid-gray: #6b7280;
+      --light-gray: #9ca3af;
+      --border: #e0e0d8;
+      --priority-bg: #fff7ed;
+      --priority-border: #fed7aa;
+    }
+
+    *, *::before, *::after {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    html {
+      font-size: 15px;
+      -webkit-print-color-adjust: exact;
+      print-color-adjust: exact;
+    }
+
+    body {
+      font-family: 'Inter', sans-serif;
+      background: #eeede8;
+      color: var(--black);
+      line-height: 1.6;
+      padding: 40px 20px;
+    }
+
+    .document {
+      max-width: 800px;
+      margin: 0 auto;
+      background: var(--white);
+      box-shadow: 0 4px 40px rgba(0,0,0,0.12), 0 1px 8px rgba(0,0,0,0.06);
+    }
+
+    /* ── HEADER ── */
+    .doc-header {
+      background: var(--dark-green);
+      color: var(--white);
+      padding: 48px 52px 40px;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .doc-header::before {
+      content: '';
+      position: absolute;
+      top: -80px;
+      right: -80px;
+      width: 320px;
+      height: 320px;
+      border-radius: 50%;
+      background: rgba(59, 235, 160, 0.06);
+    }
+
+    .doc-header::after {
+      content: '';
+      position: absolute;
+      bottom: -50px;
+      right: 100px;
+      width: 180px;
+      height: 180px;
+      border-radius: 50%;
+      background: rgba(59, 235, 160, 0.04);
+    }
+
+    .wordmark {
+      font-family: 'Inter', sans-serif;
+      font-weight: 700;
+      font-size: 10px;
+      letter-spacing: 0.2em;
+      text-transform: uppercase;
+      color: var(--mint);
+      margin-bottom: 18px;
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+
+    .wordmark::before {
+      content: '';
+      display: inline-block;
+      width: 24px;
+      height: 2px;
+      background: var(--mint);
+    }
+
+    .doc-title {
+      font-family: 'Playfair Display', serif;
+      font-size: 32px;
+      font-weight: 700;
+      color: var(--white);
+      line-height: 1.2;
+      margin-bottom: 28px;
+      letter-spacing: -0.02em;
+    }
+
+    .participant-block {
+      display: grid;
+      grid-template-columns: 1fr 1fr 1fr;
+      gap: 16px 24px;
+      border-top: 1px solid rgba(255,255,255,0.15);
+      padding-top: 24px;
+      margin-bottom: 24px;
+    }
+
+    .participant-item {
+      display: flex;
+      flex-direction: column;
+      gap: 3px;
+    }
+
+    .participant-label {
+      font-size: 9px;
+      font-weight: 700;
+      letter-spacing: 0.18em;
+      text-transform: uppercase;
+      color: var(--mint);
+      opacity: 0.9;
+    }
+
+    .participant-value {
+      font-size: 13.5px;
+      font-weight: 500;
+      color: var(--white);
+    }
+
+    .doc-tagline {
+      font-family: 'Playfair Display', serif;
+      font-style: italic;
+      font-size: 14px;
+      color: rgba(255,255,255,0.6);
+      border-top: 1px solid rgba(255,255,255,0.1);
+      padding-top: 18px;
+    }
+
+    /* ── SECTION BASE ── */
+    .section {
+      padding: 36px 52px;
+      border-bottom: 1px solid var(--border);
+    }
+
+    .section:last-of-type {
+      border-bottom: none;
+    }
+
+    .section-alt {
+      background: var(--off-white);
+    }
+
+    .section-header {
+      display: flex;
+      align-items: center;
+      gap: 14px;
+      margin-bottom: 24px;
+    }
+
+    .section-number {
+      font-family: 'Inter', sans-serif;
+      font-size: 10px;
+      font-weight: 700;
+      letter-spacing: 0.15em;
+      color: var(--white);
+      background: var(--dark-green);
+      width: 26px;
+      height: 26px;
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      flex-shrink: 0;
+    }
+
+    .section-title {
+      font-family: 'Playfair Display', serif;
+      font-size: 18px;
+      font-weight: 700;
+      color: var(--dark-green);
+      letter-spacing: -0.01em;
+    }
+
+    .section-accent {
+      width: 36px;
+      height: 3px;
+      background: var(--mint);
+      border-radius: 2px;
+      margin-bottom: 22px;
+      margin-left: 40px;
+    }
+
+    /* ── SECTION 1: SNAPSHOT ── */
+    .snapshot-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 14px;
+      margin-bottom: 20px;
+    }
+
+    .snapshot-card {
+      border: 1px solid var(--border);
+      border-radius: 8px;
+      padding: 18px 20px;
+    }
+
+    .snapshot-card-label {
+      font-size: 9px;
+      font-weight: 700;
+      letter-spacing: 0.16em;
+      text-transform: uppercase;
+      color: var(--mid-gray);
+      margin-bottom: 8px;
+    }
+
+    .snapshot-card-value {
+      font-size: 13.5px;
+      color: var(--black);
+      line-height: 1.5;
+    }
+
+    .snapshot-card-value strong {
+      font-weight: 700;
+      color: var(--dark-green);
+    }
+
+    .snapshot-card.highlight {
+      background: var(--dark-green);
+      border-color: var(--dark-green);
+    }
+
+    .snapshot-card.highlight .snapshot-card-label {
+      color: var(--mint);
+    }
+
+    .snapshot-card.highlight .snapshot-card-value {
+      color: var(--white);
+    }
+
+    .constraint-banner {
+      background: #fff7ed;
+      border: 1px solid #fed7aa;
+      border-left: 4px solid #f97316;
+      border-radius: 0 6px 6px 0;
+      padding: 14px 18px;
+      font-size: 13.5px;
+      color: #7c2d12;
+      line-height: 1.5;
+    }
+
+    .constraint-banner strong {
+      font-weight: 600;
+    }
+
+    /* ── SECTION 2: WHEEL TABLE ── */
+    .wheel-table {
+      width: 100%;
+      border-collapse: collapse;
+      font-size: 13px;
+    }
+
+    .wheel-table thead tr {
+      background: var(--dark-green);
+      color: var(--white);
+    }
+
+    .wheel-table thead th {
+      padding: 11px 14px;
+      text-align: left;
+      font-size: 9px;
+      font-weight: 700;
+      letter-spacing: 0.14em;
+      text-transform: uppercase;
+    }
+
+    .wheel-table thead th:first-child {
+      border-radius: 6px 0 0 0;
+    }
+
+    .wheel-table thead th:last-child {
+      border-radius: 0 6px 0 0;
+      text-align: center;
+    }
+
+    .wheel-table tbody tr {
+      border-bottom: 1px solid var(--border);
+    }
+
+    .wheel-table tbody tr:last-child {
+      border-bottom: none;
+    }
+
+    .wheel-table tbody td {
+      padding: 12px 14px;
+      vertical-align: middle;
+    }
+
+    .wheel-table tbody tr.priority-row {
+      background: var(--mint-light);
+    }
+
+    .wheel-table tbody tr.strong-row {
+      opacity: 0.75;
+    }
+
+    .force-name {
+      font-weight: 600;
+      color: var(--dark-green);
+      font-size: 12.5px;
+      line-height: 1.4;
+    }
+
+    .score-cell {
+      font-size: 18px;
+      font-weight: 700;
+      color: var(--dark-green);
+      text-align: center;
+    }
+
+    .gap-cell {
+      font-size: 13px;
+      font-weight: 700;
+      text-align: center;
+    }
+
+    .gap-high { color: #dc2626; }
+    .gap-mid  { color: #d97706; }
+    .gap-low  { color: var(--dark-green); }
+
+    .status-cell {
+      text-align: center;
+      white-space: nowrap;
+    }
+
+    .status-badge {
+      display: inline-block;
+      padding: 3px 10px;
+      border-radius: 20px;
+      font-size: 10px;
+      font-weight: 700;
+      letter-spacing: 0.05em;
+    }
+
+    .status-p1 {
+      background: var(--dark-green);
+      color: var(--white);
+    }
+
+    .status-p2 {
+      background: #1a4a3a22;
+      color: var(--dark-green);
+    }
+
+    .status-p3 {
+      background: var(--off-white);
+      color: var(--dark-green);
+      border: 1px solid var(--border);
+    }
+
+    .status-strong {
+      background: var(--mint-light);
+      color: var(--dark-green);
+      border: 1px solid var(--mint-mid);
+    }
+
+    /* ── SECTION 3: LEVERAGE POINTS ── */
+    .leverage-grid {
+      display: grid;
+      gap: 14px;
+    }
+
+    .leverage-card {
+      display: flex;
+      gap: 18px;
+      align-items: flex-start;
+      background: var(--dark-green);
+      border-radius: 8px;
+      padding: 20px 24px;
+      color: var(--white);
+    }
+
+    .leverage-number {
+      font-family: 'Playfair Display', serif;
+      font-size: 36px;
+      font-weight: 700;
+      color: var(--mint);
+      line-height: 1;
+      flex-shrink: 0;
+      opacity: 0.8;
+    }
+
+    .leverage-content {
+      flex: 1;
+    }
+
+    .leverage-force-tag {
+      font-size: 9px;
+      font-weight: 700;
+      letter-spacing: 0.16em;
+      text-transform: uppercase;
+      color: var(--mint);
+      margin-bottom: 6px;
+    }
+
+    .leverage-title {
+      font-size: 15px;
+      font-weight: 600;
+      color: var(--white);
+      margin-bottom: 6px;
+    }
+
+    .leverage-desc {
+      font-size: 13px;
+      color: rgba(255,255,255,0.7);
+      line-height: 1.5;
+    }
+
+    /* ── SECTION 4: FORCE DETAIL BLOCKS ── */
+    .force-block {
+      margin-bottom: 36px;
+      border: 1px solid var(--border);
+      border-radius: 10px;
+      overflow: hidden;
+    }
+
+    .force-block:last-child {
+      margin-bottom: 0;
+    }
+
+    .force-block-header {
+      background: var(--dark-green);
+      padding: 16px 24px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 12px;
+    }
+
+    .force-block-title {
+      font-family: 'Playfair Display', serif;
+      font-size: 16px;
+      font-weight: 700;
+      color: var(--white);
+      line-height: 1.3;
+    }
+
+    .force-block-meta {
+      display: flex;
+      gap: 8px;
+      align-items: center;
+      flex-shrink: 0;
+    }
+
+    .force-meta-badge {
+      font-size: 9px;
+      font-weight: 700;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      padding: 4px 10px;
+      border-radius: 20px;
+    }
+
+    .badge-priority {
+      background: var(--mint);
+      color: var(--dark-green);
+    }
+
+    .badge-gap {
+      background: rgba(255,255,255,0.15);
+      color: var(--white);
+    }
+
+    .force-block-body {
+      padding: 24px;
+    }
+
+    .force-quote-row {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 14px;
+      margin-bottom: 22px;
+    }
+
+    .force-quote {
+      padding: 14px 16px;
+      border-radius: 6px;
+      font-size: 12.5px;
+      line-height: 1.5;
+    }
+
+    .force-quote-was {
+      background: #fef2f2;
+      border-left: 3px solid #fca5a5;
+      color: #7f1d1d;
+    }
+
+    .force-quote-want {
+      background: var(--mint-light);
+      border-left: 3px solid var(--mint);
+      color: var(--dark-green);
+    }
+
+    .force-quote-label {
+      font-size: 9px;
+      font-weight: 700;
+      letter-spacing: 0.14em;
+      text-transform: uppercase;
+      margin-bottom: 6px;
+      opacity: 0.7;
+    }
+
+    .force-quote-text {
+      font-style: italic;
+    }
+
+    .force-actions-label {
+      font-size: 10px;
+      font-weight: 700;
+      letter-spacing: 0.14em;
+      text-transform: uppercase;
+      color: var(--dark-green);
+      margin-bottom: 12px;
+      border-bottom: 1px solid var(--border);
+      padding-bottom: 8px;
+    }
+
+    .force-actions {
+      display: grid;
+      gap: 8px;
+      margin-bottom: 20px;
+    }
+
+    .force-action-item {
+      display: flex;
+      align-items: flex-start;
+      gap: 10px;
+      padding: 10px 12px;
+      background: var(--off-white);
+      border-radius: 6px;
+      font-size: 13px;
+      line-height: 1.5;
+    }
+
+    .action-dot {
+      width: 6px;
+      height: 6px;
+      background: var(--mint);
+      border-radius: 50%;
+      flex-shrink: 0;
+      margin-top: 6px;
+    }
+
+    .action-text {
+      flex: 1;
+      color: var(--black);
+    }
+
+    .action-date {
+      font-size: 11px;
+      font-weight: 600;
+      color: var(--mid-gray);
+      flex-shrink: 0;
+      margin-top: 1px;
+    }
+
+    .force-metrics-row {
+      display: grid;
+      grid-template-columns: 1fr 1fr 1fr;
+      gap: 12px;
+    }
+
+    .force-metric-card {
+      background: var(--white);
+      border: 1px solid var(--border);
+      border-radius: 6px;
+      padding: 12px 14px;
+    }
+
+    .force-metric-label {
+      font-size: 9px;
+      font-weight: 700;
+      letter-spacing: 0.14em;
+      text-transform: uppercase;
+      color: var(--mid-gray);
+      margin-bottom: 5px;
+    }
+
+    .force-metric-value {
+      font-size: 12.5px;
+      font-weight: 600;
+      color: var(--dark-green);
+      line-height: 1.4;
+    }
+
+    .force-metric-sub {
+      font-size: 11px;
+      color: var(--mid-gray);
+      margin-top: 3px;
+    }
+
+    .force-dollar-value {
+      background: var(--mint);
+      border-radius: 6px;
+      padding: 12px 16px;
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      margin-top: 16px;
+    }
+
+    .force-dollar-icon {
+      font-size: 20px;
+      font-weight: 700;
+      color: var(--dark-green);
+      flex-shrink: 0;
+    }
+
+    .force-dollar-text {
+      font-size: 12.5px;
+      font-weight: 600;
+      color: var(--dark-green);
+    }
+
+    .force-dollar-amount {
+      font-size: 15px;
+      font-weight: 700;
+    }
+
+    /* ── SECTION 5: 7-DAY FOCUS ── */
+    .week-grid {
+      display: grid;
+      gap: 10px;
+    }
+
+    .week-item {
+      display: flex;
+      align-items: flex-start;
+      gap: 14px;
+      padding: 14px 16px;
+      background: var(--white);
+      border: 1px solid var(--border);
+      border-radius: 8px;
+    }
+
+    .week-day-tag {
+      font-size: 10px;
+      font-weight: 700;
+      letter-spacing: 0.08em;
+      color: var(--white);
+      background: var(--dark-green);
+      padding: 4px 10px;
+      border-radius: 4px;
+      flex-shrink: 0;
+      margin-top: 1px;
+      white-space: nowrap;
+    }
+
+    .week-text {
+      font-size: 13.5px;
+      color: var(--black);
+      line-height: 1.5;
+    }
+
+    /* ── SECTION 6: 30-DAY FOCUS ── */
+    .thirty-list {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 10px;
+    }
+
+    .thirty-item {
+      display: flex;
+      align-items: flex-start;
+      gap: 10px;
+      padding: 12px 14px;
+      background: var(--white);
+      border: 1px solid var(--border);
+      border-radius: 6px;
+    }
+
+    .thirty-check {
+      width: 18px;
+      height: 18px;
+      border: 2px solid var(--mint);
+      border-radius: 3px;
+      flex-shrink: 0;
+      margin-top: 1px;
+    }
+
+    .thirty-text {
+      font-size: 13px;
+      color: var(--black);
+      line-height: 1.45;
+    }
+
+    /* ── SECTION 7: OPEN QUESTIONS ── */
+    .open-q-list {
+      display: grid;
+      gap: 14px;
+    }
+
+    .open-q-item {
+      display: flex;
+      align-items: flex-start;
+      gap: 14px;
+      padding: 16px 18px;
+      background: var(--white);
+      border: 1px solid var(--border);
+      border-radius: 8px;
+    }
+
+    .open-q-num {
+      font-family: 'Playfair Display', serif;
+      font-size: 20px;
+      font-weight: 700;
+      color: var(--mint);
+      flex-shrink: 0;
+      line-height: 1.2;
+    }
+
+    .open-q-text {
+      font-size: 13.5px;
+      color: var(--black);
+      line-height: 1.55;
+    }
+
+    .tony-ai-callout {
+      background: var(--dark-green);
+      color: var(--white);
+      border-radius: 8px;
+      padding: 18px 22px;
+      margin-top: 20px;
+      display: flex;
+      align-items: center;
+      gap: 14px;
+    }
+
+    .tony-ai-icon {
+      font-size: 22px;
+      flex-shrink: 0;
+    }
+
+    .tony-ai-text {
+      font-size: 13px;
+      color: rgba(255,255,255,0.85);
+      line-height: 1.5;
+    }
+
+    .tony-ai-text strong {
+      color: var(--mint);
+    }
+
+    /* ── FOOTER ── */
+    .doc-footer {
+      background: var(--dark-green);
+      padding: 24px 52px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 20px;
+    }
+
+    .footer-left {
+      display: flex;
+      flex-direction: column;
+      gap: 4px;
+    }
+
+    .footer-primary {
+      font-size: 11px;
+      font-weight: 600;
+      color: var(--mint);
+      letter-spacing: 0.05em;
+    }
+
+    .footer-secondary {
+      font-size: 10px;
+      color: rgba(255,255,255,0.55);
+      font-style: italic;
+    }
+
+    .footer-right {
+      font-size: 9px;
+      color: rgba(255,255,255,0.35);
+      text-align: right;
+      line-height: 1.6;
+    }
+
+    /* ── PRINT ── */
+    @media print {
+      body {
+        background: white;
+        padding: 0;
+      }
+
+      .document {
+        box-shadow: none;
+        max-width: 100%;
+      }
+
+      .force-block {
+        break-inside: avoid;
+      }
+
+      .section {
+        break-inside: avoid;
+      }
+
+      .section-alt {
+        background: #f5f5f0 !important;
+        -webkit-print-color-adjust: exact;
+        print-color-adjust: exact;
+      }
+
+      .doc-header,
+      .doc-footer,
+      .outcome-callout,
+      .leverage-card,
+      .force-block-header,
+      .snapshot-card.highlight,
+      .tony-ai-callout {
+        -webkit-print-color-adjust: exact;
+        print-color-adjust: exact;
+      }
+
+      .doc-header::before,
+      .doc-header::after {
+        display: none;
+      }
+
+      @page {
+        margin: 0.5in;
+        size: letter;
+      }
+    }
+
+    @media (max-width: 600px) {
+      .doc-header, .section, .doc-footer {
+        padding-left: 24px;
+        padding-right: 24px;
+      }
+
+      .participant-block {
+        grid-template-columns: 1fr 1fr;
+      }
+
+      .snapshot-grid,
+      .force-quote-row,
+      .force-metrics-row,
+      .thirty-list {
+        grid-template-columns: 1fr;
+      }
+
+      .force-block-header {
+        flex-direction: column;
+        align-items: flex-start;
+      }
+    }
+  </style>
+</head>
+<body>
+<div class="document">
+
+  <!-- ═══ HEADER ═══ -->
+  <header class="doc-header">
+    <div class="wordmark">Tony Robbins Business Mastery</div>
+    <h1 class="doc-title">Seven Forces<br>Implementation Plan</h1>
+    <div class="participant-block">
+      <div class="participant-item">
+        <span class="participant-label">Participant</span>
+        <span class="participant-value">Marcus Chen</span>
+      </div>
+      <div class="participant-item">
+        <span class="participant-label">Business</span>
+        <span class="participant-value">Marcus Chen Home Services</span>
+      </div>
+      <div class="participant-item">
+        <span class="participant-label">Completed</span>
+        <span class="participant-value">Day 5 · Business Mastery 2026</span>
+      </div>
+    </div>
+    <div class="doc-tagline">"Throughout this program, you've become the conscious architect of your business."</div>
+  </header>
+
+  <!-- ═══ BODY ═══ -->
+
+  <!-- ── SECTION 1: BUSINESS SNAPSHOT ── -->
+  <section class="section">
+    <div class="section-header">
+      <div class="section-number">1</div>
+      <h2 class="section-title">Business Snapshot &amp; Outcome</h2>
+    </div>
+    <div class="section-accent"></div>
+
+    <div class="snapshot-grid">
+      <div class="snapshot-card">
+        <div class="snapshot-card-label">Starting Point</div>
+        <div class="snapshot-card-value"><strong>$3M</strong> revenue · <strong>12 people</strong> · Owner-dependent · <strong>18% net margin</strong></div>
+      </div>
+      <div class="snapshot-card highlight">
+        <div class="snapshot-card-label">Business Mastery Outcome</div>
+        <div class="snapshot-card-value"><strong>$5M revenue</strong>, <strong>20%+ net margin</strong>, Marcus working on the business — not in it</div>
+      </div>
+    </div>
+
+    <div class="constraint-banner">
+      <strong>Primary Constraint Identified:</strong> Owner dependency — Marcus is the sales closer, ops decision-maker, and quality control. The business cannot scale without structural change.
+    </div>
+  </section>
+
+  <!-- ── SECTION 2: WHEEL TABLE ── -->
+  <section class="section section-alt">
+    <div class="section-header">
+      <div class="section-number">2</div>
+      <h2 class="section-title">7 Forces Wheel Summary</h2>
+    </div>
+    <div class="section-accent"></div>
+
+    <table class="wheel-table">
+      <thead>
+        <tr>
+          <th style="width:38%">Force</th>
+          <th style="width:10%; text-align:center">Was</th>
+          <th style="width:10%; text-align:center">Want</th>
+          <th style="width:8%; text-align:center">Gap</th>
+          <th style="width:18%; text-align:center">Status</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td><span class="force-name">1 · Know Where You Really Are &amp; Create an Effective Business Map</span></td>
+          <td class="score-cell">6</td>
+          <td class="score-cell">8</td>
+          <td class="gap-cell gap-mid">2</td>
+          <td class="status-cell"><span class="status-badge status-p3">Priority 3</span></td>
+        </tr>
+        <tr>
+          <td><span class="force-name">2 · Strategic Innovation: Products, Services, &amp; Delivery</span></td>
+          <td class="score-cell">5</td>
+          <td class="score-cell">8</td>
+          <td class="gap-cell gap-mid">3</td>
+          <td class="status-cell"><span class="status-badge status-p3">Priority 4</span></td>
+        </tr>
+        <tr class="strong-row">
+          <td><span class="force-name">3 · CANI of World Class Marketing &amp; Product Promises</span></td>
+          <td class="score-cell">7</td>
+          <td class="score-cell">9</td>
+          <td class="gap-cell gap-low">2</td>
+          <td class="status-cell"><span class="status-badge status-strong">Strong ✓</span></td>
+        </tr>
+        <tr class="priority-row">
+          <td><span class="force-name" style="color:var(--dark-green); font-weight:700">4 · CANI of Sales Mastery Systems</span></td>
+          <td class="score-cell">4</td>
+          <td class="score-cell">8</td>
+          <td class="gap-cell gap-high">4</td>
+          <td class="status-cell"><span class="status-badge status-p1">Priority 1 ⚡</span></td>
+        </tr>
+        <tr>
+          <td><span class="force-name">5 · Constant Anticipation: Financial &amp; Legal Analysis</span></td>
+          <td class="score-cell">5</td>
+          <td class="score-cell">8</td>
+          <td class="gap-cell gap-mid">3</td>
+          <td class="status-cell"><span class="status-badge status-p3">Priority 5</span></td>
+        </tr>
+        <tr>
+          <td><span class="force-name">6 · Optimization &amp; Maximization: People &amp; Processes</span></td>
+          <td class="score-cell">5</td>
+          <td class="score-cell">8</td>
+          <td class="gap-cell gap-mid">3</td>
+          <td class="status-cell"><span class="status-badge status-p2">Priority 2</span></td>
+        </tr>
+        <tr class="strong-row">
+          <td><span class="force-name">7 · Constantly Create Raving Fans &amp; Culture</span></td>
+          <td class="score-cell">7</td>
+          <td class="score-cell">9</td>
+          <td class="gap-cell gap-low">2</td>
+          <td class="status-cell"><span class="status-badge status-strong">Strong ✓</span></td>
+        </tr>
+      </tbody>
+    </table>
+  </section>
+
+  <!-- ── SECTION 3: TOP 3 LEVERAGE POINTS ── -->
+  <section class="section">
+    <div class="section-header">
+      <div class="section-number">3</div>
+      <h2 class="section-title">Top 3 Leverage Points</h2>
+    </div>
+    <div class="section-accent"></div>
+
+    <div class="leverage-grid">
+      <div class="leverage-card">
+        <div class="leverage-number">1</div>
+        <div class="leverage-content">
+          <div class="leverage-force-tag">Force 4 · CANI of Sales Mastery Systems</div>
+          <div class="leverage-title">Document the process — get it out of Marcus's head</div>
+          <div class="leverage-desc">The biggest immediate unlock. A system Sarah can run means Marcus exits the sales floor without losing revenue.</div>
+        </div>
+      </div>
+      <div class="leverage-card" style="background: #1d5446;">
+        <div class="leverage-number">2</div>
+        <div class="leverage-content">
+          <div class="leverage-force-tag">Force 6 · Optimization &amp; Maximization</div>
+          <div class="leverage-title">Install an ops manager — build the daily rhythm</div>
+          <div class="leverage-desc">Carlos or an external hire takes the operational decision load. Marcus gets 15–20 hours back per week to work on growth.</div>
+        </div>
+      </div>
+      <div class="leverage-card" style="background: #214e40;">
+        <div class="leverage-number">3</div>
+        <div class="leverage-content">
+          <div class="leverage-force-tag">Force 1 · Know Where You Really Are</div>
+          <div class="leverage-title">Build the weekly dashboard and financial clarity</div>
+          <div class="leverage-desc">Marcus can't lead what he can't see. Weekly P&amp;L and job-level profitability turns intuition into strategy.</div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ── SECTION 4: FORCE-BY-FORCE PLAN ── -->
+  <section class="section section-alt">
+    <div class="section-header">
+      <div class="section-number">4</div>
+      <h2 class="section-title">Force-by-Force Implementation Plan</h2>
+    </div>
+    <div class="section-accent"></div>
+
+    <!-- FORCE 4 -->
+    <div class="force-block">
+      <div class="force-block-header">
+        <div class="force-block-title">Force 4 · CANI of Sales Mastery Systems</div>
+        <div class="force-block-meta">
+          <span class="force-meta-badge badge-priority">Priority 1</span>
+          <span class="force-meta-badge badge-gap">Gap: 4</span>
+        </div>
+      </div>
+      <div class="force-block-body">
+        <div class="force-quote-row">
+          <div class="force-quote force-quote-was">
+            <div class="force-quote-label">Where I Was</div>
+            <div class="force-quote-text">"I close every deal personally. No documented process. Sarah handles leads but doesn't have a script or system. We lose deals we should win because follow-up is inconsistent."</div>
+          </div>
+          <div class="force-quote force-quote-want">
+            <div class="force-quote-label">Where I Want to Be</div>
+            <div class="force-quote-text">A documented 5-step sales process that Sarah and one other person can run. Marcus reviews weekly numbers, not individual deals.</div>
+          </div>
+        </div>
+
+        <div class="force-actions-label">Actions to Close the Gap</div>
+        <div class="force-actions">
+          <div class="force-action-item">
+            <div class="action-dot"></div>
+            <div class="action-text">Document the 5-step process Marcus uses intuitively — get it on paper</div>
+            <div class="action-date">By Jun 30</div>
+          </div>
+          <div class="force-action-item">
+            <div class="action-dot"></div>
+            <div class="action-text">Train Sarah on Steps 1–3: discovery, proposal, and follow-up</div>
+            <div class="action-date">By Jul 15</div>
+          </div>
+          <div class="force-action-item">
+            <div class="action-dot"></div>
+            <div class="action-text">Set up CRM (Jobber or HubSpot) to track lead-to-close pipeline</div>
+            <div class="action-date">By Jul 15</div>
+          </div>
+          <div class="force-action-item">
+            <div class="action-dot"></div>
+            <div class="action-text">Weekly sales review: 30 min every Monday, Marcus + Sarah</div>
+            <div class="action-date">Starts now</div>
+          </div>
+          <div class="force-action-item">
+            <div class="action-dot"></div>
+            <div class="action-text">Hire or identify second sales-capable team member</div>
+            <div class="action-date">By Aug 1</div>
+          </div>
+        </div>
+
+        <div class="force-metrics-row">
+          <div class="force-metric-card">
+            <div class="force-metric-label">Key Metric</div>
+            <div class="force-metric-value">Quote-to-Close Rate</div>
+            <div class="force-metric-sub">~45% now → 60% target (90 days)</div>
+          </div>
+          <div class="force-metric-card">
+            <div class="force-metric-label">Owner</div>
+            <div class="force-metric-value">Marcus → Sarah</div>
+            <div class="force-metric-sub">Build then hand off</div>
+          </div>
+          <div class="force-metric-card">
+            <div class="force-metric-label">Timeline</div>
+            <div class="force-metric-value">90 days to handoff</div>
+            <div class="force-metric-sub">Sarah owns by Sep 1</div>
+          </div>
+        </div>
+
+        <div class="force-dollar-value">
+          <div class="force-dollar-icon">$</div>
+          <div class="force-dollar-text">
+            <span class="force-dollar-amount">$400K–$600K</span> in annual revenue at current lead volume — unlocked by closing the gap.
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- FORCE 6 -->
+    <div class="force-block">
+      <div class="force-block-header">
+        <div class="force-block-title">Force 6 · Optimization &amp; Maximization: People &amp; Processes</div>
+        <div class="force-block-meta">
+          <span class="force-meta-badge badge-priority">Priority 2</span>
+          <span class="force-meta-badge badge-gap">Gap: 3</span>
+        </div>
+      </div>
+      <div class="force-block-body">
+        <div class="force-quote-row">
+          <div class="force-quote force-quote-was">
+            <div class="force-quote-label">Where I Was</div>
+            <div class="force-quote-text">"Marcus makes every operations decision. No documented SOPs. Field team is excellent but relies on Marcus for quality calls. No ops manager."</div>
+          </div>
+          <div class="force-quote force-quote-want">
+            <div class="force-quote-label">Where I Want to Be</div>
+            <div class="force-quote-text">An ops manager who owns day-to-day operations. Core SOPs documented. Marcus reviews a dashboard, not individual jobs.</div>
+          </div>
+        </div>
+
+        <div class="force-actions-label">Actions to Close the Gap</div>
+        <div class="force-actions">
+          <div class="force-action-item">
+            <div class="action-dot"></div>
+            <div class="action-text">Evaluate Carlos (lead field supervisor) for ops manager role — structured assessment</div>
+            <div class="action-date">By Jun 30</div>
+          </div>
+          <div class="force-action-item">
+            <div class="action-dot"></div>
+            <div class="action-text">If promoting Carlos: build his 90-day transition plan and define the new role</div>
+            <div class="action-date">Start Jul 1</div>
+          </div>
+          <div class="force-action-item">
+            <div class="action-dot"></div>
+            <div class="action-text">Document top 5 operational SOPs: job intake, quality check, customer complaint, scheduling, crew briefing</div>
+            <div class="action-date">By Jul 31</div>
+          </div>
+          <div class="force-action-item">
+            <div class="action-dot"></div>
+            <div class="action-text">Build weekly ops dashboard: jobs completed, callbacks, quality scores, crew utilization</div>
+            <div class="action-date">By Jul 15</div>
+          </div>
+        </div>
+
+        <div class="force-metrics-row">
+          <div class="force-metric-card">
+            <div class="force-metric-label">Key Metric</div>
+            <div class="force-metric-value">% Decisions Without Marcus</div>
+            <div class="force-metric-sub">~20% now → 70% target (90 days)</div>
+          </div>
+          <div class="force-metric-card">
+            <div class="force-metric-label">Owner</div>
+            <div class="force-metric-value">Marcus → Carlos</div>
+            <div class="force-metric-sub">Design then delegate</div>
+          </div>
+          <div class="force-metric-card">
+            <div class="force-metric-label">Decision Point</div>
+            <div class="force-metric-value">Promote or Hire</div>
+            <div class="force-metric-sub">Carlos vs. external by Jul 1</div>
+          </div>
+        </div>
+
+        <div class="force-dollar-value">
+          <div class="force-dollar-icon">⏱</div>
+          <div class="force-dollar-text">
+            Frees <span class="force-dollar-amount">15–20 hrs/week</span> for Marcus to work on growth — time that is currently swallowed by daily operations.
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- FORCE 1 -->
+    <div class="force-block">
+      <div class="force-block-header">
+        <div class="force-block-title">Force 1 · Know Where You Really Are &amp; Create an Effective Business Map</div>
+        <div class="force-block-meta">
+          <span class="force-meta-badge badge-priority">Priority 3</span>
+          <span class="force-meta-badge badge-gap">Gap: 2</span>
+        </div>
+      </div>
+      <div class="force-block-body">
+        <div class="force-quote-row">
+          <div class="force-quote force-quote-was">
+            <div class="force-quote-label">Where I Was</div>
+            <div class="force-quote-text">"I know the revenue number but not the real health of the business. No weekly financial review. Margins are thin but I don't know which jobs or clients are actually profitable."</div>
+          </div>
+          <div class="force-quote force-quote-want">
+            <div class="force-quote-label">Where I Want to Be</div>
+            <div class="force-quote-text">A clear business map — weekly P&amp;L visibility, job-level profitability, customer acquisition cost understood. Marcus knows the numbers before problems happen.</div>
+          </div>
+        </div>
+
+        <div class="force-actions-label">Actions to Close the Gap</div>
+        <div class="force-actions">
+          <div class="force-action-item">
+            <div class="action-dot"></div>
+            <div class="action-text">Set up job-level profitability tracking in Jobber — know which jobs and clients actually make money</div>
+            <div class="action-date">By Jul 15</div>
+          </div>
+          <div class="force-action-item">
+            <div class="action-dot"></div>
+            <div class="action-text">Weekly financial review: 45 min every Friday, Marcus + bookkeeper</div>
+            <div class="action-date">Starts now</div>
+          </div>
+          <div class="force-action-item">
+            <div class="action-dot"></div>
+            <div class="action-text">Identify top 20% of clients by revenue and margin — protect and deepen these relationships</div>
+            <div class="action-date">By Jun 30</div>
+          </div>
+          <div class="force-action-item">
+            <div class="action-dot"></div>
+            <div class="action-text">Cut or reprice bottom 10% of jobs that compress margins without strategic value</div>
+            <div class="action-date">By Aug 1</div>
+          </div>
+        </div>
+
+        <div class="force-metrics-row">
+          <div class="force-metric-card">
+            <div class="force-metric-label">Key Metric</div>
+            <div class="force-metric-value">Net Margin</div>
+            <div class="force-metric-sub">18% now → 22% target (90 days)</div>
+          </div>
+          <div class="force-metric-card">
+            <div class="force-metric-label">Owner</div>
+            <div class="force-metric-value">Marcus + bookkeeper</div>
+            <div class="force-metric-sub">Shared ownership</div>
+          </div>
+          <div class="force-metric-card">
+            <div class="force-metric-label">Review Cadence</div>
+            <div class="force-metric-value">Weekly Fridays</div>
+            <div class="force-metric-sub">45 min · non-negotiable</div>
+          </div>
+        </div>
+
+        <div class="force-dollar-value">
+          <div class="force-dollar-icon">$</div>
+          <div class="force-dollar-text">
+            4-point margin improvement on $3M = <span class="force-dollar-amount">$120K additional profit</span> — without adding a single new client.
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ── SECTION 5: 7-DAY FOCUS ── -->
+  <section class="section">
+    <div class="section-header">
+      <div class="section-number">5</div>
+      <h2 class="section-title">7-Day Implementation Focus</h2>
+    </div>
+    <div class="section-accent"></div>
+
+    <div class="week-grid">
+      <div class="week-item">
+        <span class="week-day-tag">Day 1–2</span>
+        <span class="week-text">Write out the 5-step sales process from memory. Don't overthink it. Get it on paper — you've been running it for years.</span>
+      </div>
+      <div class="week-item">
+        <span class="week-day-tag">Day 3</span>
+        <span class="week-text">Meet with Sarah. Walk her through the documented process. Get her input on what's missing or unclear. This is a co-design session, not a handoff.</span>
+      </div>
+      <div class="week-item">
+        <span class="week-day-tag">Day 4–5</span>
+        <span class="week-text">Evaluate Carlos. Have a direct conversation about the ops manager opportunity. What does he want? What does he need to succeed in that role?</span>
+      </div>
+      <div class="week-item">
+        <span class="week-day-tag">Day 6–7</span>
+        <span class="week-text">Set up the weekly review cadences: Monday sales (Marcus + Sarah) and Friday financials (Marcus + bookkeeper). Block them in the calendar now — protect them like client appointments.</span>
+      </div>
+    </div>
+  </section>
+
+  <!-- ── SECTION 6: 30-DAY FOCUS ── -->
+  <section class="section section-alt">
+    <div class="section-header">
+      <div class="section-number">6</div>
+      <h2 class="section-title">30-Day Milestones</h2>
+    </div>
+    <div class="section-accent"></div>
+    <p style="font-size:12.5px; color:var(--mid-gray); margin-bottom:18px;">By end of Month 1, these six things are done:</p>
+
+    <div class="thirty-list">
+      <div class="thirty-item">
+        <div class="thirty-check"></div>
+        <div class="thirty-text">Sales process documented and Sarah trained on Steps 1–3</div>
+      </div>
+      <div class="thirty-item">
+        <div class="thirty-check"></div>
+        <div class="thirty-text">Ops manager decision made: Carlos or external hire</div>
+      </div>
+      <div class="thirty-item">
+        <div class="thirty-check"></div>
+        <div class="thirty-text">CRM set up and tracking leads through the pipeline</div>
+      </div>
+      <div class="thirty-item">
+        <div class="thirty-check"></div>
+        <div class="thirty-text">Job-level profitability visible in Jobber</div>
+      </div>
+      <div class="thirty-item">
+        <div class="thirty-check"></div>
+        <div class="thirty-text">Weekly dashboards running (sales Mondays, financials Fridays)</div>
+      </div>
+      <div class="thirty-item">
+        <div class="thirty-check"></div>
+        <div class="thirty-text">Top 20% of clients identified by profitability and flagged for deepening</div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ── SECTION 7: OPEN QUESTIONS ── -->
+  <section class="section">
+    <div class="section-header">
+      <div class="section-number">7</div>
+      <h2 class="section-title">Open Questions</h2>
+    </div>
+    <div class="section-accent"></div>
+    <p style="font-size:12.5px; color:var(--mid-gray); margin-bottom:18px;">Questions to resolve with Tony AI post-event:</p>
+
+    <div class="open-q-list">
+      <div class="open-q-item">
+        <div class="open-q-num">?</div>
+        <div class="open-q-text">Is Carlos the right person for ops manager, or do I need someone with more formal management experience? What's the assessment framework?</div>
+      </div>
+      <div class="open-q-item">
+        <div class="open-q-num">?</div>
+        <div class="open-q-text">How do I handle the pricing conversation with long-term clients who are unprofitable? What's the right way to reprice without losing the relationship?</div>
+      </div>
+      <div class="open-q-item">
+        <div class="open-q-num">?</div>
+        <div class="open-q-text">What does the right org chart look like at $5M for a home services business? How many people, what roles, and what does Marcus actually do every week?</div>
+      </div>
+    </div>
+
+    <div class="tony-ai-callout">
+      <div class="tony-ai-icon">🤖</div>
+      <div class="tony-ai-text"><strong>Your Tony AI has this plan.</strong> Reach in whenever you're ready to work a force, run a decision, or think through the next move. It knows where you are and where you're going.</div>
+    </div>
+  </section>
+
+  <!-- ═══ FOOTER ═══ -->
+  <footer class="doc-footer">
+    <div class="footer-left">
+      <span class="footer-primary">Generated by Tony AI · Day 5 · Business Mastery 2026</span>
+      <span class="footer-secondary">"Your Tony AI has this plan. Reach in whenever you're ready to work a force."</span>
+    </div>
+    <div class="footer-right">
+      © 2026 Robbins Research International, Inc.<br>
+      All rights reserved.
+    </div>
+  </footer>
+
+</div><!-- end document -->
+</body>
+</html>

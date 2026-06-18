@@ -1,0 +1,958 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Business Mastery Prep Brief — Marcus Chen</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,600;0,700;1,400&family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet" />
+  <style>
+    :root {
+      --mint: #3beba0;
+      --mint-light: #e8fdf4;
+      --dark-green: #1a4a3a;
+      --black: #000000;
+      --white: #ffffff;
+      --off-white: #f5f5f0;
+      --mid-gray: #6b7280;
+      --border: #e0e0d8;
+    }
+
+    *, *::before, *::after {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    html {
+      font-size: 15px;
+      -webkit-print-color-adjust: exact;
+      print-color-adjust: exact;
+    }
+
+    body {
+      font-family: 'Inter', sans-serif;
+      background: #eeede8;
+      color: var(--black);
+      line-height: 1.6;
+      padding: 40px 20px;
+    }
+
+    .document {
+      max-width: 800px;
+      margin: 0 auto;
+      background: var(--white);
+      box-shadow: 0 4px 40px rgba(0,0,0,0.12), 0 1px 8px rgba(0,0,0,0.06);
+    }
+
+    /* ── HEADER ── */
+    .doc-header {
+      background: var(--dark-green);
+      color: var(--white);
+      padding: 48px 52px 40px;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .doc-header::before {
+      content: '';
+      position: absolute;
+      top: -60px;
+      right: -60px;
+      width: 280px;
+      height: 280px;
+      border-radius: 50%;
+      background: rgba(59, 235, 160, 0.07);
+    }
+
+    .doc-header::after {
+      content: '';
+      position: absolute;
+      bottom: -40px;
+      right: 80px;
+      width: 160px;
+      height: 160px;
+      border-radius: 50%;
+      background: rgba(59, 235, 160, 0.05);
+    }
+
+    .wordmark {
+      font-family: 'Inter', sans-serif;
+      font-weight: 700;
+      font-size: 10px;
+      letter-spacing: 0.2em;
+      text-transform: uppercase;
+      color: var(--mint);
+      margin-bottom: 18px;
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+
+    .wordmark::before {
+      content: '';
+      display: inline-block;
+      width: 24px;
+      height: 2px;
+      background: var(--mint);
+    }
+
+    .doc-title {
+      font-family: 'Playfair Display', serif;
+      font-size: 34px;
+      font-weight: 700;
+      color: var(--white);
+      line-height: 1.2;
+      margin-bottom: 28px;
+      letter-spacing: -0.02em;
+    }
+
+    .participant-block {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 16px 32px;
+      border-top: 1px solid rgba(255,255,255,0.15);
+      padding-top: 24px;
+      margin-bottom: 24px;
+    }
+
+    .participant-item {
+      display: flex;
+      flex-direction: column;
+      gap: 3px;
+    }
+
+    .participant-label {
+      font-size: 9px;
+      font-weight: 700;
+      letter-spacing: 0.18em;
+      text-transform: uppercase;
+      color: var(--mint);
+      opacity: 0.9;
+    }
+
+    .participant-value {
+      font-size: 14px;
+      font-weight: 500;
+      color: var(--white);
+    }
+
+    .doc-tagline {
+      font-family: 'Playfair Display', serif;
+      font-style: italic;
+      font-size: 14px;
+      color: rgba(255,255,255,0.6);
+      border-top: 1px solid rgba(255,255,255,0.1);
+      padding-top: 18px;
+    }
+
+    /* ── BODY ── */
+    .doc-body {
+      padding: 0;
+    }
+
+    /* ── SECTIONS ── */
+    .section {
+      padding: 36px 52px;
+      border-bottom: 1px solid var(--border);
+    }
+
+    .section:last-of-type {
+      border-bottom: none;
+    }
+
+    .section-alt {
+      background: var(--off-white);
+    }
+
+    .section-header {
+      display: flex;
+      align-items: center;
+      gap: 14px;
+      margin-bottom: 24px;
+    }
+
+    .section-number {
+      font-family: 'Inter', sans-serif;
+      font-size: 10px;
+      font-weight: 700;
+      letter-spacing: 0.15em;
+      color: var(--white);
+      background: var(--dark-green);
+      width: 26px;
+      height: 26px;
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      flex-shrink: 0;
+    }
+
+    .section-title {
+      font-family: 'Playfair Display', serif;
+      font-size: 18px;
+      font-weight: 700;
+      color: var(--dark-green);
+      letter-spacing: -0.01em;
+    }
+
+    .section-accent {
+      width: 36px;
+      height: 3px;
+      background: var(--mint);
+      border-radius: 2px;
+      margin-bottom: 20px;
+      margin-left: 40px;
+    }
+
+    /* ── FIELD ROWS ── */
+    .field-grid {
+      display: grid;
+      gap: 14px;
+    }
+
+    .field-row {
+      display: grid;
+      grid-template-columns: 180px 1fr;
+      gap: 12px;
+      align-items: baseline;
+    }
+
+    .field-label {
+      font-size: 10px;
+      font-weight: 700;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      color: var(--mid-gray);
+      padding-top: 1px;
+    }
+
+    .field-value {
+      font-size: 14px;
+      color: var(--black);
+      line-height: 1.55;
+    }
+
+    .field-value strong {
+      font-weight: 600;
+    }
+
+    /* ── STAT PILLS ── */
+    .stat-row {
+      display: flex;
+      gap: 12px;
+      flex-wrap: wrap;
+      margin-top: 4px;
+    }
+
+    .stat-pill {
+      background: var(--mint-light);
+      border: 1px solid rgba(59,235,160,0.3);
+      border-radius: 20px;
+      padding: 5px 14px;
+      font-size: 12px;
+      font-weight: 600;
+      color: var(--dark-green);
+    }
+
+    /* ── OUTCOME CALLOUT ── */
+    .outcome-callout {
+      background: var(--dark-green);
+      color: var(--white);
+      border-radius: 8px;
+      padding: 22px 26px;
+      margin-bottom: 20px;
+    }
+
+    .outcome-callout-label {
+      font-size: 9px;
+      font-weight: 700;
+      letter-spacing: 0.18em;
+      text-transform: uppercase;
+      color: var(--mint);
+      margin-bottom: 8px;
+    }
+
+    .outcome-callout-text {
+      font-size: 15px;
+      font-weight: 500;
+      line-height: 1.55;
+      color: var(--white);
+    }
+
+    .outcome-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 14px;
+      margin-bottom: 20px;
+    }
+
+    .outcome-card {
+      background: var(--off-white);
+      border-left: 3px solid var(--mint);
+      border-radius: 0 6px 6px 0;
+      padding: 16px 18px;
+    }
+
+    .outcome-card-label {
+      font-size: 9px;
+      font-weight: 700;
+      letter-spacing: 0.15em;
+      text-transform: uppercase;
+      color: var(--dark-green);
+      margin-bottom: 6px;
+    }
+
+    .outcome-card-text {
+      font-size: 13px;
+      color: var(--black);
+      line-height: 1.5;
+    }
+
+    /* ── QUOTE BLOCK ── */
+    .quote-block {
+      border-left: 3px solid var(--mint);
+      padding: 14px 20px;
+      background: var(--mint-light);
+      border-radius: 0 6px 6px 0;
+      margin-top: 16px;
+    }
+
+    .quote-text {
+      font-family: 'Playfair Display', serif;
+      font-style: italic;
+      font-size: 14px;
+      color: var(--dark-green);
+      line-height: 1.6;
+    }
+
+    .quote-attr {
+      font-size: 11px;
+      font-weight: 600;
+      color: var(--mid-gray);
+      margin-top: 8px;
+    }
+
+    /* ── CONSTRAINT SECTION ── */
+    .constraint-main {
+      background: var(--off-white);
+      border: 1px solid var(--border);
+      border-radius: 8px;
+      padding: 20px 24px;
+      margin-bottom: 16px;
+    }
+
+    .constraint-label {
+      font-size: 10px;
+      font-weight: 700;
+      letter-spacing: 0.14em;
+      text-transform: uppercase;
+      color: var(--mid-gray);
+      margin-bottom: 6px;
+    }
+
+    .constraint-value {
+      font-size: 15px;
+      font-weight: 600;
+      color: var(--dark-green);
+      line-height: 1.4;
+    }
+
+    .cost-highlight {
+      display: inline-block;
+      background: #fef3cd;
+      border: 1px solid #fde68a;
+      color: #92400e;
+      border-radius: 4px;
+      padding: 2px 8px;
+      font-weight: 700;
+      font-size: 13px;
+    }
+
+    /* ── WORKING LIST ── */
+    .working-list {
+      display: grid;
+      gap: 12px;
+    }
+
+    .working-item {
+      display: flex;
+      align-items: flex-start;
+      gap: 12px;
+    }
+
+    .working-check {
+      width: 20px;
+      height: 20px;
+      background: var(--mint);
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      flex-shrink: 0;
+      margin-top: 1px;
+    }
+
+    .working-check svg {
+      width: 10px;
+      height: 10px;
+    }
+
+    .working-text {
+      font-size: 13.5px;
+      color: var(--black);
+      line-height: 1.5;
+    }
+
+    .working-text strong {
+      font-weight: 600;
+      color: var(--dark-green);
+    }
+
+    /* ── FOCUS SECTION ── */
+    .focus-subsection {
+      margin-bottom: 24px;
+    }
+
+    .focus-subsection:last-child {
+      margin-bottom: 0;
+    }
+
+    .focus-sublabel {
+      font-size: 10px;
+      font-weight: 700;
+      letter-spacing: 0.15em;
+      text-transform: uppercase;
+      color: var(--dark-green);
+      border-bottom: 1px solid var(--border);
+      padding-bottom: 8px;
+      margin-bottom: 14px;
+    }
+
+    .focus-item {
+      display: flex;
+      gap: 12px;
+      align-items: flex-start;
+      padding: 10px 14px;
+      border-radius: 6px;
+      margin-bottom: 8px;
+      background: var(--white);
+      border: 1px solid var(--border);
+    }
+
+    .focus-force-tag {
+      font-size: 9px;
+      font-weight: 700;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      background: var(--dark-green);
+      color: var(--white);
+      padding: 3px 8px;
+      border-radius: 3px;
+      flex-shrink: 0;
+      margin-top: 1px;
+    }
+
+    .focus-item-text {
+      font-size: 13px;
+      color: var(--black);
+      line-height: 1.5;
+    }
+
+    .question-item {
+      display: flex;
+      gap: 12px;
+      align-items: flex-start;
+      padding: 10px 0;
+      border-bottom: 1px solid var(--border);
+    }
+
+    .question-item:last-child {
+      border-bottom: none;
+    }
+
+    .q-mark {
+      font-family: 'Playfair Display', serif;
+      font-size: 22px;
+      font-weight: 700;
+      color: var(--mint);
+      line-height: 1;
+      flex-shrink: 0;
+      margin-top: -2px;
+    }
+
+    .q-text {
+      font-size: 13.5px;
+      color: var(--black);
+      line-height: 1.5;
+    }
+
+    .decision-item {
+      display: flex;
+      gap: 12px;
+      align-items: flex-start;
+      margin-bottom: 10px;
+    }
+
+    .decision-bullet {
+      width: 6px;
+      height: 6px;
+      background: var(--mint);
+      border-radius: 50%;
+      flex-shrink: 0;
+      margin-top: 7px;
+    }
+
+    .decision-text {
+      font-size: 13.5px;
+      color: var(--black);
+      line-height: 1.5;
+    }
+
+    /* ── 30-DAY SECTION ── */
+    .day30-grid {
+      display: grid;
+      gap: 14px;
+    }
+
+    .day30-row {
+      display: grid;
+      grid-template-columns: 160px 1fr;
+      gap: 12px;
+      align-items: baseline;
+      padding: 12px 0;
+      border-bottom: 1px solid var(--border);
+    }
+
+    .day30-row:last-child {
+      border-bottom: none;
+    }
+
+    .day30-label {
+      font-size: 10px;
+      font-weight: 700;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      color: var(--dark-green);
+    }
+
+    .day30-value {
+      font-size: 13.5px;
+      color: var(--black);
+      line-height: 1.55;
+    }
+
+    /* ── FOOTER ── */
+    .doc-footer {
+      background: var(--dark-green);
+      padding: 24px 52px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 20px;
+    }
+
+    .footer-left {
+      display: flex;
+      flex-direction: column;
+      gap: 4px;
+    }
+
+    .footer-primary {
+      font-size: 11px;
+      font-weight: 600;
+      color: var(--mint);
+      letter-spacing: 0.05em;
+    }
+
+    .footer-secondary {
+      font-size: 10px;
+      color: rgba(255,255,255,0.55);
+      font-style: italic;
+    }
+
+    .footer-right {
+      font-size: 9px;
+      color: rgba(255,255,255,0.35);
+      text-align: right;
+      line-height: 1.6;
+    }
+
+    /* ── PRINT ── */
+    @media print {
+      body {
+        background: white;
+        padding: 0;
+      }
+
+      .document {
+        box-shadow: none;
+        max-width: 100%;
+      }
+
+      .section {
+        break-inside: avoid;
+      }
+
+      .section-alt {
+        background: #f5f5f0 !important;
+        -webkit-print-color-adjust: exact;
+        print-color-adjust: exact;
+      }
+
+      .doc-header {
+        background: #1a4a3a !important;
+        -webkit-print-color-adjust: exact;
+        print-color-adjust: exact;
+      }
+
+      .doc-footer {
+        background: #1a4a3a !important;
+        -webkit-print-color-adjust: exact;
+        print-color-adjust: exact;
+      }
+
+      .doc-header::before,
+      .doc-header::after {
+        display: none;
+      }
+
+      .outcome-callout {
+        background: #1a4a3a !important;
+        -webkit-print-color-adjust: exact;
+        print-color-adjust: exact;
+      }
+
+      .working-check {
+        background: #3beba0 !important;
+        -webkit-print-color-adjust: exact;
+        print-color-adjust: exact;
+      }
+
+      .stat-pill {
+        background: #e8fdf4 !important;
+        -webkit-print-color-adjust: exact;
+        print-color-adjust: exact;
+      }
+
+      .section-number {
+        background: #1a4a3a !important;
+        -webkit-print-color-adjust: exact;
+        print-color-adjust: exact;
+      }
+
+      @page {
+        margin: 0.5in;
+        size: letter;
+      }
+    }
+
+    @media (max-width: 600px) {
+      .doc-header, .section, .doc-footer {
+        padding-left: 24px;
+        padding-right: 24px;
+      }
+
+      .participant-block {
+        grid-template-columns: 1fr;
+      }
+
+      .outcome-grid {
+        grid-template-columns: 1fr;
+      }
+
+      .field-row {
+        grid-template-columns: 1fr;
+        gap: 4px;
+      }
+
+      .day30-row {
+        grid-template-columns: 1fr;
+        gap: 4px;
+      }
+    }
+  </style>
+</head>
+<body>
+<div class="document">
+
+  <!-- ═══ HEADER ═══ -->
+  <header class="doc-header">
+    <div class="wordmark">Tony Robbins Business Mastery</div>
+    <h1 class="doc-title">Business Mastery<br>Prep Brief</h1>
+    <div class="participant-block">
+      <div class="participant-item">
+        <span class="participant-label">Participant</span>
+        <span class="participant-value">Marcus Chen</span>
+      </div>
+      <div class="participant-item">
+        <span class="participant-label">Business</span>
+        <span class="participant-value">Marcus Chen Home Services</span>
+      </div>
+      <div class="participant-item">
+        <span class="participant-label">Event</span>
+        <span class="participant-value">Business Mastery 2026</span>
+      </div>
+      <div class="participant-item">
+        <span class="participant-label">Prepared</span>
+        <span class="participant-value">June 18, 2026</span>
+      </div>
+    </div>
+    <div class="doc-tagline">"This is your starting point. Business Mastery will take you further."</div>
+  </header>
+
+  <!-- ═══ BODY ═══ -->
+  <div class="doc-body">
+
+    <!-- ── SECTION 1: My Business Now ── -->
+    <section class="section">
+      <div class="section-header">
+        <div class="section-number">1</div>
+        <h2 class="section-title">My Business Now</h2>
+      </div>
+      <div class="section-accent"></div>
+      <div class="field-grid">
+        <div class="field-row">
+          <span class="field-label">Business</span>
+          <span class="field-value"><strong>Marcus Chen Home Services</strong></span>
+        </div>
+        <div class="field-row">
+          <span class="field-label">What We Do</span>
+          <span class="field-value">Residential and commercial cleaning and property maintenance services in the greater Phoenix area. Average job value $800. Primarily inbound referral-driven.</span>
+        </div>
+        <div class="field-row">
+          <span class="field-label">Who We Serve</span>
+          <span class="field-value">Homeowners (70%) and small commercial property managers (30%). Repeat clients make up 65% of revenue.</span>
+        </div>
+        <div class="field-row">
+          <span class="field-label">Current Stage</span>
+          <span class="field-value">Growth — strong demand, team in place, but owner still central to delivery and decisions.</span>
+        </div>
+        <div class="field-row">
+          <span class="field-label">Main Offer</span>
+          <span class="field-value">Recurring maintenance contracts + one-time project services</span>
+        </div>
+        <div class="field-row">
+          <span class="field-label">Revenue &amp; Team</span>
+          <span class="field-value">
+            <div class="stat-row">
+              <span class="stat-pill">$3M Annual Revenue</span>
+              <span class="stat-pill">12 Team Members</span>
+              <span class="stat-pill">18% Net Margin</span>
+              <span class="stat-pill">$800 Avg Job</span>
+            </div>
+            <div style="margin-top:8px; font-size:12.5px; color:var(--mid-gray);">6 field · 4 admin/ops · 2 sales</div>
+          </span>
+        </div>
+        <div class="field-row">
+          <span class="field-label">Current Momentum</span>
+          <span class="field-value">Revenue up 18% YoY. Client retention strong at 78%. New commercial segment growing.</span>
+        </div>
+      </div>
+    </section>
+
+    <!-- ── SECTION 2: My Business Mastery Outcome ── -->
+    <section class="section section-alt">
+      <div class="section-header">
+        <div class="section-number">2</div>
+        <h2 class="section-title">My Business Mastery Outcome</h2>
+      </div>
+      <div class="section-accent"></div>
+
+      <div class="outcome-grid">
+        <div class="outcome-card">
+          <div class="outcome-card-label">12-Month Outcome</div>
+          <div class="outcome-card-text">Scale to <strong>$5M revenue</strong> with <strong>20%+ net margin</strong> and Marcus working <em>on</em> the business — not <em>in</em> it.</div>
+        </div>
+        <div class="outcome-card">
+          <div class="outcome-card-label">90-Day Outcome</div>
+          <div class="outcome-card-text">Document and install a formal sales process. Hire or promote an operations manager. Build a weekly performance dashboard Marcus reviews but doesn't run.</div>
+        </div>
+      </div>
+
+      <div class="quote-block">
+        <div class="quote-text">"We have the demand. I'm the ceiling. Every decision still runs through me, and that's not a business — that's a job. I need to build the team and the systems so the business can grow without me holding it together."</div>
+        <div class="quote-attr">— Marcus Chen · Why this matters now</div>
+      </div>
+    </section>
+
+    <!-- ── SECTION 3: Current Constraint ── -->
+    <section class="section">
+      <div class="section-header">
+        <div class="section-number">3</div>
+        <h2 class="section-title">My Current Constraint</h2>
+      </div>
+      <div class="section-accent"></div>
+
+      <div class="constraint-main">
+        <div class="constraint-label">Primary Constraint</div>
+        <div class="constraint-value">Owner Dependency — Marcus is the decision-maker, lead closer, and quality control point. The business cannot scale without him stepping back.</div>
+      </div>
+
+      <div class="field-grid">
+        <div class="field-row">
+          <span class="field-label">What It's Costing</span>
+          <span class="field-value">Conservatively <span class="cost-highlight">$600K–$800K</span> in unrealized revenue annually. Marcus working 55+ hours/week. Team not developing. Sales outcomes inconsistent.</span>
+        </div>
+        <div class="field-row">
+          <span class="field-label">What Changes</span>
+          <span class="field-value">Marcus moves from operator to owner. The business can grow predictably. A leadership team makes daily decisions.</span>
+        </div>
+      </div>
+    </section>
+
+    <!-- ── SECTION 4: What Is Already Working ── -->
+    <section class="section section-alt">
+      <div class="section-header">
+        <div class="section-number">4</div>
+        <h2 class="section-title">What Is Already Working</h2>
+      </div>
+      <div class="section-accent"></div>
+
+      <div class="working-list">
+        <div class="working-item">
+          <div class="working-check">
+            <svg viewBox="0 0 10 10" fill="none" xmlns="http://www.w3.org/2000/svg">
+              <path d="M1.5 5L4 7.5L8.5 2.5" stroke="#1a4a3a" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/>
+            </svg>
+          </div>
+          <div class="working-text"><strong>Strong Referral Engine</strong> — 60%+ of new clients come from existing client referrals. No paid acquisition needed at current scale.</div>
+        </div>
+        <div class="working-item">
+          <div class="working-check">
+            <svg viewBox="0 0 10 10" fill="none" xmlns="http://www.w3.org/2000/svg">
+              <path d="M1.5 5L4 7.5L8.5 2.5" stroke="#1a4a3a" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/>
+            </svg>
+          </div>
+          <div class="working-text"><strong>Client Loyalty</strong> — 78% retention rate. Long-term clients expand scope over time.</div>
+        </div>
+        <div class="working-item">
+          <div class="working-check">
+            <svg viewBox="0 0 10 10" fill="none" xmlns="http://www.w3.org/2000/svg">
+              <path d="M1.5 5L4 7.5L8.5 2.5" stroke="#1a4a3a" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/>
+            </svg>
+          </div>
+          <div class="working-text"><strong>Field Team Quality</strong> — Core crew of 4 has been with Marcus 3+ years. High standards. Clients ask for them by name.</div>
+        </div>
+        <div class="working-item">
+          <div class="working-check">
+            <svg viewBox="0 0 10 10" fill="none" xmlns="http://www.w3.org/2000/svg">
+              <path d="M1.5 5L4 7.5L8.5 2.5" stroke="#1a4a3a" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/>
+            </svg>
+          </div>
+          <div class="working-text"><strong>Commercial Traction</strong> — New B2B segment grew 34% last year on zero outbound effort. Demand exists without a real sales motion.</div>
+        </div>
+        <div class="working-item">
+          <div class="working-check">
+            <svg viewBox="0 0 10 10" fill="none" xmlns="http://www.w3.org/2000/svg">
+              <path d="M1.5 5L4 7.5L8.5 2.5" stroke="#1a4a3a" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/>
+            </svg>
+          </div>
+          <div class="working-text"><strong>Brand Reputation</strong> — 4.9 stars across 340+ Google reviews.</div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ── SECTION 5: My Event Focus ── -->
+    <section class="section">
+      <div class="section-header">
+        <div class="section-number">5</div>
+        <h2 class="section-title">My Event Focus</h2>
+      </div>
+      <div class="section-accent"></div>
+
+      <!-- Topics -->
+      <div class="focus-subsection">
+        <div class="focus-sublabel">Topics to Pay Closest Attention To</div>
+        <div class="focus-item">
+          <span class="focus-force-tag">Force 1</span>
+          <span class="focus-item-text">How Tony defines a real business map vs. a plan — specifically the gap between where Marcus is and where the business needs to be without him.</span>
+        </div>
+        <div class="focus-item">
+          <span class="focus-force-tag">Force 4</span>
+          <span class="focus-item-text">Sales process and team. Everything about systematizing sales and removing owner dependency from close.</span>
+        </div>
+        <div class="focus-item">
+          <span class="focus-force-tag">Force 6</span>
+          <span class="focus-item-text">Operations optimization — how to build processes that run without the owner as the bottleneck.</span>
+        </div>
+      </div>
+
+      <!-- Questions -->
+      <div class="focus-subsection">
+        <div class="focus-sublabel">Questions to Bring Into the Room</div>
+        <div class="question-item">
+          <span class="q-mark">?</span>
+          <span class="q-text">What does a $5M home services business actually look like structurally? How many people, what roles, what does the owner do?</span>
+        </div>
+        <div class="question-item">
+          <span class="q-mark">?</span>
+          <span class="q-text">How do I build a sales process for a referral business? Is it different from outbound?</span>
+        </div>
+        <div class="question-item">
+          <span class="q-mark">?</span>
+          <span class="q-text">At what point do I hire an ops manager vs. promote from within?</span>
+        </div>
+      </div>
+
+      <!-- Decisions -->
+      <div class="focus-subsection">
+        <div class="focus-sublabel">Decisions I May Need to Make</div>
+        <div class="decision-item">
+          <span class="decision-bullet"></span>
+          <span class="decision-text">Whether to hire an outside ops manager or invest in promoting my current lead field supervisor.</span>
+        </div>
+        <div class="decision-item">
+          <span class="decision-bullet"></span>
+          <span class="decision-text">Whether to build a formal outbound commercial sales motion or continue riding referrals.</span>
+        </div>
+      </div>
+    </section>
+
+    <!-- ── SECTION 6: First 30-Day Direction ── -->
+    <section class="section section-alt">
+      <div class="section-header">
+        <div class="section-number">6</div>
+        <h2 class="section-title">First 30-Day Direction</h2>
+      </div>
+      <div class="section-accent"></div>
+      <p style="font-size:12px; color:var(--mid-gray); font-style:italic; margin-bottom:20px;">Note: This is a directional first draft — Business Mastery will sharpen it.</p>
+
+      <div class="day30-grid">
+        <div class="day30-row">
+          <span class="day30-label">First Likely Move</span>
+          <span class="day30-value">Document the 5-step sales process Marcus uses intuitively. Teach it to Sarah (current lead admin). Have Sarah own Steps 1–3 by end of Month 1.</span>
+        </div>
+        <div class="day30-row">
+          <span class="day30-label">Metric to Watch</span>
+          <span class="day30-value">Lead-to-quote rate and quote-to-close rate, tracked weekly. Current close rate estimated at ~45% — target 60% with a documented process.</span>
+        </div>
+        <div class="day30-row">
+          <span class="day30-label">People &amp; Process</span>
+          <span class="day30-value">Sarah Chen (admin lead), Marcus (sales training), CRM setup (Marcus to decide tool by end of Month 1).</span>
+        </div>
+        <div class="day30-row">
+          <span class="day30-label">Open Question</span>
+          <span class="day30-value">Is the real constraint sales, or is it that Marcus hasn't built the org structure that would let a sales process run without him?</span>
+        </div>
+      </div>
+    </section>
+
+  </div><!-- end doc-body -->
+
+  <!-- ═══ FOOTER ═══ -->
+  <footer class="doc-footer">
+    <div class="footer-left">
+      <span class="footer-primary">Generated by Tony AI · Business Mastery 2026</span>
+      <span class="footer-secondary">This plan will be refined throughout the event and updated on Day 5.</span>
+    </div>
+    <div class="footer-right">
+      © 2026 Robbins Research International, Inc.<br>
+      All rights reserved.
+    </div>
+  </footer>
+
+</div><!-- end document -->
+</body>
+</html>
