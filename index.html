@@ -810,6 +810,91 @@
     0%, 100% { opacity: 1; transform: scale(1); }
     50% { opacity: 0.5; transform: scale(0.8); }
   }
+
+  /* ═══════════════════════════════════════════
+     MOBILE RESPONSIVE
+  ═══════════════════════════════════════════ */
+  @media (max-width: 768px) {
+    .shell { padding-bottom: 60px; }
+
+    /* Top bar */
+    .topbar { padding: 10px 16px; flex-wrap: wrap; gap: 6px; }
+    .topbar-brand { font-size: 14px; }
+    .topbar-tag { font-size: 10px; }
+    .topbar-user span { display: none; }
+
+    /* Tab nav — scroll horizontally */
+    .tab-nav { padding: 0 8px; gap: 4px; overflow-x: auto; -webkit-overflow-scrolling: touch; flex-wrap: nowrap; }
+    .tab-btn { font-size: 11px; padding: 8px 10px; white-space: nowrap; flex-shrink: 0; }
+
+    /* Hero */
+    .tab-hero { padding: 24px 16px; }
+    .tab-hero h1 { font-size: 24px; }
+    .tab-hero p { font-size: 13px; }
+    .tab-hero-meta { margin-top: 16px; }
+    .countdown-num { font-size: 36px; }
+
+    /* Page body */
+    .page-body { padding: 16px; }
+
+    /* 2-column grids → single column */
+    .grid-2,
+    .wheel-layout,
+    .immersion-layout,
+    .post-layout { grid-template-columns: 1fr !important; }
+
+    /* Prep steps → vertical */
+    .prep-steps { flex-direction: column; gap: 12px; }
+    .prep-step { padding: 12px 16px; }
+    .prep-step-desc { font-size: 12px; }
+
+    /* Cards */
+    .card-white, .card-dark { padding: 16px; }
+
+    /* Panels */
+    .panel-header { padding: 10px 14px; }
+    .panel-body { padding: 14px; }
+    .right-panels { gap: 12px; }
+
+    /* Chat bubbles */
+    .chat-bubble { font-size: 13px; padding: 10px 12px; }
+
+    /* Force cards → 2-col on mobile */
+    .force-cards { grid-template-columns: 1fr 1fr !important; gap: 8px; }
+    .force-card { padding: 10px; }
+    .force-card-name { font-size: 11px; }
+
+    /* Implementation table — scroll */
+    .impl-table-wrap, table { display: block; overflow-x: auto; -webkit-overflow-scrolling: touch; font-size: 12px; }
+    table th, table td { padding: 8px 10px; min-width: 100px; }
+
+    /* Week selector */
+    .week-selector { gap: 4px; }
+    .week-chip { font-size: 11px; padding: 5px 10px; }
+
+    /* Wheel layout — wheel full width then panel below */
+    .wheel { width: 100% !important; max-width: 280px; margin: 0 auto; display: block; }
+
+    /* Gap map sliders */
+    .gap-bar-name { font-size: 11px; }
+
+    /* Buttons */
+    .btn { font-size: 12px; padding: 9px 14px; }
+
+    /* Section titles */
+    .section-title { font-size: 15px; }
+
+    /* Badges */
+    .badge { font-size: 9px; }
+  }
+
+  @media (max-width: 480px) {
+    .tab-hero h1 { font-size: 20px; }
+    .force-cards { grid-template-columns: 1fr !important; }
+    .topbar-brand { font-size: 13px; }
+    .grid-2 { gap: 12px; }
+  }
+
 </style>
 </head>
 <body>
