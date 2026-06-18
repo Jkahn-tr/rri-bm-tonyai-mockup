@@ -1,0 +1,1007 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+  <meta charset="utf-8" />
+  <meta name="generator" content="pandoc" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes" />
+  <title>TonyAI_BM_Spec_v6</title>
+  <style>
+    /* Default styles provided by pandoc.
+    ** See https://pandoc.org/MANUAL.html#variables-for-html for config info.
+    */
+    html {
+      color: #1a1a1a;
+      background-color: #fdfdfd;
+    }
+    body {
+      margin: 0 auto;
+      max-width: 36em;
+      padding-left: 50px;
+      padding-right: 50px;
+      padding-top: 50px;
+      padding-bottom: 50px;
+      hyphens: auto;
+      overflow-wrap: break-word;
+      text-rendering: optimizeLegibility;
+      font-kerning: normal;
+    }
+    @media (max-width: 600px) {
+      body {
+        font-size: 0.9em;
+        padding: 12px;
+      }
+      h1 {
+        font-size: 1.8em;
+      }
+    }
+    @media print {
+      html {
+        background-color: white;
+      }
+      body {
+        background-color: transparent;
+        color: black;
+        font-size: 12pt;
+      }
+      p, h2, h3 {
+        orphans: 3;
+        widows: 3;
+      }
+      h2, h3, h4 {
+        page-break-after: avoid;
+      }
+    }
+    p {
+      margin: 1em 0;
+    }
+    a {
+      color: #1a1a1a;
+    }
+    a:visited {
+      color: #1a1a1a;
+    }
+    img {
+      max-width: 100%;
+    }
+    svg {
+      height: auto;
+      max-width: 100%;
+    }
+    h1, h2, h3, h4, h5, h6 {
+      margin-top: 1.4em;
+    }
+    h5, h6 {
+      font-size: 1em;
+      font-style: italic;
+    }
+    h6 {
+      font-weight: normal;
+    }
+    ol, ul {
+      padding-left: 1.7em;
+      margin-top: 1em;
+    }
+    li > ol, li > ul {
+      margin-top: 0;
+    }
+    blockquote {
+      margin: 1em 0 1em 1.7em;
+      padding-left: 1em;
+      border-left: 2px solid #e6e6e6;
+      color: #606060;
+    }
+    code {
+      font-family: Menlo, Monaco, Consolas, 'Lucida Console', monospace;
+      font-size: 85%;
+      margin: 0;
+      hyphens: manual;
+    }
+    pre {
+      margin: 1em 0;
+      overflow: auto;
+    }
+    pre code {
+      padding: 0;
+      overflow: visible;
+      overflow-wrap: normal;
+    }
+    .sourceCode {
+     background-color: transparent;
+     overflow: visible;
+    }
+    hr {
+      border: none;
+      border-top: 1px solid #1a1a1a;
+      height: 1px;
+      margin: 1em 0;
+    }
+    table {
+      margin: 1em 0;
+      border-collapse: collapse;
+      width: 100%;
+      overflow-x: auto;
+      display: block;
+      font-variant-numeric: lining-nums tabular-nums;
+    }
+    table caption {
+      margin-bottom: 0.75em;
+    }
+    tbody {
+      margin-top: 0.5em;
+      border-top: 1px solid #1a1a1a;
+      border-bottom: 1px solid #1a1a1a;
+    }
+    th {
+      border-top: 1px solid #1a1a1a;
+      padding: 0.25em 0.5em 0.25em 0.5em;
+    }
+    td {
+      padding: 0.125em 0.5em 0.25em 0.5em;
+    }
+    header {
+      margin-bottom: 4em;
+      text-align: center;
+    }
+    #TOC li {
+      list-style: none;
+    }
+    #TOC ul {
+      padding-left: 1.3em;
+    }
+    #TOC > ul {
+      padding-left: 0;
+    }
+    #TOC a:not(:hover) {
+      text-decoration: none;
+    }
+    code{white-space: pre-wrap;}
+    span.smallcaps{font-variant: small-caps;}
+    div.columns{display: flex; gap: min(4vw, 1.5em);}
+    div.column{flex: auto; overflow-x: auto;}
+    div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+    /* The extra [class] is a hack that increases specificity enough to
+       override a similar rule in reveal.js */
+    ul.task-list[class]{list-style: none;}
+    ul.task-list li input[type="checkbox"] {
+      font-size: inherit;
+      width: 0.8em;
+      margin: 0 0.8em 0.2em -1.6em;
+      vertical-align: middle;
+    }
+    .display.math{display: block; text-align: center; margin: 0.5rem auto;}
+  </style>
+</head>
+<body>
+<p><strong>Tony AI × Business Mastery</strong></p>
+<p>Integration Spec — Before, During &amp; After</p>
+<p>v3 · June 2026 · Synthesized from all source documents</p>
+<p>────────────────────────────────────────────────────────────────────────────────</p>
+<h1 id="the-one-idea">The One Idea</h1>
+<p>The one idea: Business Mastery gives participants the tools to get
+clear on where they are, where they want to be, and specifically how to
+close the gap on each of the 7 Forces. Tony AI is the coach that helps
+them get there — alongside the event — meeting them where their gap is
+widest, in their own words, on their own schedule.</p>
+<h1 id="tonys-design-filter">Tony's Design Filter</h1>
+<p>Every feature must pass this test. If the answer is not yes to at
+least one, it doesn't belong.</p>
+<ol type="1">
+<li><p>Does it help the attendee know where they are?</p></li>
+<li><p>Does it help them know where they want to be?</p></li>
+<li><p>Does it eliminate what's in the way?</p></li>
+<li><p>Does it help them close the gap?</p></li>
+</ol>
+<p><strong>Three things the AI does that the current experience
+structurally cannot:</strong></p>
+<ul>
+<li><p>It remembers, so the person doesn't restart. A binder, a portal,
+and a once-a-year event all start the person from zero every time they
+open them. The AI carries their own words from Day 1 forward. When they
+reach for it in week six, it already holds the decision they made — so
+the work is continuing, not re-explaining. Continuity is the thing no
+static resource can offer.</p></li>
+<li><p>It asks instead of tells, in the moment they're actually in. A
+document can only broadcast the same conclusion to everyone. The AI can
+ask the one question this person needs right now, hear the answer, and
+ask the next one — which is how Tony facilitates discovery rather than
+handing over conclusions. The answer comes from them; the AI just holds
+the space for it.</p></li>
+<li><p>It meets the friction where it happens. Plans don't break for
+lack of information; they break at the moment something gets hard and no
+one's there. The AI is reachable at that moment, and reconnects the
+person to their own commitment — not to a lesson. Nothing in the current
+experience is present at the point of follow-through.</p></li>
+</ul>
+<h1 id="what-it-does-and-does-not-do">What It Does — and Does Not
+Do</h1>
+<p><strong>Does:</strong></p>
+<ul>
+<li><p>Opens a real conversation at the right moment</p></li>
+<li><p>Responds like a coach to what the attendee actually says</p></li>
+<li><p>Holds their plan so it meets them where they are instead of
+starting blank every time</p></li>
+</ul>
+<p><strong>Does not:</strong></p>
+<ul>
+<li><p>Hand out prompt libraries</p></li>
+<li><p>Push checklists or nag about unfinished items</p></li>
+<li><p>Pull attention to a screen while Tony is on stage</p></li>
+<li><p>Operate as a content repository or homework system</p></li>
+<li><p>Behave like a deliverable — the goal is AI behaving like a coach
+who happens to be reachable</p></li>
+</ul>
+<h1 id="ai-posture-principles">AI Posture — Principles</h1>
+<p><em>This is a content and voice discipline, not a tech one. Tony AI
+reads the moment and responds to what the person actually brings.
+Principles over rules.</em></p>
+<p><strong>Core Principles</strong></p>
+<ul>
+<li><p>Start with the person, not the system. Open with their words,
+their plan, their stated intention — never the clock or the
+curriculum.</p></li>
+<li><p>Ask more than tell. The answer comes from them; Tony AI holds the
+space. Questions over conclusions.</p></li>
+<li><p>Read the moment. Sometimes they need a push; sometimes they need
+to be caught doing something right. Be flexible enough to do
+both.</p></li>
+<li><p>Keep the attendee as the subject. Every message is about their
+intention, their gap, their next move — not the system's
+schedule.</p></li>
+<li><p>Offer, never assign. "Want to?" not "Time to." Saying not now
+costs nothing. The door stays open.</p></li>
+<li><p>Go quiet when ignored. Two unanswered invitations become silence.
+The willingness to disappear is what proves it isn't
+surveillance.</p></li>
+</ul>
+<p><strong>What Tony AI sounds like</strong></p>
+<p><em>These examples are illustrative of voice and posture — not
+literal scripts:</em></p>
+<ul>
+<li><p>"Last time you said your biggest constraint was cash flow. Let's
+stay there."</p></li>
+<li><p>"You said you want to grow 30%. What would it take to go
+50%?"</p></li>
+<li><p>"Which of the 7 Forces would move the needle most right
+now?"</p></li>
+<li><p>"Your sales force is still light. What's the one move there worth
+the most to you?"</p></li>
+<li><p>"That's real movement on your marketing — what made the
+difference?" (Catching people doing things right, building on small
+wins, is part of Tony's coaching.)</p></li>
+</ul>
+<p><strong>Flexibility within principles</strong></p>
+<p>Tony AI can acknowledge genuine progress when it's appropriate,
+sincere, and timed right. It can offer a reframe, a "have you
+considered..." or a useful tip when genuinely helpful in context. It can
+reference Tony's content and methodology, teach, coach, or brainstorm
+depending on what the person brings. The reference model: the existing
+Tony AI coaching app (RPM Planner) — supportive, insightful,
+motivational, flexible to whatever the person actually needs in the
+moment.</p>
+<p><strong>The one thing to avoid</strong></p>
+<p>Making the system the subject instead of the attendee's own
+intention. Generic cheerleading with no connection to their actual work.
+Nagging. Treating the cadence as the point.</p>
+<h1 id="the-seven-forces-canonical-reference">The Seven Forces —
+Canonical Reference</h1>
+<p>This is the taxonomy the AI's structure must match. Order, names, and
+colors are taken from the wheel spec. Every drawer the AI sorts into,
+and every wedge on the wheel, uses exactly these seven and no
+others.</p>
+<blockquote>
+<p><strong>Force 1: Know Where You Really Are &amp; Create an Effective
+Business Map</strong> [#1A3A5C navy]</p>
+<p>Understanding where your business really is; creating an effective
+business map, not a plan that's out of date in 12 months — a flexible
+map from where you are to where you want to be.</p>
+<p><strong>Force 2: Strategic Innovation: Products, Services, &amp;
+Delivery</strong> [#2E7D32 green]</p>
+<p>Constant Strategic Innovation. The competitive advantage that doesn't
+stagnate. What business are you really in? What business do you NEED to
+be in to have an extreme competitive advantage?</p>
+<p><strong>Force 3: CANI of World Class Marketing &amp; Product
+Promises</strong> [#8B1A1A red]</p>
+<p>CANI of World-Class Marketing and Product Promises. How you reach,
+attract, and own your position in the market.</p>
+<p><strong>Force 4: CANI of Sales Mastery Systems</strong> [#5C4033
+brown]</p>
+<p>CANI of Sales Mastery Systems. Delivering on the promise — every
+time, for every customer.</p>
+<p><strong>Force 5: Constant Anticipation: The Power of Financial &amp;
+Legal Analysis</strong> [#1565C0 blue]</p>
+<p>Constant Anticipation: the power of financial and legal analysis.
+Seeing around corners; building loyalty that compounds.</p>
+<p><strong>Force 6: Optimization &amp; Maximization: People &amp;
+Processes</strong> [#4A148C purple]</p>
+<p>Constant Optimization and Maximization. Taking a bunch of little
+things that don't seem very difficult to change and doing them
+consistently — that's the multiplier.</p>
+<p><strong>Force 7: Constantly Create Raving Fans &amp; Culture</strong>
+[#F57F17 gold]</p>
+<p>Constantly Create Raving Fans and Culture. The rhythms and
+relationships that sustain everything else.</p>
+</blockquote>
+<p><em>Open item: confirm Force 7 taxonomy matches what ships in the
+digital manual. The AI and digital manual cannot diverge.</em></p>
+<h1 id="product-architecture-three-layers-not-one">Product Architecture:
+Three Layers, Not One</h1>
+<p>The participant should never have to guess which one they are using.
+Three clear top-level tabs or modules:</p>
+<ul>
+<li><p>Manual — official content and answers (complete parity with
+printed manual)</p></li>
+<li><p>Wheel — participant thinking, scoring, gap map, and AI
+clarification</p></li>
+<li><p>Plan — final synthesized implementation artifact</p></li>
+</ul>
+<p><strong>The full manual is underneath. The focused experience is on
+top.</strong></p>
+<p>Do not create a condensed digital manual. A condensed manual creates
+confusion, trust friction, and a second source of truth. Do not make the
+full manual the primary UX — a complete linear digital book will
+overwhelm participants. Build complete parity plus progressive
+disclosure: the content is all there, but the default experience is
+guided and context-specific.</p>
+<h1 id="before-the-event">BEFORE THE EVENT</h1>
+<p><strong>Business Mastery AI Prep Experience</strong></p>
+<h2 id="core-promise">Core Promise</h2>
+<p>Before you arrive, Tony AI helps you clarify where your business is
+now, what you want to get from Business Mastery, and the first version
+of your Business Mastery Growth Plan — so you show up ready to use the
+event, not just attend it. That’s the real value.</p>
+<p>Not: “Complete your business plan before Business Mastery.” That is
+too much and probably wrong. The pre-event version should create
+readiness, relevance, and hunger.</p>
+<h2 id="product-objective">Product Objective</h2>
+<p>The AI should help each participant answer:</p>
+<p>1. What business am I really here to grow or transform?</p>
+<p>2. What is the measurable outcome I want from Business Mastery?</p>
+<p>3. What is my current constraint?</p>
+<p>4. What do I need to pay special attention to during the event?</p>
+<p>5. What first-draft plan am I bringing into the room?</p>
+<p>That’s it. The user should arrive with a Business Mastery Prep
+Brief.</p>
+<h2 id="where-it-lives">Where It Lives</h2>
+<p>Inside the Business Mastery app / attendee portal. Position it
+as:</p>
+<p><strong>Start Your Business Mastery Growth Plan</strong></p>
+<p>Take 5–7 minutes before the event. Tony AI will help you clarify your
+business, your outcome, and the areas to focus on during Business
+Mastery.</p>
+<p>Button: Start My Prep</p>
+<h2 id="trigger-sequence">Trigger Sequence</h2>
+<p>14–21 days before event: Primary invitation. Subject: “Start your
+Business Mastery Growth Plan before you arrive.” Goal: get them into the
+experience early.</p>
+<p>7 days before event: Reminder — “You’ll get more from Business
+Mastery if you know what you’re looking to solve.”</p>
+<p>48 hours before event: Final prompt. Shorter, easier: “Even 5 minutes
+of prep can help you walk in with more clarity.”</p>
+<p>On-site Day 1 (before opening session): For people who did not
+complete it: “Build your first draft now. You’ll use it throughout the
+event.” Do not punish non-completers. Give them a fast entry at the
+event.</p>
+<h2 id="user-flow">User Flow</h2>
+<p><strong>Step 1: Welcome / Enrollment Screen</strong></p>
+<p>Copy: Business Mastery works best when you bring a real business
+challenge into the room. This short AI prep will help you capture where
+your business is now, what you want to improve, and what to pay
+attention to during the event.</p>
+<p>Then: You do not need perfect answers. Just start with what is true
+right now.</p>
+<p>Button: Begin</p>
+<p><strong>Step 2: Business Snapshot</strong></p>
+<p>Tony AI asks: “What business are you bringing to Business
+Mastery?”</p>
+<p>Support text: Tell me what you do, who you serve, how long you’ve
+been in business, and roughly where the business is today.</p>
+<p>Optional quick fields: Business name · Industry · Revenue range ·
+Team size · Years in business · B2B / B2C / both · Main offer · Primary
+customer</p>
+<p>But let voice/text lead. The AI then reflects:</p>
+<p>“Here’s what I’m hearing: you run [business], serving [customer],
+currently at [stage], with [main strengths/challenges]. Is that
+accurate?”</p>
+<p>Buttons: Yes / Edit / Add more</p>
+<p>This reflection step is key. It makes the AI feel intelligent and
+keeps bad inputs from poisoning the plan.</p>
+<p><strong>Step 3: Outcome for Business Mastery</strong></p>
+<p>Tony AI asks: “What would make Business Mastery a win for you?”</p>
+<p>If vague, AI tightens it. User says: “I want to scale.” AI asks:
+“Scale in what way — revenue, profit, team, freedom, valuation, market
+reach, or something else?”</p>
+<p>Then pushes for specificity: “What would be a meaningful measurable
+result over the next 12 months?”</p>
+<p>Examples shown: Increase revenue from $1M to $2M · Improve profit
+margin from 12% to 20% · Build a leadership team · Reduce owner
+dependency · Fix lead generation · Improve sales conversion · Create a
+more scalable offer · Prepare to sell the business · Rebuild
+momentum</p>
+<p>Output: Your Business Mastery Outcome: [Clear result]</p>
+<p><strong>Step 4: Current Constraint</strong></p>
+<p>Tony AI asks: “What is the biggest thing stopping that result right
+now?”</p>
+<p>Categories: Marketing / lead generation · Sales / conversion · Offer
+/ positioning · Pricing / margins · Fulfillment / delivery · Team /
+leadership · Operations / systems · Cash flow / finance · Time / owner
+dependency · Strategy / focus · Mindset / decision-making · Market
+conditions</p>
+<p>AI clarifies: “Is this the root constraint, or is it a symptom?”</p>
+<p>Example: User says “we need more leads.” AI asks: “When leads do come
+in, do they convert profitably and consistently?” Because maybe the real
+issue is offer, sales, follow-up, pricing, or trust. This is where the
+prep becomes valuable.</p>
+<p><strong>Step 5: What Is Already Working</strong></p>
+<p>Tony AI asks: “What is working in the business right now that we
+should not ignore?”</p>
+<p>This is very important. Tony’s audience is not broken. The AI should
+not diagnose them like a failing business.</p>
+<p>Prompts: Where are customers already saying yes? · What offer sells
+best? · What channel has worked, even inconsistently? · What are you
+proud of? · What does your team do well? · Where do you already have
+momentum?</p>
+<p>The AI captures: existing assets to build from. This is a much
+stronger frame than “problems to fix.”</p>
+<p><strong>Step 6: Event Focus Map</strong></p>
+<p>Tony AI creates a personalized focus map for the event based on the
+attendee’s answers.</p>
+<p>Example output:</p>
+<p>Your Business Mastery Focus Map</p>
+<p>Primary focus: Lead flow and follow-up</p>
+<p>Secondary focus: Sales conversion and team ownership</p>
+<p>Watch for: Anything Tony teaches on customer acquisition,
+measurement, standards, and execution rhythm</p>
+<p>Be careful not to over-focus on: New offer creation unless it solves
+the follow-up and consistency problem</p>
+<p>Main question to carry into the room: What would make growth more
+predictable without adding unnecessary complexity?</p>
+<p>This tells them what to listen for.</p>
+<p><strong>Step 7: First-Draft Business Mastery Growth Plan</strong></p>
+<p>The AI generates the Prep Brief.</p>
+<p>The most important design principle: The AI should not finish the
+plan before the event. It should say: “This is not your final plan. It
+is your starting point. You’ll refine it as you go through Business
+Mastery.” That creates anticipation and avoids overpromising.</p>
+<p>Output: The Business Mastery Prep Brief (one page, printable)</p>
+<p>1. My Business Now: Business · Customer · Current stage · Main offer
+· Revenue/team snapshot · Current momentum</p>
+<p>2. My Business Mastery Outcome: 12-month outcome · 90-day outcome ·
+Why this matters now</p>
+<p>3. My Current Constraint: Primary constraint · What it is costing the
+business · What may change if this improves</p>
+<p>4. What Is Already Working: Current strengths · Best-performing
+offer/channel/process · Assets to build from</p>
+<p>5. My Event Focus: Topics to pay closest attention to · Questions to
+bring into the room · Decisions I may need to make</p>
+<p>6. First 30-Day Direction: Not a final plan — just a directional
+first draft. First likely move · Metric to watch · Person/process
+involved · Open question to resolve at Business Mastery</p>
+<h2 id="completion-tiers">Completion Tiers</h2>
+<p><strong>Level 1 — Fast prep:</strong> 3 minutes. Basic snapshot and
+outcome.</p>
+<p><strong>Level 2 — Full prep:</strong> 7–10 minutes. Snapshot,
+outcome, constraint, strengths, focus map.</p>
+<p><strong>Level 3 — Deep prep:</strong> 15–20 minutes. Adds metrics,
+team, sales, finance, and operations.</p>
+<p>Do not make everyone do Level 3. Let the AI say: “You have enough to
+start. Want to go deeper?” That protects completion rates.</p>
+<h2 id="ai-behavior-requirements">AI Behavior Requirements</h2>
+<p><strong>The AI must:</strong></p>
+<ul>
+<li><p>Reflect before advising</p></li>
+<li><p>Ask one question at a time</p></li>
+<li><p>Let people answer by voice</p></li>
+<li><p>Keep the experience under 7 minutes</p></li>
+<li><p>Use plain business language</p></li>
+<li><p>Identify strengths, not just gaps</p></li>
+<li><p>Push vague outcomes toward measurable outcomes</p></li>
+<li><p>Distinguish symptoms from constraints</p></li>
+<li><p>Create a concise prep brief</p></li>
+<li><p>Save the plan for use during the event</p></li>
+</ul>
+<p><strong>The AI must not:</strong></p>
+<ul>
+<li><p>Give a generic SWOT</p></li>
+<li><p>Create a bloated business plan</p></li>
+<li><p>Sound like an MBA consultant</p></li>
+<li><p>Teach the whole Business Mastery curriculum before the
+event</p></li>
+<li><p>Diagnose the business from too little information with false
+certainty</p></li>
+<li><p>Tell participants what they “must” do</p></li>
+<li><p>Overwhelm people with forms</p></li>
+<li><p>Replace the workbook or event experience</p></li>
+</ul>
+<h2 id="data-the-system-collects">Data the System Collects</h2>
+<p><strong>Required:</strong></p>
+<ul>
+<li><p>Business name</p></li>
+<li><p>Industry</p></li>
+<li><p>Business model</p></li>
+<li><p>Customer served</p></li>
+<li><p>Current revenue range</p></li>
+<li><p>Team size</p></li>
+<li><p>Primary offer</p></li>
+<li><p>Desired 12-month outcome</p></li>
+<li><p>Biggest perceived constraint</p></li>
+<li><p>What is already working</p></li>
+<li><p>What they want from Business Mastery</p></li>
+</ul>
+<p><strong>Optional (AI asks based on relevance, not all
+upfront):</strong></p>
+<ul>
+<li><p>Gross margin / net margin</p></li>
+<li><p>Lead sources</p></li>
+<li><p>Sales conversion estimate</p></li>
+<li><p>Average transaction value</p></li>
+<li><p>Repeat purchase rate</p></li>
+<li><p>Owner hours per week</p></li>
+<li><p>Team structure</p></li>
+<li><p>Biggest operational bottleneck</p></li>
+<li><p>Current marketing channels</p></li>
+<li><p>Top 3 products/services</p></li>
+<li><p>Whether they are starting, scaling, optimizing, or preparing to
+exit</p></li>
+</ul>
+<h1 id="during-the-event">DURING THE EVENT</h1>
+<p><em>Three modes, one rule: the AI is closed while Tony is on
+stage.</em></p>
+<h2 id="the-single-most-important-rule">The Single Most Important
+Rule</h2>
+<p>The AI is closed while Tony is on stage. Nothing on a screen competes
+with physiology, music, and group energy doing the real work. The AI's
+only in-event job is to catch the breakthrough before it evaporates —
+and the event already asks attendees to do this.</p>
+<h2 id="mode-1-digital-manual">Mode 1: Digital Manual</h2>
+<p>Read-only access to official workbook content during sessions.
+Complete parity with the printed/manual version. No fill-in fields
+competing with AI inputs. Separate from the AI companion layer.</p>
+<p><strong>Digital Manual UX requirements:</strong></p>
+<ul>
+<li><p>Default to current day/session during the live event — not the
+full manual</p></li>
+<li><p>Show the current exercise first; show surrounding context only
+when participant asks</p></li>
+<li><p>Allow search and browse without making it the primary work
+surface</p></li>
+<li><p>Autosave every answer</p></li>
+<li><p>Support journal entries connected to day/session/module</p></li>
+<li><p>Allow completed manual export at the end of the event</p></li>
+<li><p>Preserve print references: "Print manual page __" or "Manual
+section __" where useful</p></li>
+<li><p>Clearly label as the Official Digital Manual, not a companion
+summary</p></li>
+</ul>
+<p>Participant-facing copy: "Your official Business Mastery manual, now
+digital. Use it to capture your answers, save your notes, and download
+your completed manual after the event."</p>
+<h2 id="mode-2-guided-event-mode">Mode 2: Guided Event Mode</h2>
+<p>The default live-event experience. Sits on top of the complete
+digital manual and reduces what the participant sees to what they need
+right now. Side panel. Open at the breaks. Closed during content
+delivery.</p>
+<p><strong>Default live-event screen when participant opens the product
+during Business Mastery:</strong></p>
+<ul>
+<li><p>"Today at Business Mastery" — not "Full Manual"</p></li>
+<li><p>Today / Day number</p></li>
+<li><p>Current session or module</p></li>
+<li><p>Current force, if applicable — e.g., "Tony is covering Force 3:
+CANI of World Class Marketing &amp; Product Promises. What's coming up
+for you?"</p></li>
+<li><p>Current manual exercise or answer field</p></li>
+<li><p>Journal / notes option</p></li>
+<li><p>Next step button: "Save Answer," "Continue," or "Complete This
+Force"</p></li>
+<li><p>Secondary link: "View full manual section"</p></li>
+</ul>
+<p><em>The AI captures verbatim. It never interrupts, summarizes, or
+responds mid-session. Captures only.</em></p>
+<p><strong>UX rules for guided mode:</strong></p>
+<ul>
+<li><p>Default to today, not everything</p></li>
+<li><p>Use progressive disclosure: show headings and answer fields
+first; expand teaching copy only when needed</p></li>
+<li><p>Keep one primary action per screen</p></li>
+<li><p>Use "You are here" indicators: Day 2 → Force 3 → Exercise 2 of
+5</p></li>
+<li><p>Preserve print manual references so participants can move between
+print and digital without friction</p></li>
+<li><p>Avoid "all modules unlocked" as the default participant view
+during the event</p></li>
+</ul>
+<h2 id="mode-3-wheel-gap-map">Mode 3: Wheel / Gap Map</h2>
+<p>The AI-powered application layer where participants integrate what
+they just learned into their actual business. A separate primary
+experience — not a manual field. Activated once per force per day, after
+Tony completes each force.</p>
+<p><strong>Required participant flow per force:</strong></p>
+<ol start="5" type="1">
+<li><p>Participant completes or references relevant manual exercises
+during the live session.</p></li>
+<li><p>Scott / facilitator transitions the room into the AI wheel/gap
+map moment.</p></li>
+<li><p>Participant opens the force-specific wheel capture.</p></li>
+<li><p>Tony AI asks where they were before the content.</p></li>
+<li><p>Tony AI asks what they see now.</p></li>
+<li><p>Tony AI asks where they want this force to be.</p></li>
+<li><p>Tony AI helps them name the gap.</p></li>
+<li><p>Tony AI asks what they will do to close the gap.</p></li>
+<li><p>Tony AI captures the key decision, metric, owner/person/system,
+and next action.</p></li>
+<li><p>Tony AI reflects back a concise force summary.</p></li>
+<li><p>Participant confirms, edits, or talks it through
+further.</p></li>
+<li><p>Final force summary is saved into the wheel/gap map data
+model.</p></li>
+</ol>
+<p>The Gap Map already instructs attendees to return to the dashboard
+twice a day — once mid-day at the meal break, once at night — to capture
+where they are, where they want to be, and their plan to close the gap.
+The AI does not add a new habit. It makes the habit they're already
+asked to do feel like a check-in with a coach instead of a 10–15 minute
+form.</p>
+<h2 id="the-daily-capture-conversation-that-feeds-the-wheel">The Daily
+Capture — Conversation That Feeds the Wheel</h2>
+<p>Direction confirmed: the AI conversation captures the narrative
+("what's the one thing"), while the 0–10 self-ratings are still
+collected to feed the wheel. Each capture does two jobs at once: a short
+spoken reflection the AI files into the right force drawer, plus the
+three ratings (before / want-to-be, on understanding, follow-through,
+execution) that drive the wedges. The AI can ask for the rating
+conversationally at the end ("where would you put yourself on that, zero
+to ten?") so it never feels like a separate form.</p>
+<p><strong>Daily capture questions — Tony's voice (do NOT
+change):</strong></p>
+<p><strong>Start of each morning:</strong></p>
+<blockquote>
+<p><em>"What did you discover yesterday that you haven't fully owned
+yet?"</em></p>
+</blockquote>
+<p><strong>End of each day:</strong></p>
+<blockquote>
+<p><em>"What's the one thing from today that, if you acted on it, would
+change everything?"</em></p>
+</blockquote>
+<p><strong>Day 5 opening:</strong></p>
+<blockquote>
+<p><em>"You've spent five days looking at your business from every
+angle. You've measured every gap. Now: what's the one move that changes
+everything?"</em></p>
+</blockquote>
+<p><strong>Force-specific capture by day:</strong></p>
+<blockquote>
+<p><strong>Day 1 — Force 1: Know Where You Really Are &amp; Create an
+Effective Business Map:</strong> After they answer, AI reflects it in
+one line, asks for the rating, and confirms: "I'll keep that with your
+Business Map force; we'll come back to it."</p>
+<p><strong>Day 2 morning — Force 2: Strategic Innovation: Products,
+Services, &amp; Delivery: Same structure — capture, reflect, rate,
+confirm drawer.</strong></p>
+<p><strong>Day 2 afternoon — Force 3: CANI of World Class Marketing
+&amp; Product Promises:</strong> Same structure.</p>
+<p><strong>Day 3 morning — Force 4: CANI of Sales Mastery
+Systems:</strong> Same structure. Note: Sales is the force most people
+leave thin. Flag this on Day 5.</p>
+<p><strong>Day 3 afternoon — Force 5: Constant Anticipation: The Power
+of Financial &amp; Legal Analysis:</strong> Same structure.</p>
+<p><strong>Day 4 morning — Force 6: Optimization &amp; Maximization:
+People &amp; Processes: Same structure.</strong></p>
+<p><strong>Day 4 afternoon — Force 7: Constantly Create Raving Fans
+&amp; Culture:</strong> Same structure.</p>
+</blockquote>
+<p><em>Closing each capture: after they answer, the AI reflects it in
+one line, asks for the rating, and confirms which force drawer it filed
+under. That confirmation is what makes Day 5 feel like assembly, not a
+blank page.</em></p>
+<h2 id="wheel-gap-map-display-requirements">Wheel / Gap Map Display
+Requirements</h2>
+<ul>
+<li><p>Desktop-primary, mobile-supported. Wheel is designed full-size on
+desktop; scales cleanly to phone (single column, wheel above legend, tap
+a wedge for that force's detail).</p></li>
+<li><p>Two states overlaid: Before (solid inner fill) and want-to-be
+(faint outer band) on the same wheel, per the Gap Map's before/after
+design.</p></li>
+<li><p>Exact colors and clockwise order matching the canonical force
+table: navy, green, red, brown, blue, purple, gold.</p></li>
+<li><p>Interactive in-app: tapping or hovering a wedge opens that
+force's captured notes and plan items. The wheel is the navigation into
+the seven drawers, not just a picture.</p></li>
+<li><p>Gap = want − now. Widest gap = starting point
+post-event.</p></li>
+</ul>
+<h2 id="device-strategy">Device Strategy</h2>
+<p>The product should be accessible on mobile but not designed under the
+fiction that a phone is the primary device for serious manual
+completion, wheel work, or implementation planning. Phone is useful for
+access and light interaction. iPad/laptop is the practical event work
+surface.</p>
+<blockquote>
+<p><em>Participant-facing copy: "For the best experience during Business
+Mastery, bring a laptop or tablet. You'll be able to access everything
+on your phone, but the digital manual, wheel, and implementation plan
+are easiest to use on a larger screen."</em></p>
+</blockquote>
+<h1 id="day-5-implementation-plan-assembly">DAY 5 — Implementation Plan
+Assembly</h1>
+<p><em>Integration day. The AI assembles; the attendee authors.</em></p>
+<h2 id="opening">Opening</h2>
+<blockquote>
+<p><em>"You've spent five days looking at your business from every
+angle. You've measured every gap. Now: what's the one move that changes
+everything?"</em></p>
+</blockquote>
+<h2 id="the-assembly-flow">The Assembly Flow</h2>
+<p><strong>1. Play it back</strong></p>
+<blockquote>
+<p>The AI shows the attendee what they said across five days, already
+sorted into the seven forces: "Here's what you told me mattered, force
+by force. Your words, not mine."</p>
+</blockquote>
+<p><strong>2. Turn captures into actions</strong></p>
+<blockquote>
+<p>For each force, the AI helps them convert a reflection into a
+concrete action item, a dollar value, and a deadline — the four columns
+the manual plan already asks for. The AI asks; the attendee decides. It
+never writes the action for them.</p>
+</blockquote>
+<p><strong>3. Flag the thin forces</strong></p>
+<blockquote>
+<p>Highest-value move. Where a force is empty or weak — and Force 4
+(Sales) is the one most people leave thin — the AI names it once,
+plainly: "Your sales force is still light. What's the one move there
+worth the most to you?" One ask. Droppable. Not a scold.</p>
+</blockquote>
+<p><strong>4. Narrow to three-to-five</strong></p>
+<blockquote>
+<p>It helps them choose the few things that get done first, by urgency
+and dollar value — Tony's "three to five to thrive," not a 14-item
+wishlist.</p>
+</blockquote>
+<p><strong>5. Lock the wheel</strong></p>
+<blockquote>
+<p>The before/after wheel is revealed; the completed plan is saved as
+the AI's context for everything after the event.</p>
+</blockquote>
+<h2 id="required-plan-inputs">Required Plan Inputs</h2>
+<ul>
+<li><p>Completed wheel visual</p></li>
+<li><p>Before/current/desired score for each force</p></li>
+<li><p>Participant-approved gap statement for each force</p></li>
+<li><p>Participant's stated action to close the gap for each
+force</p></li>
+<li><p>Participant's key decision for each force</p></li>
+<li><p>Metric or signal to track for each force</p></li>
+<li><p>Owner/person/system/rhythm needed for each force (if
+identified)</p></li>
+<li><p>Relevant manual/workbook answers that add useful detail</p></li>
+<li><p>Pre-event Business Mastery outcome and focus map, if still
+relevant</p></li>
+<li><p>Tony AI synthesis of patterns across the seven forces, confirmed
+by participant before finalizing</p></li>
+</ul>
+<h2 id="required-plan-structure">Required Plan Structure</h2>
+<ul>
+<li><p>Business snapshot and Business Mastery outcome</p></li>
+<li><p>Completed 7 Forces wheel visual</p></li>
+<li><p>Top three leverage points across the wheel</p></li>
+<li><p>Force-by-force summary: what is strong, what gap remains, what
+they will do next</p></li>
+<li><p>7-day implementation focus</p></li>
+<li><p>30-day implementation focus</p></li>
+<li><p>Metrics/rhythms to track</p></li>
+<li><p>Open questions or decisions to resolve</p></li>
+<li><p>Post-event Tony AI coaching starting point</p></li>
+<li><p>Download/export option</p></li>
+</ul>
+<h2 id="data-architecture-note">Data Architecture Note</h2>
+<p>Build the Implementation Plan as structured fields — force,
+principle, action item, dollar value, deadline — plus the Gap Map's
+three ratings per session. Structured costs nothing extra now and is the
+difference between the AI referencing "your Force 4 action, worth $40K,
+due March 1" precisely versus gesturing vaguely at a wall of notes. This
+is the single highest-leverage build decision available right now.</p>
+<p>Non-negotiable: the Day 5 Seven Forces Implementation Plan is
+generated primarily from participant-approved wheel/gap map data and
+manual exercises. Workbook/manual answers can fill in details where
+useful. The plan should never feel like a generic AI business plan
+generated from a few notes.</p>
+<h1 id="after-the-event-post-event-implementation">AFTER THE EVENT —
+Post-Event Implementation</h1>
+<p><em>Post-event continuity. Helpful, not nagging.</em></p>
+<h2 id="structure">Structure</h2>
+<p><strong>Week 1–7:</strong> One force per week, 90-minute team
+meeting</p>
+<p><strong>Week 8+:</strong> Repeat the cycle all year</p>
+<p><strong>Structure for each week:</strong></p>
+<ul>
+<li><p>Tony AI opens with the participant's own committed plan for that
+force — what they said, what they decided, no re-choosing
+required</p></li>
+<li><p>Attendee shares what changed</p></li>
+<li><p>Tony AI surfaces what comes next based on what they committed to
+— the participant doesn't have to decide what to work on</p></li>
+<li><p>Tony AI holds the thread — memory and methodology together, doing
+the thinking so they don't have to</p></li>
+</ul>
+<h2 id="tonys-language-on-optimization">Tony's Language on
+Optimization</h2>
+<blockquote>
+<p><em>"Optimization means taking a bunch of little things that don't
+seem very difficult to change and doing them consistently."</em></p>
+</blockquote>
+<h2 id="the-posture-rule">The Posture Rule</h2>
+<p>Whether a message lands as coaching or nagging is not about
+frequency. It's about who the message is about. A message about the
+system's schedule is a nag. A message about the person's own stated
+intention is a coach. Same proactivity, opposite posture.</p>
+<p><strong>Three rules that keep it on the right side:</strong></p>
+<p><strong>Open with their words, never the clock</strong></p>
+<blockquote>
+<p>The trigger can be the calendar; the message is always their own
+commitment reflected back. The person never hears "it's week 3" — only
+their own intention.</p>
+</blockquote>
+<p><strong>Always offer, never assign</strong></p>
+<blockquote>
+<p>"Want to?" not "Time to." Saying "not now" costs nothing and earns no
+guilt. The door stays open; it's never a debt.</p>
+</blockquote>
+<p><strong>Go quiet when ignored</strong></p>
+<blockquote>
+<p>Two unanswered invitations become silence, not a third louder one.
+The willingness to disappear is what proves it isn't surveillance.</p>
+</blockquote>
+<h2 id="post-event-rhythm">Post-Event Rhythm</h2>
+<p><em>The guardrails on the post-event cadence are intentionally loose
+— a strict weekly cycle starts to feel like nagging.</em></p>
+<ul>
+<li><p>Mostly progress-driven: the AI surfaces around the things they
+said they wanted to do — when an action they committed to is coming due,
+when they mention movement on one, or when they reach in at a friction
+moment. These are the moments that matter most.</p></li>
+<li><p>Occasional gentle open: now and then, a light invitation to spend
+focused time on a force — chosen by their widest gap on the wheel,
+framed as their goal, never as a schedule they're behind on.</p></li>
+<li><p>Friction-moment reach-in: when they come to the AI mid-struggle,
+it already holds their plan — their force, their action, their dollar
+value, their deadline — so they never re-explain themselves. This is the
+prize, and it's pure pull: they initiate, it's ready.</p></li>
+</ul>
+<h2 id="connection-to-further-support">Connection to Further
+Support</h2>
+<p>The Gap Map was built to "help show them they'll still need help and
+our resources after the event." Its third field literally asks what
+training, coaching, or mentoring they still need. When the AI surfaces a
+force where the gap is wide and the attendee keeps stalling, that's the
+honest, in-their-own-words moment to point toward further support — not
+a sales overlay, but the fulfillment of what the instrument was designed
+to reveal.</p>
+<h1 id="for-the-tech-ai-team">For the Tech / AI Team</h1>
+<h2 id="three-things-that-gate-the-build">Three Things That Gate the
+Build</h2>
+<p><em>Questions 1 and 2 are scoping questions to answer before
+estimating. Question 3 is a design choice to get right while the digital
+manual is being built now.</em></p>
+<p><strong>1. Can a trigger launch a specific conversation?</strong></p>
+<p>Can Tony AI be triggered (segmented to registrants, on a date offset)
+to launch into a specific opening conversation rather than the generic
+home screen? The entire before-event design, and the proactive side of
+the after-event design, depend on this. If the AI can only do open-ended
+chat from a home screen, the design shifts from "the product reaches for
+them" to "we teach them when to reach for it" — workable, but different.
+Answer this first.</p>
+<p><strong>2. Do we control the AI's memory?</strong></p>
+<p>Is Tony AI's conversational memory something the team can write to,
+or is it closed from the app vendor? This decides whether "hand it the
+plan" is a config we own or a feature request to someone else. The
+completed plan must be loadable as per-account context.</p>
+<p><strong>3. Build the plan as structured fields, not a
+blob</strong></p>
+<p>While the digital manual is being designed, build the Implementation
+Plan as structured fields — force, principle, action item, dollar value,
+deadline — plus the Gap Map's three ratings per session. This is the
+single highest-leverage decision available right now.</p>
+<h2 id="connection-scope-snapshot-not-live-sync">Connection Scope:
+Snapshot, Not Live Sync</h2>
+<p>When the attendee completes their plan, pass a snapshot to Tony AI as
+context tied to their account. Build the snapshot version — not two-way
+live sync. The snapshot delivers nearly all the value; sync adds real
+complexity and a source-of-truth problem. Ship the snapshot, watch
+engagement, let sync earn its way in later if it does.</p>
+<h2 id="product-engineering-checklist">Product / Engineering
+Checklist</h2>
+<ul>
+<li><p>Build complete digital manual content parity, not a condensed
+manual</p></li>
+<li><p>Implement guided event mode as the default participant interface
+during the live event</p></li>
+<li><p>Support three top-level areas: Manual, Wheel, Plan</p></li>
+<li><p>Preserve print/manual references inside the digital
+manual</p></li>
+<li><p>Allow full manual browse/search without making it the default
+event work surface</p></li>
+<li><p>Build wheel/gap map as a separate structured data object, not
+merely a manual answer field</p></li>
+<li><p>Build data linkage so Day 5 plan can pull wheel/gap map data
+first and relevant manual answers second</p></li>
+<li><p>Support tablet/laptop responsive UX as the primary completion
+surface</p></li>
+<li><p>Support phone access for light review, voice prep, quick AI
+questions, and post-event check-ins</p></li>
+<li><p>Add participant confirmation before wheel summaries or Day 5 plan
+content are finalized</p></li>
+<li><p>Allow download/export for completed manual, wheel/gap map, Day 5
+plan, and post-event implementation summary</p></li>
+<li><p>Wire daily ratings into the wheel and daily captures into the
+force drawers</p></li>
+<li><p>Build the snapshot connection (manual → AI), tied to account —
+not live sync</p></li>
+<li><p>Admin dashboard: aggregate insights (top industries, revenue
+ranges, most common constraints, prep completion rate)</p></li>
+</ul>
+<h2 id="qa-checklist">QA Checklist</h2>
+<ul>
+<li><p>Does the digital manual remain complete and official?</p></li>
+<li><p>Does the default UX avoid overwhelming participants with the full
+manual?</p></li>
+<li><p>Are Manual, Wheel, and Plan clearly separated?</p></li>
+<li><p>Is the wheel/gap map still the core during-event AI
+product?</p></li>
+<li><p>Is the Day 5 plan built from both wheel/gap map data and manual
+exercises?</p></li>
+<li><p>Are manual/workbook answers used only as helpful supporting
+detail?</p></li>
+<li><p>Is the product built for iPad/laptop as the real work surface,
+while remaining mobile-accessible?</p></li>
+<li><p>Are participant download rights preserved regardless of
+continuation?</p></li>
+</ul>
+<h1 id="open-items-to-confirm">Open Items to Confirm</h1>
+<p><strong>Force 7 taxonomy:</strong> Manual version locked here;
+confirm it matches what ships in the digital manual. The AI and digital
+manual cannot diverge.</p>
+<p><strong>Exact before-event trigger timing:</strong> 3–5 days out
+confirmed; final timing to confirm with event team. Full sequence: 14–21
+days / 7 days / 48 hours / Day 1 on-site.</p>
+<p><strong>Gentle-open cadence floor:</strong> Whether post-event
+implementation gentle-open has any minimum floor, or is purely
+progress-driven.</p>
+<p><strong>Admin dashboard scope:</strong> What aggregate insights RRI
+needs and at what granularity.</p>
+<p><strong>Guardrails disclosure language:</strong> Final language for
+regulated industries and the planning-tool disclaimer.</p>
+<h1 id="who-does-what">Who Does What</h1>
+<p><strong>Content Team</strong></p>
+<ul>
+<li><p>Finalize the before-event opening question and the seven daily
+capture questions (drafts above) in Tony's voice</p></li>
+<li><p>Write the Day 5 assembly script — playback, action-conversion
+prompts, the thin-force flag, the narrow-to-three-to-five</p></li>
+<li><p>Own the posture spec: the "says vs. never says" guardrails for
+every proactive after-event message. This is the make-or-break, and it's
+a content/voice discipline, not a tech one</p></li>
+<li><p>Influence the digital manual's structure now so the plan captures
+as clean fields</p></li>
+</ul>
+<p><strong>Tech / AI Team</strong></p>
+<ul>
+<li><p>Answer the two scoping questions (trigger launch; memory
+control)</p></li>
+<li><p>Build the manual → AI snapshot connection, tied to
+account</p></li>
+<li><p>Build the wheel graphic, desktop-primary and mobile-responsive,
+interactive into the seven drawers</p></li>
+<li><p>Wire daily ratings into the wheel and daily captures into the
+force drawers</p></li>
+<li><p>Build complete digital manual with guided event mode as default
+UX</p></li>
+<li><p>Implement structured fields for the Implementation Plan</p></li>
+<li><p>Build admin dashboard for aggregate insights</p></li>
+</ul>
+<p>────────────────────────────────────────────────────────────────────────────────</p>
+<p><em>Tony AI × Business Mastery · Integration Spec v3 · June
+2026</em></p>
+</body>
+</html>
