@@ -880,6 +880,14 @@
     .card-white, .card-dark { padding: 12px; }
     svg.wheel { max-width: 220px !important; }
   }
+
+  .tab-hero-split { display: flex; align-items: center; justify-content: space-between; gap: 24px; }
+  .tab-hero-main { flex: 1; }
+  @media (max-width: 800px) {
+    .tab-hero-split { flex-direction: column !important; align-items: flex-start !important; gap: 16px; }
+    .tab-hero-main { width: 100%; }
+  }
+
 </style>
 </head>
 <body>
@@ -915,8 +923,8 @@
     <div class="screen active" id="screen-0">
 
       <!-- Dark Hero -->
-      <div class="tab-hero" style="display:flex; align-items:center; justify-content:space-between;">
-        <div style="flex:1;">
+      <div class="tab-hero tab-hero-split">
+        <div class="tab-hero-main">
           <div class="tab-hero-eyebrow">Pre-Event · 14 Days Out</div>
           <h1>Show up ready to <em>use</em> Business Mastery, not just attend it.</h1>
           <div class="flex gap8 mt20">
